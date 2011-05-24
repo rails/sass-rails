@@ -3,7 +3,7 @@ require "rails/generators/named_base"
 
 module Sass
   module Generators
-    class SassScaffold < ::Rails::Generators::NamedBase
+    class ScaffoldBase < ::Rails::Generators::NamedBase
       def copy_stylesheet
         dir = ::Rails::Generators::ScaffoldGenerator.source_root
         file = File.join(dir, "scaffold.css")

@@ -14,6 +14,10 @@ module Sass
     config.sass.syntax = :scss
 
     initializer :setup_sass do |app|
+      syntax     = app.config.sass.syntax
+      alt_syntax = syntax.to_s == "sass" ? "scss" : "sass"
+
+      app.config.generators.hide_namespace alt_syntax
       config.app_generators.stylesheet_engine app.config.sass.syntax
     end
 
