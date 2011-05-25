@@ -7,7 +7,8 @@ module Sass
       def copy_stylesheet
         dir = ::Rails::Generators::ScaffoldGenerator.source_root
         file = File.join(dir, "scaffold.css")
-        create_file "app/assets/stylesheets/scaffold.css.#{syntax}", ::Sass::CSS.new(File.read(file)).render(syntax)
+        converted_contents = ::Sass::CSS.new(File.read(file)).render(syntax)
+        create_file "app/assets/stylesheets/#{name}.css.#{syntax}", converted_contents
       end
     end
   end
