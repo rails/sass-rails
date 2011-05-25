@@ -6,8 +6,6 @@ module Sass::Rails
     config.sass.preferred_syntax = :scss
     # Use expanded output instead of the sass default of :nested
     config.sass.style            = :expanded
-    # Set the sass cache location to tmp/sass-cache
-    config.sass.cache_location   = File.join(Rails.root, "tmp/sass-cache")
     # Write sass cache files to tmp/sass-cache for performance
     config.sass.cache            = true
     # Read sass cache files from tmp/sass-cache for performance
@@ -23,6 +21,9 @@ module Sass::Rails
 
       # Set the stylesheet engine to the preferred syntax
       config.app_generators.stylesheet_engine syntax
+
+      # Set the sass cache location to tmp/sass-cache
+      config.sass.cache_location   = File.join(Rails.root, "tmp/sass-cache")
 
       # Establish configuration defaults that are evironmental in nature
       if config.sass.full_exception.nil?
