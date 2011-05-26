@@ -38,6 +38,7 @@ module Sass::Rails
     def find_relative(name, base, options)
       base_pathname = Pathname.new(base)
       if pathname = resolve(name, base_pathname)
+        context.depend_on(pathname)
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
         else
@@ -50,6 +51,7 @@ module Sass::Rails
 
     def find(name, options)
       if pathname = resolve(name)
+        context.depend_on(pathname)
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
         else
