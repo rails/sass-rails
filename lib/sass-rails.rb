@@ -1,3 +1,5 @@
+require 'sass'
+
 module Sass
   class CssCompressor
     def compress(css)
