@@ -2,6 +2,7 @@ require 'sprockets'
 
 module Sass::Rails
   class Importer
+    GLOB = /\*|\[.+\]/
     PARTIAL = /^_/
     HAS_EXTENSION = /\.css(.s[ac]ss)?$/
 
@@ -37,7 +38,9 @@ module Sass::Rails
 
     def find_relative(name, base, options)
       base_pathname = Pathname.new(base)
-      if pathname = resolve(name, base_pathname)
+      if name =~ GLOB
+        glob_imports(name, base_pathname, options)
+      elsif pathname = resolve(name, base_pathname)
         context.depend_on(pathname)
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
@@ -62,8 +65,40 @@ module Sass::Rails
       end
     end
 
+    def each_globbed_file(glob, base_pathname, options)
+      Dir["#{base_pathname.dirname}/#{glob}"].sort.each do |filename|
+        next if filename == options[:filename]
+        yield filename if File.directory?(filename) || context.asset_requirable?(filename)
+      end
+    end
+
+    def glob_imports(glob, base_pathname, options)
+      contents = ""
+      each_globbed_file(glob, base_pathname, options) do |filename|
+        if File.directory?(filename)
+          context.depend_on(filename)
+        elsif context.asset_requirable?(filename)
+          context.depend_on(filename)
+          contents << "@import #{Pathname.new(filename).relative_path_from(base_pathname.dirname).to_s.inspect};\n"
+        end
+      end
+
+      Sass::Engine.new(contents, options.merge(
+        :filename => base_pathname.to_s,
+        :importer => self,
+        :syntax => :scss
+      ))
+    end
+
     def mtime(name, options)
-      if pathname = resolve(name)
+      if name =~ GLOB && options[:filename]
+        mtime = nil
+        each_globbed_file(name, Pathname.new(options[:filename]), options) do |p|
+          mtime ||= File.mtime(p)
+          mtime = [mtime, File.mtime(p)].max
+        end
+        mtime
+      elsif pathname = resolve(name)
         pathname.mtime
       end
     end

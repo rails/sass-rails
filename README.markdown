@@ -32,3 +32,14 @@ The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFER
 5. `:syntax` - This is determined by the file's extensions.
 6. `:filename` - This is determined by the file's name.
 7. `:line` - This is provided by the template handler.
+
+## Features
+
+* **Glob Imports**. When in rails, there is a special import syntax that allows you to
+  glob imports relative to the folder of the stylesheet that is doing the importing.
+  E.g. `@import "mixins/*"` will import all the files in the mixins folder and
+  `@import "mixins/**/*"` will import all the files in the mixins tree.
+  Any valid ruby glob may be used. The imports are sorted alphabetically.
+  **NOTE:** It is recommended that you only use this when importing pure library
+  files (containing mixins and variables) because it is difficult to control the
+  cascade ordering for imports that contain styles using this approach.
