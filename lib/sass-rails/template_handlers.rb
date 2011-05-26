@@ -18,10 +18,7 @@ module Sass::Rails
     end
 
     def sass_options_from_rails(scope)
-      env = scope.environment
-      puts env.inspect
-      env = env.environment if env.respond_to?(:environment)
-      env.opaque_data[:sass_config]
+      scope.environment.context_class.sass_config
     end
 
     def sass_options(scope)
