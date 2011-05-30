@@ -43,3 +43,10 @@ The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFER
   **NOTE:** It is recommended that you only use this when importing pure library
   files (containing mixins and variables) because it is difficult to control the
   cascade ordering for imports that contain styles using this approach.
+
+## Running Tests
+
+    $ bundle install
+    $ bundle exec rake test
+
+If you need to test against local gems, use Bundler's gem :path option in the Gemfile and also edit `test/support/test_helper.rb` and tell the tests where the gem is checked out.
