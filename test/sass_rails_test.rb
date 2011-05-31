@@ -10,6 +10,7 @@ class SassRailsTest < Sass::Rails::TestCase
     within_rails_app "scss_project" do
       runcmd "rails generate scaffold foo"
       assert_file_exists "app/assets/stylesheets/foos.css.scss"
+      assert_file_exists "app/assets/stylesheets/scaffolds.css.scss"
       assert_not_output(/conflict/)
     end
   end
@@ -17,6 +18,7 @@ class SassRailsTest < Sass::Rails::TestCase
     within_rails_app "sass_project" do
       runcmd "rails generate scaffold foo"
       assert_file_exists "app/assets/stylesheets/foos.css.sass"
+      assert_file_exists "app/assets/stylesheets/scaffolds.css.sass"
       assert_not_output(/conflict/)
     end
   end
