@@ -40,4 +40,11 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match css_output, /plain-old-css/
     assert_match css_output, /another-plain-old-css/
   end
+  test "css compressor compresses" do
+    assert_equal "div{color:red}\n", Sass::Rails::CssCompressor.new.compress(<<CSS)
+div {
+  color: red;
+}
+CSS
+  end
 end
