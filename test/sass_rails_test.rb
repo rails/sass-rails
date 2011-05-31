@@ -28,14 +28,16 @@ class SassRailsTest < Sass::Rails::TestCase
   end
   test "sass imports work correctly" do
     css_output = sprockets_render("scss_project", "application.css.scss")
-    assert css_output =~ /main/
-    assert css_output =~ /top-level/
-    assert css_output =~ /partial-sass/
-    assert css_output =~ /partial-scss/
-    assert css_output =~ /sub-folder-relative-sass/
-    assert css_output =~ /sub-folder-relative-scss/
-    assert css_output =~ /not-a-partial/
-    assert css_output =~ /globbed/
-    assert css_output =~ /nested-glob/
+    assert_match css_output, /main/
+    assert_match css_output, /top-level/
+    assert_match css_output, /partial-sass/
+    assert_match css_output, /partial-scss/
+    assert_match css_output, /sub-folder-relative-sass/
+    assert_match css_output, /sub-folder-relative-scss/
+    assert_match css_output, /not-a-partial/
+    assert_match css_output, /globbed/
+    assert_match css_output, /nested-glob/
+    assert_match css_output, /plain-old-css/
+    assert_match css_output, /another-plain-old-css/
   end
 end

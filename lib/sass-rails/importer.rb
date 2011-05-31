@@ -117,6 +117,10 @@ module Sass::Rails
       rescue Sprockets::FileNotFound
         nil
       end
+
+      def sprockets_process(path)
+        context.environment[path].to_s
+      end
   end
 
 end
