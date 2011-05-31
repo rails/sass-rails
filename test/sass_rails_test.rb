@@ -35,5 +35,7 @@ class SassRailsTest < Sass::Rails::TestCase
     assert css_output =~ /sub-folder-relative-sass/
     assert css_output =~ /sub-folder-relative-scss/
     assert css_output =~ /not-a-partial/
+    assert css_output =~ /globbed/
+    assert css_output =~ /nested-glob/
   end
 end
