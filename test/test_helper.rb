@@ -1,22 +1,26 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require 'rails'
 require "rails/test_help"
-
-ActionMailer::Base.delivery_method = :test
-ActionMailer::Base.perform_deliveries = true
-ActionMailer::Base.default_url_options[:host] = "test.com"
+require 'sass-rails'
 
 Rails.backtrace_cleaner.remove_silencers!
 
-# Configure capybara for integration testing
-require "capybara/rails"
-Capybara.default_driver   = :rack_test
-Capybara.default_selector = :css
+# Set locations of local gems in this hash.
+# They will be added/replaced in the generated Gemfiles
+# You should also set them in the local Gemfile
+$gem_locations = {
+  "sass-rails" => File.expand_path("../../", __FILE__)
+}
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
+# Uncomment this if you need to test against a local rails checkout
+# $gem_locations["rails"] = "/Users/chris/Projects/rails"
+# Uncomment this if you need to test against a local sass checkout
+# $gem_locations["sass"] = "/Users/chris/Projects/sass"
+# Uncomment this if you need to test against a local sprockets checkout
+# $gem_locations["sprockets"] = "/Users/chris/Projects/sprockets"
+
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "sass-rails"
 
-  s.add_runtime_dependency 'sass',       '~> 3.1.1'
+  s.add_runtime_dependency 'sass',       '>= 3.1.2'
   s.add_runtime_dependency 'railties',   '~> 3.1.0.rc1'
   s.add_runtime_dependency 'actionpack', '~> 3.1.0.rc1'
 

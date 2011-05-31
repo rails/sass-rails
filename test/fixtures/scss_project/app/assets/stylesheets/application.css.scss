@@ -1,0 +1,10 @@
+@import "partials/sass_import";
+@import "partials/scss_import";
+@import "globbed/**/*";
+@import "subfolder/plain";
+@import "subfolder/second_level";
+
+.main {
+  color: yellow;
+  @include background-from-partial(red);
+}
