@@ -23,6 +23,21 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   protected
 
+  def fixture_path(path)
+    File.expand_path("../../fixtures/#{path}", __FILE__)
+  end
+
+  def sprockets_render(project, filename)
+    @env = Sprockets::Environment.new
+    @env.context_class.class_eval do
+      def self.sass_config
+        Sass::Rails::Railtie.config.sass
+      end
+    end
+    @env.paths << fixture_path("#{project}/app/assets/stylesheets")
+    @env[filename].to_s
+  end
+
   def assert_file_exists(filename)
     assert File.exists?(filename), "could not find #{filename}. PWD=#{Dir.pwd}\nDid find: #{Dir.glob(File.dirname(filename)+"/*").join(", ")}"
   end

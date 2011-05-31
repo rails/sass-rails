@@ -22,4 +22,18 @@ class SassRailsTest < Sass::Rails::TestCase
       assert_not_output(/conflict/)
     end
   end
+  test "templates are registered with sprockets" do
+    assert_equal Sass::Rails::SassTemplate, Sprockets.engines[".sass"]
+    assert_equal Sass::Rails::ScssTemplate, Sprockets.engines[".scss"]
+  end
+  test "sass imports work correctly" do
+    css_output = sprockets_render("scss_project", "application.css.scss")
+    assert css_output =~ /main/
+    assert css_output =~ /top-level/
+    assert css_output =~ /partial-sass/
+    assert css_output =~ /partial-scss/
+    assert css_output =~ /sub-folder-relative-sass/
+    assert css_output =~ /sub-folder-relative-scss/
+    assert css_output =~ /not-a-partial/
+  end
 end

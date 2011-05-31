@@ -1,0 +1,7 @@
+@import "partials/sass_import";
+@import "partials/scss_import";
+
+.main {
+  color: yellow;
+  @include background-from-partial(red);
+}
