@@ -1,3 +1,5 @@
+require 'sass'
+
 module Sass
   module Rails
     class CssCompressor

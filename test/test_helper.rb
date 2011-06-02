@@ -3,7 +3,7 @@ ENV["RAILS_ENV"] = "test"
 
 require 'rails'
 require "rails/test_help"
-require 'sass-rails'
+require 'sass/rails'
 
 Rails.backtrace_cleaner.remove_silencers!
 
