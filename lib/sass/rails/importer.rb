@@ -53,7 +53,9 @@ module Sass::Rails
     end
 
     def find(name, options)
-      if pathname = resolve(name)
+      if name =~ GLOB
+        nil # globs must be relative
+      elsif pathname = resolve(name)
         context.depend_on(pathname)
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
@@ -82,7 +84,7 @@ module Sass::Rails
           contents << "@import #{Pathname.new(filename).relative_path_from(base_pathname.dirname).to_s.inspect};\n"
         end
       end
-
+      return nil if contents.empty?
       Sass::Engine.new(contents, options.merge(
         :filename => base_pathname.to_s,
         :importer => self,
@@ -114,7 +116,7 @@ module Sass::Rails
     private
       def sprockets_resolve(path)
         context.resolve(path, :content_type => :self)
-      rescue Sprockets::FileNotFound
+      rescue Sprockets::FileNotFound, Sprockets::ContentTypeMismatch
         nil
       end
 
