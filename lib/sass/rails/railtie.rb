@@ -12,6 +12,8 @@ module Sass::Rails
     config.sass.read_cache       = true
     # Display line comments above each selector as a debugging aid
     config.sass.line_comments    = true
+    # Initialize the load paths to an empty array
+    config.sass.load_paths       = []
 
     initializer :setup_sass do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
