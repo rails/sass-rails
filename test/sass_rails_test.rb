@@ -14,12 +14,26 @@ class SassRailsTest < Sass::Rails::TestCase
       assert_not_output(/conflict/)
     end
   end
-  test "sass files are generated during scaffold generation sass projects" do
+  test "sass files are generated during scaffold generation of sass projects" do
     within_rails_app "sass_project" do
       runcmd "rails generate scaffold foo"
       assert_file_exists "app/assets/stylesheets/foos.css.sass"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.sass"
       assert_not_output(/conflict/)
+    end
+  end
+  test "scss template has correct dasherized css class for namespaced controllers" do
+    within_rails_app "scss_project" do
+      runcmd "rails generate controller foo/bar"
+      assert_file_exists "app/assets/stylesheets/foo/bar.css.scss"
+      assert_match File.read("app/assets/stylesheets/foo/bar.css.scss"), /\.foo-bar/
+    end
+  end
+  test "sass template has correct dasherized css class for namespaced controllers" do
+    within_rails_app "sass_project" do
+      runcmd "rails generate controller foo/bar"
+      assert_file_exists "app/assets/stylesheets/foo/bar.css.sass"
+      assert_match File.read("app/assets/stylesheets/foo/bar.css.sass"), /\.foo-bar/
     end
   end
   test "templates are registered with sprockets" do
