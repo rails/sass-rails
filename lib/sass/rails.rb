@@ -4,6 +4,7 @@ module Sass
 end
 
 require 'sass/rails/compressor'
+require 'sass/rails/logger'
 require 'sass/rails/railtie'
 require 'sass/rails/monkey_patches'
 require 'sass/rails/importer'
