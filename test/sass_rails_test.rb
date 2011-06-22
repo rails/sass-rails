@@ -42,8 +42,6 @@ class SassRailsTest < Sass::Rails::TestCase
   end
   test "sass imports work correctly" do
     css_output = sprockets_render("scss_project", "application.css.scss")
-    require "ruby-debug/debugger"
-    ""
     assert_match css_output, /main/
     assert_match css_output, /top-level/
     assert_match css_output, /partial-sass/
