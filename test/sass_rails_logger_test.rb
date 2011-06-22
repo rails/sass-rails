@@ -2,22 +2,23 @@ require 'test_helper'
 
 class SassRailsLoggerTest < Sass::Rails::TestCase
   test "setting a sass-rails logger as the sass default logger" do
-    assert Sass::logger.is_a?(Sass::Rails::Logger)
-  end
-
-  log_levels = [:debug, :warn, :error, :info]
-  log_levels.each do |level|
-
-    test "calling the  sass #{level} logger passes the message to rails #{level} logger" do
-      message = "debug message"
-      Rails.logger.expects(:debug).with(message)
-      Sass::logger.log(:debug, message)
+    within_rails_app "scss_project" do
+      logger_class_name = runcmd 'rails runner "print Sass::logger.class.name"'
+      assert_equal Sass::Rails::Logger.name, logger_class_name
     end
-
   end
 
-  test "calling the sass trace logger uses the built-in sass logger" do
-    Sass::logger.expects(:super)
-    Sass::logger.log(:trace, "trace message")
+  [:debug, :warn, :info, :error, :trace].each do |level|
+    test "sending a #{level} message to the sass logger writes to the environment log file" do
+      within_rails_app "scss_project" do
+        app_root = runcmd 'rails runner "print Rails.root"'
+
+        message = "[#{level}]: sass message"
+        runcmd %{rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, '#{message}')"}
+
+        log_output = File.open("#{app_root}/log/development.log").read
+        assert log_output.include?(message), "the #{level} log message was not found in the log file"
+      end
+    end
   end
 end

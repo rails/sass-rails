@@ -14,6 +14,8 @@ module Sass::Rails
     config.sass.line_comments    = true
     # Initialize the load paths to an empty array
     config.sass.load_paths       = []
+    # Send Sass logs to Rails.logger
+    config.sass.logger           = Sass::Rails::Logger.new
 
     initializer :setup_sass do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
@@ -32,7 +34,6 @@ module Sass::Rails
         # Display a stack trace in the css output when in development-like environments.
         config.sass.full_exception = app.config.consider_all_requests_local
       end
-
     end
 
     initializer :setup_compression do |app|
@@ -40,6 +41,10 @@ module Sass::Rails
         # Use sass's css_compressor
         app.config.assets.css_compressor = CssCompressor.new
       end
+    end
+
+    config.after_initialize do |app|
+      Sass::logger = app.config.sass.logger
     end
   end
 end
