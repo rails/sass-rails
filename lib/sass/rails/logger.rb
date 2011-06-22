@@ -2,16 +2,18 @@ module Sass
   module Rails
     class Logger < Sass::Logger::Base
       def _log(level, message)
-        logger = ::Rails.logger
 
-        if logger.respond_to? level
-          logger.send(level, message)
-        else
-          super
+        case level
+          when :trace, :debug
+            ::Rails.logger.debug message
+          when :warn
+            ::Rails.logger.warn message
+          when :error
+            ::Rails.logger.error message
+          when :info
+            ::Rails.logger.info message
         end
       end
     end
   end
 end
-
-Sass::logger = Sass::Rails::Logger.new
