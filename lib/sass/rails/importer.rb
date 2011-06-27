@@ -14,6 +14,7 @@ module Sass::Rails
 
     def initialize(context)
       @context = context
+      @resolver = Resolver.new(context)
     end
 
     def sass_file?(filename)
@@ -33,7 +34,7 @@ module Sass::Rails
         name = base_pathname.dirname.relative_path_from(context.pathname.dirname).join(name)
       end
       partial_name = name.dirname.join("_#{name.basename}")
-      sprockets_resolve(name) || sprockets_resolve(partial_name)
+      @resolver.resolve(name) || @resolver.resolve(partial_name)
     end
 
     def find_relative(name, base, options)
@@ -45,7 +46,7 @@ module Sass::Rails
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
         else
-          Sass::Engine.new(sprockets_process(pathname), options.merge(:filename => pathname.to_s, :importer => self, :syntax => :scss))
+          Sass::Engine.new(@resolver.process(pathname), options.merge(:filename => pathname.to_s, :importer => self, :syntax => :scss))
         end
       else
         nil
@@ -60,7 +61,7 @@ module Sass::Rails
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
         else
-          Sass::Engine.new(sprockets_process(pathname), options.merge(:filename => pathname.to_s, :importer => self, :syntax => :scss))
+          Sass::Engine.new(@resolver.process(pathname), options.merge(:filename => pathname.to_s, :importer => self, :syntax => :scss))
         end
       else
         nil
@@ -113,16 +114,6 @@ module Sass::Rails
       "Sass::Rails::Importer(#{context.pathname})"
     end
 
-    private
-      def sprockets_resolve(path)
-        context.resolve(path, :content_type => :self)
-      rescue Sprockets::FileNotFound, Sprockets::ContentTypeMismatch
-        nil
-      end
-
-      def sprockets_process(path)
-        context.environment[path].to_s
-      end
   end
 
 end

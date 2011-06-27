@@ -1,5 +1,7 @@
 require 'fileutils'
 require 'tmpdir'
+require 'action_view/helpers/capture_helper'
+
 
 class Sass::Rails::TestCase < ActiveSupport::TestCase
 
@@ -27,15 +29,39 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     File.expand_path("../../fixtures/#{path}", __FILE__)
   end
 
+  module TestAssetPaths
+    attr_accessor :assets
+  end
+
   def sprockets_render(project, filename)
-    @env = Sprockets::Environment.new
-    @env.context_class.class_eval do
+    env = Sprockets::Environment.new
+    env.context_class.class_eval do
+      def self.assets=(assets)
+        @assets = assets
+      end
+      def self.assets
+        @assets
+      end
       def self.sass_config
         Sass::Rails::Railtie.config.sass
       end
+      def config
+        @config ||= ActiveSupport::InheritableOptions.new
+      end
+      include Sprockets::Helpers::RailsHelper
+      def asset_paths_with_testing
+        paths = asset_paths_without_testing
+        unless paths.is_a?(TestAssetPaths)
+          paths.extend(TestAssetPaths)
+          paths.assets = self.class.assets
+        end
+        paths
+      end
+      alias_method_chain :asset_paths, :testing
     end
-    @env.paths << fixture_path("#{project}/app/assets/stylesheets")
-    @env[filename].to_s
+    env.context_class.assets = env
+    env.paths << fixture_path("#{project}/app/assets/stylesheets")
+    env[filename].to_s
   end
 
   def assert_file_exists(filename)
