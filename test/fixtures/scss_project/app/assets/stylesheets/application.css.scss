@@ -8,3 +8,9 @@
   color: yellow;
   @include background-from-partial(red);
 }
+
+.rails {
+  asset-path: asset-path("rails.png", image);
+  asset-url: asset-url("rails.png", image);
+  image-url: image-url("rails.png");
+}

@@ -54,6 +54,12 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match css_output, /plain-old-css/
     assert_match css_output, /another-plain-old-css/
   end
+  test "sass asset paths work" do
+    css_output = sprockets_render("scss_project", "application.css.scss")
+    assert_match css_output, %r{asset-path:\s*"/assets/rails.png"}
+    assert_match css_output, %r{asset-url:\s*url\(/assets/rails.png\)}
+    assert_match css_output, %r{image-url:\s*url\(/assets/rails.png\)}
+  end
   test "css compressor compresses" do
     assert_equal "div{color:red}\n", Sass::Rails::CssCompressor.new.compress(<<CSS)
 div {

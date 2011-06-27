@@ -57,7 +57,10 @@ module Sass::Rails
         :line => line,
         :syntax => syntax,
         :importer => importer,
-        :load_paths => load_paths
+        :load_paths => load_paths,
+        :custom => {
+          :resolver => Resolver.new(scope)
+        }
       )
     end
 

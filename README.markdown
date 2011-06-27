@@ -44,6 +44,22 @@ The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFER
   files (containing mixins and variables) because it is difficult to control the
   cascade ordering for imports that contain styles using this approach.
 
+* **Asset Helpers**. When using the asset pipeline, paths to assets must be rewritten.
+  When referencing assets use the following asset helpers:
+
+  * `asset_path($relative-asset-path, $asset-class)` - Returns a string to the asset.
+    For example: `asset_path("rails.png", image)` becomes `"/assets/rails.png"`
+  * `asset_url($relative-asset-path, $asset-class)` - Returns url reference to the asset.
+    
+    For example: `asset_url("rails.png", image)` becomes `url(/assets/rails.png)`
+  * As a convenience, for each of the following asset classes there are
+    corresponding `_path` and `_url` helpers:
+    image, font, video, audio, javascript, stylesheet.
+    
+    For example: `image_url("rails.png")` becomes `url(/assets/rails.png)` and
+    `image_path("rails.png")` becomes `"/assets/rails.png"`.
+  
+
 ## Running Tests
 
     $ bundle install
