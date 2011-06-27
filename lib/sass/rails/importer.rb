@@ -31,7 +31,8 @@ module Sass::Rails
     def resolve(name, base_pathname = nil)
       name = Pathname.new(name)
       if base_pathname && base_pathname.to_s.size > 0
-        name = base_pathname.dirname.relative_path_from(context.pathname.dirname).join(name)
+        root = Pathname.new(context.root_path)
+        name = base_pathname.relative_path_from(root).join(name)
       end
       partial_name = name.dirname.join("_#{name.basename}")
       @resolver.resolve(name) || @resolver.resolve(partial_name)
@@ -41,7 +42,7 @@ module Sass::Rails
       base_pathname = Pathname.new(base)
       if name =~ GLOB
         glob_imports(name, base_pathname, options)
-      elsif pathname = resolve(name, base_pathname)
+      elsif pathname = resolve(name, base_pathname.dirname)
         context.depend_on(pathname)
         if sass_file?(pathname)
           Sass::Engine.new(pathname.read, options.merge(:filename => pathname.to_s, :importer => self, :syntax => syntax(pathname)))
@@ -69,7 +70,7 @@ module Sass::Rails
     end
 
     def each_globbed_file(glob, base_pathname, options)
-      Dir["#{base_pathname.dirname}/#{glob}"].sort.each do |filename|
+      Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
         next if filename == options[:filename]
         yield filename if File.directory?(filename) || context.asset_requirable?(filename)
       end
@@ -77,7 +78,7 @@ module Sass::Rails
 
     def glob_imports(glob, base_pathname, options)
       contents = ""
-      each_globbed_file(glob, base_pathname, options) do |filename|
+      each_globbed_file(glob, base_pathname.dirname, options) do |filename|
         if File.directory?(filename)
           context.depend_on(filename)
         elsif context.asset_requirable?(filename)
@@ -96,7 +97,7 @@ module Sass::Rails
     def mtime(name, options)
       if name =~ GLOB && options[:filename]
         mtime = nil
-        each_globbed_file(name, Pathname.new(options[:filename]), options) do |p|
+        each_globbed_file(name, Pathname.new(options[:filename]).dirname, options) do |p|
           mtime ||= File.mtime(p)
           mtime = [mtime, File.mtime(p)].max
         end

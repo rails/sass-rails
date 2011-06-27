@@ -40,6 +40,10 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_equal Sass::Rails::SassTemplate, Sprockets.engines[".sass"]
     assert_equal Sass::Rails::ScssTemplate, Sprockets.engines[".scss"]
   end
+  test "sprockets require works correctly" do
+    css_output = sprockets_render("scss_project", "css_application.css")
+    assert_match css_output, /globbed/
+  end
   test "sass imports work correctly" do
     css_output = sprockets_render("scss_project", "application.css.scss")
     assert_match css_output, /main/
