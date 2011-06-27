@@ -18,7 +18,7 @@ module Sass
           def #{asset_class}_url(asset)
             asset_url(asset, Sass::Script::String.new("#{asset_class}"))
           end
-        }, __FILE__, __LINE__ - 7
+        }, __FILE__, __LINE__ - 6
       end
 
     protected
