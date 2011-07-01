@@ -1,7 +1,5 @@
 require 'fileutils'
 require 'tmpdir'
-require 'action_view/helpers/capture_helper'
-
 
 class Sass::Rails::TestCase < ActiveSupport::TestCase
 
