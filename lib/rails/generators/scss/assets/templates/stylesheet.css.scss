@@ -3,5 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.<%= name.parameterize.dasherize %> {
-  // Place scoped styles here
+  // Add the <%= name.parameterize.dasherize %> class to your body tag
+  // Then, place scoped styles here.
 }
