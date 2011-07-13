@@ -14,7 +14,7 @@ class SassRailsLoggerTest < Sass::Rails::TestCase
         app_root = runcmd 'rails runner "print Rails.root"'
 
         message = "[#{level}]: sass message"
-        runcmd %{rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, '#{message}')"}
+        runcmd %{rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, %Q|#{message}|)"}
 
         log_output = File.open("#{app_root}/log/development.log").read
         assert log_output.include?(message), "the #{level} log message was not found in the log file"
