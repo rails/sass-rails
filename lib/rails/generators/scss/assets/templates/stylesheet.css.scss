@@ -1,8 +1,3 @@
 // Place all the styles related to the <%= name %> controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-body.<%= name.parameterize.dasherize %> {
-  // Add the <%= name.parameterize.dasherize %> class to your body tag
-  // Then, place scoped styles here.
-}
