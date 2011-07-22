@@ -26,14 +26,14 @@ class SassRailsTest < Sass::Rails::TestCase
     within_rails_app "scss_project" do
       runcmd "rails generate controller foo/bar"
       assert_file_exists "app/assets/stylesheets/foo/bar.css.scss"
-      assert_match File.read("app/assets/stylesheets/foo/bar.css.scss"), /\.foo-bar/
+      assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.scss")
     end
   end
   test "sass template has correct dasherized css class for namespaced controllers" do
     within_rails_app "sass_project" do
       runcmd "rails generate controller foo/bar"
       assert_file_exists "app/assets/stylesheets/foo/bar.css.sass"
-      assert_match File.read("app/assets/stylesheets/foo/bar.css.sass"), /\.foo-bar/
+      assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
     end
   end
   test "templates are registered with sprockets" do
@@ -42,7 +42,7 @@ class SassRailsTest < Sass::Rails::TestCase
   end
   test "sprockets require works correctly" do
     css_output = sprockets_render("scss_project", "css_application.css")
-    assert_match css_output, /globbed/
+    assert_match /globbed/, css_output
   end
   test "sass imports work correctly" do
     css_output = sprockets_render("scss_project", "application.css.scss")
@@ -57,6 +57,7 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match css_output, /nested-glob/
     assert_match css_output, /plain-old-css/
     assert_match css_output, /another-plain-old-css/
+    assert_match css_output, /without-css-ext/
   end
   test "sass asset paths work" do
     css_output = sprockets_render("scss_project", "application.css.scss")

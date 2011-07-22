@@ -3,6 +3,7 @@
 @import "globbed/**/*";
 @import "subfolder/plain";
 @import "subfolder/second_level";
+@import "partials/without_css_ext";
 
 .main {
   color: yellow;
@@ -14,3 +15,5 @@
   asset-url: asset-url("rails.png", image);
   image-url: image-url("rails.png");
 }
+
+@include without-css-ext;

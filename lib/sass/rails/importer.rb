@@ -8,7 +8,9 @@ module Sass::Rails
 
     SASS_EXTENSIONS = {
       ".css.sass" => :sass,
-      ".css.scss" => :scss
+      ".css.scss" => :scss,
+      ".sass" => :sass,
+      ".scss" => :scss
     }
     attr_reader :context
 

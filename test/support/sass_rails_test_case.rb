@@ -151,7 +151,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     env["BUNDLE_GEMFILE"] = "#{working_directory}/#{gemfile}" if clean_env
     todo = Proc.new do
       r, w = IO.pipe
-      pid = spawn(env, cmd, :out =>w , :err => w, :chdir => working_directory)
+      pid = Kernel.spawn(env, cmd, :out =>w , :err => w, :chdir => working_directory)
       w.close
       Process.wait
       output = r.read
