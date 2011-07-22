@@ -57,6 +57,7 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match css_output, /nested-glob/
     assert_match css_output, /plain-old-css/
     assert_match css_output, /another-plain-old-css/
+    assert_match css_output, /without-css-ext/
   end
   test "sass asset paths work" do
     css_output = sprockets_render("scss_project", "application.css.scss")
