@@ -22,20 +22,21 @@ class SassRailsTest < Sass::Rails::TestCase
       assert_not_output(/conflict/)
     end
   end
-  test "scss template has correct dasherized css class for namespaced controllers" do
-    within_rails_app "scss_project" do
-      runcmd "rails generate controller foo/bar"
-      assert_file_exists "app/assets/stylesheets/foo/bar.css.scss"
-      assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.scss")
-    end
-  end
-  test "sass template has correct dasherized css class for namespaced controllers" do
-    within_rails_app "sass_project" do
-      runcmd "rails generate controller foo/bar"
-      assert_file_exists "app/assets/stylesheets/foo/bar.css.sass"
-      assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
-    end
-  end
+  # DISABLED because we've removed the feature for now.
+  # test "scss template has correct dasherized css class for namespaced controllers" do
+  #   within_rails_app "scss_project" do
+  #     runcmd "rails generate controller foo/bar"
+  #     assert_file_exists "app/assets/stylesheets/foo/bar.css.scss"
+  #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.scss")
+  #   end
+  # end
+  # test "sass template has correct dasherized css class for namespaced controllers" do
+  #   within_rails_app "sass_project" do
+  #     runcmd "rails generate controller foo/bar"
+  #     assert_file_exists "app/assets/stylesheets/foo/bar.css.sass"
+  #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
+  #   end
+  # end
   test "templates are registered with sprockets" do
     assert_equal Sass::Rails::SassTemplate, Sprockets.engines[".sass"]
     assert_equal Sass::Rails::ScssTemplate, Sprockets.engines[".scss"]
@@ -61,9 +62,9 @@ class SassRailsTest < Sass::Rails::TestCase
   end
   test "sass asset paths work" do
     css_output = sprockets_render("scss_project", "application.css.scss")
-    assert_match css_output, %r{asset-path:\s*"/assets/rails.png"}
-    assert_match css_output, %r{asset-url:\s*url\(/assets/rails.png\)}
-    assert_match css_output, %r{image-url:\s*url\(/assets/rails.png\)}
+    assert_match css_output, %r{asset-path:\s*"/assets/rails.png"}, 'asset-path:\s*"/assets/rails.png"'
+    assert_match css_output, %r{asset-url:\s*url\(/assets/rails.png\)}, 'asset-url:\s*url\(/assets/rails.png\)'
+    assert_match css_output, %r{image-url:\s*url\(/assets/rails.png\)}, 'image-url:\s*url\(/assets/rails.png\)'
   end
   test "css compressor compresses" do
     assert_equal "div{color:red}\n", Sass::Rails::CssCompressor.new.compress(<<CSS)
