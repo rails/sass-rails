@@ -22,13 +22,18 @@ module Sass::Rails
     # Send Sass logs to Rails.logger
     config.sass.logger           = Sass::Rails::Logger.new
 
+    # Set the default stylesheet engine
+    # It could be overrided by application specific settings
+    config.app_generators.stylesheet_engine :scss
+
+
     initializer :setup_sass do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
       alt_syntax = syntax == :sass ? "scss" : "sass"
       app.config.generators.hide_namespace alt_syntax
 
-      # Set the stylesheet engine to the preferred syntax
+      # Override stylesheet engine to the preferred syntax
       config.app_generators.stylesheet_engine syntax
 
       # Set the sass cache location to tmp/sass-cache
