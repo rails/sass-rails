@@ -39,8 +39,15 @@ module Sass::Rails
         # Display a stack trace in the css output when in development-like environments.
         config.sass.full_exception = app.config.consider_all_requests_local
       end
-      app.assets.context_class.extend(SassContext)
-      app.assets.context_class.sass_config = app.config.sass
+
+      # app.assets might be nil if asset pipeline is not enabled
+      if app.assets
+        app.assets.context_class.extend(SassContext)
+        app.assets.context_class.sass_config = app.config.sass
+      else
+        $stderr.puts 'sass-rails now requires asset pipeline to be enabled. ' <<
+          'Please put config.assets.enabled = true into your application.rb file.'
+      end
     end
 
     initializer :setup_compression do |app|
