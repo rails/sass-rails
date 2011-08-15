@@ -2,7 +2,6 @@ require 'fileutils'
 require 'tmpdir'
 require 'sprockets/helpers/rails_helper'
 
-
 class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   class ExecutionError < StandardError
@@ -33,49 +32,10 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     attr_accessor :assets
   end
 
-  def fake_sprockets_env(project)
-    # Fuck everything about this.
-    # This HAS to get simplified.
-    # But it works right now.
-    env = Sprockets::Environment.new
-    env.context_class.extend(Sass::Rails::Railtie::SassContext)
-    env.context_class.sass_config = Sass::Rails::Railtie.config.sass
-    env.context_class.class_eval do
-      def self.assets=(assets)
-        @assets = assets
-      end
-      def self.assets
-        @assets
-      end
-      def config
-        @config ||= ActiveSupport::InheritableOptions.new
-      end
-      include Sprockets::Helpers::RailsHelper
-      def asset_paths_with_testing
-        paths = asset_paths_without_testing
-        unless paths.is_a?(TestAssetPaths)
-          paths.extend(TestAssetPaths)
-          paths.assets = self.class.assets
-        end
-        paths
-      end
-      alias_method_chain :asset_paths, :testing
-    end
-    env.context_class.assets = env
-    app = mock
-    app.stubs(:assets).returns(env)
-    config = ActiveSupport::InheritableOptions.new
-    config.sass = Sass::Rails::Railtie.config.sass
-    config.assets = env
-    config.assets.stubs(:prefix).returns("/assets")
-    app.stubs(:config).returns(config)
-    Rails.stubs(:application).returns(app)
-    env.append_path(fixture_path("#{project}/app/assets/stylesheets"))
-    env
-  end
-
   def sprockets_render(project, filename)
-    fake_sprockets_env(project)[filename].to_s
+    within_rails_app(project) do
+      runcmd "ruby script/rails runner 'puts Rails.application.assets[#{filename.inspect}]'"
+    end
   end
 
   def assert_file_exists(filename)
