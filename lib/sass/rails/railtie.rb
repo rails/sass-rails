@@ -22,6 +22,12 @@ module Sass::Rails
     # Send Sass logs to Rails.logger
     config.sass.logger           = Sass::Rails::Logger.new
 
+    config.before_initialize do
+      require 'sprockets/engines'
+      Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
+      Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
+    end
+
     initializer :setup_sass do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym

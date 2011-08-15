@@ -84,7 +84,3 @@ module Sass::Rails
     end
   end
 end
-
-Sprockets::Engines #invoke autoloading
-Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
-Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
