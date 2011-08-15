@@ -37,10 +37,6 @@ class SassRailsTest < Sass::Rails::TestCase
   #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
   #   end
   # end
-  test "templates are registered with sprockets" do
-    assert_equal Sass::Rails::SassTemplate, Sprockets.engines[".sass"]
-    assert_equal Sass::Rails::ScssTemplate, Sprockets.engines[".scss"]
-  end
   test "sprockets require works correctly" do
     css_output = sprockets_render("scss_project", "css_application.css")
     assert_match /globbed/, css_output
