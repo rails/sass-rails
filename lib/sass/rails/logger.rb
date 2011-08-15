@@ -1,3 +1,5 @@
+require 'sass/logger'
+
 module Sass
   module Rails
     class Logger < Sass::Logger::Base
