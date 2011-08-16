@@ -1,3 +1,7 @@
+unless defined?(Bundler)
+  $stderr.puts "You didn't run bundle exec did you? Try again: bundle exec rake test"
+  exit 1
+end
 require 'fileutils'
 require 'tmpdir'
 require 'sprockets/helpers/rails_helper'
