@@ -3,7 +3,6 @@ module Sass
 
   module Rails
     autoload :CssCompressor, 'sass/rails/compressor'
-    autoload :Helpers,       'sass/rails/helpers'
     autoload :Importer,      'sass/rails/importer'
     autoload :Logger,        'sass/rails/logger'
     autoload :Resolver,      'sass/rails/template_handlers'
@@ -13,4 +12,5 @@ module Sass
 end
 
 require 'sass/rails/version'
+require 'sass/rails/helpers'
 require 'sass/rails/railtie'
