@@ -22,8 +22,9 @@ module Sass::Rails
     # Send Sass logs to Rails.logger
     config.sass.logger           = Sass::Rails::Logger.new
 
-    config.before_initialize do
-      require 'sprockets/engines'
+    config.before_initialize do |app|
+      require 'sass'
+      Sprockets::Engines #force autoloading
       Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
       Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
     end
