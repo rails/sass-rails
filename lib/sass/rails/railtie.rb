@@ -23,10 +23,9 @@ module Sass::Rails
     config.sass.logger           = Sass::Rails::Logger.new
 
     # Set the default stylesheet engine
-    # It could be overrided by application specific settings:
-    # config.sass.preferred_syntax = :sass
-    # or by passing:
-    # --stylesheet_engine=sass in the rails new/generate commands
+    # It can be overridedden by passing:
+    #     --stylesheet_engine=sass
+    # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
     config.before_initialize do |app|
