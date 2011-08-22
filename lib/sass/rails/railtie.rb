@@ -23,6 +23,10 @@ module Sass::Rails
     config.sass.logger           = Sass::Rails::Logger.new
 
     config.before_initialize do |app|
+      unless app.config.assets && app.config.assets.enabled
+        raise "The sass-rails plugin requires the asset pipeline to be enabled."
+      end
+
       require 'sass'
       Sprockets::Engines #force autoloading
       Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
