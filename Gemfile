@@ -3,7 +3,6 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in sass-rails.gemspec
 gemspec
 
-gem "rails", :git => "git://github.com/rails/rails.git", :branch => "3-1-stable"
 gem "sfl", "~> 2.0"
 gem "sprockets"
 gem "mocha"

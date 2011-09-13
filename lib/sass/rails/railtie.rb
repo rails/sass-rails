@@ -11,9 +11,9 @@ module Sass::Rails
     config.sass.preferred_syntax = :scss
     # Use expanded output instead of the sass default of :nested
     config.sass.style            = :expanded
-    # Write sass cache files to tmp/sass-cache for performance
+    # Write sass cache files for performance
     config.sass.cache            = true
-    # Read sass cache files from tmp/sass-cache for performance
+    # Read sass cache files for performance
     config.sass.read_cache       = true
     # Display line comments above each selector as a debugging aid
     config.sass.line_comments    = true
@@ -22,8 +22,19 @@ module Sass::Rails
     # Send Sass logs to Rails.logger
     config.sass.logger           = Sass::Rails::Logger.new
 
-    config.before_initialize do
-      require 'sprockets/engines'
+    # Set the default stylesheet engine
+    # It can be overridedden by passing:
+    #     --stylesheet_engine=sass
+    # to the rails generate command
+    config.app_generators.stylesheet_engine config.sass.preferred_syntax
+
+    config.before_initialize do |app|
+      unless app.config.assets && app.config.assets.enabled
+        raise "The sass-rails plugin requires the asset pipeline to be enabled."
+      end
+
+      require 'sass'
+      Sprockets::Engines #force autoloading
       Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
       Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
     end
@@ -34,11 +45,11 @@ module Sass::Rails
       alt_syntax = syntax == :sass ? "scss" : "sass"
       app.config.generators.hide_namespace alt_syntax
 
-      # Set the stylesheet engine to the preferred syntax
+      # Override stylesheet engine to the preferred syntax
       config.app_generators.stylesheet_engine syntax
 
-      # Set the sass cache location to tmp/sass-cache
-      config.sass.cache_location   = File.join(Rails.root, "tmp/sass-cache")
+      # Set the sass cache location
+      config.sass.cache_location   = File.join(Rails.root, "tmp/cache/sass")
 
       # Establish configuration defaults that are evironmental in nature
       if config.sass.full_exception.nil?
