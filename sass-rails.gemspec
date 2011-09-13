@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'sass',       '>= 3.1.4'
   s.add_runtime_dependency 'railties',   '~> 3.2.0.beta'
   s.add_runtime_dependency 'actionpack', '~> 3.2.0.beta'
-  s.add_runtime_dependency 'sprockets',  '~>= 2.0.0'
+  s.add_runtime_dependency 'sprockets',  '~> 2.0.0'
   s.add_runtime_dependency 'tilt',       '~> 1.3.2'
 
   s.files         = `git ls-files`.split("\n")
