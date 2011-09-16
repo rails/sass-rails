@@ -2,6 +2,11 @@ module Sass
   module Rails
     module Helpers
 
+      def asset_data_url(path)
+        data = context_asset_data_uri(path.value)
+        Sass::Script::String.new(%Q{url(#{data})})
+      end
+
       def asset_path(asset, kind)
         Sass::Script::String.new(public_path(asset.value, kind.value), true)
       end
@@ -24,6 +29,10 @@ module Sass
     protected
       def public_path(asset, kind)
         options[:custom][:resolver].public_path(asset, kind.pluralize)
+      end
+      
+      def context_asset_data_uri(path)
+        options[:custom][:resolver].context.asset_data_uri(path)
       end
     end
   end
