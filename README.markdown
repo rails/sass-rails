@@ -51,15 +51,12 @@ The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFER
   * `asset_path($relative-asset-path, $asset-class)` - Returns a string to the asset.
     For example: `asset-path("rails.png", image)` becomes `"/assets/rails.png"`
   * `asset_url($relative-asset-path, $asset-class)` - Returns url reference to the asset.
-    
     For example: `asset-url("rails.png", image)` becomes `url(/assets/rails.png)`
   * As a convenience, for each of the following asset classes there are
     corresponding `-path` and `-url` helpers:
     image, font, video, audio, javascript, stylesheet.
-    
     For example: `image-url("rails.png")` becomes `url(/assets/rails.png)` and
     `image-path("rails.png")` becomes `"/assets/rails.png"`.
-  
   * `asset_data_url($relative-asset-path)` - Returns url reference to the Base64-encoded asset at the specified path.
     For example: `asset-data-url("rails.png")` becomes `url(data:image/png;base64,iVBORw0K...)`
 
