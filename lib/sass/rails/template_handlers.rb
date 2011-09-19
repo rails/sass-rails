@@ -53,6 +53,7 @@ module Sass::Rails
       load_paths = (options[:load_paths] || []).dup
       load_paths.unshift(importer)
       options.merge(
+        :css_filename => scope.logical_path,
         :filename => eval_file,
         :line => line,
         :syntax => syntax,
