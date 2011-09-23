@@ -5,7 +5,9 @@ module Sass::Rails
     module SassContext
       attr_accessor :sass_config
     end
+
     config.sass = ActiveSupport::OrderedOptions.new
+
     # Establish static configuration defaults
     # Emit scss files during stylesheet generation of scaffold
     config.sass.preferred_syntax = :scss
@@ -28,18 +30,16 @@ module Sass::Rails
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
-    config.before_initialize do |app|
-      unless app.config.assets && app.config.assets.enabled
-        raise "The sass-rails plugin requires the asset pipeline to be enabled."
-      end
-
-      require 'sass'
+    # Assume dependency on sprockets, not on app.config.assets enabled.
+    if defined?(Sprockets::Engines)
       Sprockets::Engines #force autoloading
       Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
       Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
     end
 
-    initializer :setup_sass do |app|
+    initializer :setup_sass, :group => :assets do |app|
+      require 'sass'
+
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
       alt_syntax = syntax == :sass ? "scss" : "sass"
@@ -58,17 +58,15 @@ module Sass::Rails
       end
       app.assets.context_class.extend(SassContext)
       app.assets.context_class.sass_config = app.config.sass
+
+      Sass.logger = app.config.sass.logger
     end
 
-    initializer :setup_compression do |app|
+    initializer :setup_compression, :group => :assets do |app|
       if app.config.assets.compress
         # Use sass's css_compressor
         app.config.assets.css_compressor = CssCompressor.new
       end
-    end
-
-    config.after_initialize do |app|
-      Sass::logger = app.config.sass.logger
     end
   end
 end
