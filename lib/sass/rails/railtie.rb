@@ -30,16 +30,18 @@ module Sass::Rails
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
-    # Assume dependency on sprockets, not on app.config.assets enabled.
-    if defined?(Sprockets::Engines)
-      Sprockets::Engines #force autoloading
-      Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
-      Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
+    config.before_initialize do
+      require 'sass'
+
+      # Assume dependency on sprockets, not on app.config.assets enabled.
+      if defined?(Sprockets::Engines)
+        Sprockets::Engines #force autoloading
+        Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
+        Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
+      end
     end
 
     initializer :setup_sass, :group => :assets do |app|
-      require 'sass'
-
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
       alt_syntax = syntax == :sass ? "scss" : "sass"
