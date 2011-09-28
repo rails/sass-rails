@@ -18,10 +18,10 @@ module Sass
       [:image, :video, :audio, :javascript, :stylesheet].each do |asset_class|
         class_eval %Q{
           def #{asset_class}_path(asset)
-            Sass::Script::String.new(options[:custom][:resolver].#{asset_class}_path(asset.value), true)
+            Sass::Script::String.new(resolver.#{asset_class}_path(asset.value), true)
           end
           def #{asset_class}_url(asset)
-            Sass::Script::String.new("url(" + options[:custom][:resolver].#{asset_class}_path(asset.value) + ")")
+            Sass::Script::String.new("url(" + resolver.#{asset_class}_path(asset.value) + ")")
           end
         }, __FILE__, __LINE__ - 6
       end
@@ -35,13 +35,18 @@ module Sass
       end
 
     protected
-      def public_path(asset, kind)
-        options[:custom][:resolver].public_path(asset, kind.pluralize)
-      end
-      
-      def context_asset_data_uri(path)
-        options[:custom][:resolver].context.asset_data_uri(path)
-      end
+
+    def resolver
+      options[:custom][:resolver]
+    end
+
+    def public_path(asset, kind)
+      resolver.public_path(asset, kind.pluralize)
+    end
+
+    def context_asset_data_uri(path)
+      resolver.context.asset_data_uri(path)
+    end
     end
   end
 end
