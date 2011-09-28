@@ -20,11 +20,31 @@ module Sass::Rails
     end
 
     def public_path(path, scope)
-      context.asset_paths.compute_public_path(path, scope)
+      context.asset_paths.compute_public_path(path, ::Rails.application.config.assets.prefix)
     end
 
     def process(path)
       context.environment[path].to_s
+    end
+
+    def image_path(img)
+      context.image_path(img)
+    end
+
+    def video_path(video)
+      context.video_path(video)
+    end
+
+    def audio_path(audio)
+      context.audio_path(audio)
+    end
+
+    def javascript_path(javascript)
+      context.javascript_path(javascript)
+    end
+
+    def stylesheet_path(stylesheet)
+      context.stylesheet_path(stylesheet)
     end
   end
 

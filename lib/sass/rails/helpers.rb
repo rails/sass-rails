@@ -15,25 +15,38 @@ module Sass
         Sass::Script::String.new(%Q{url(#{public_path(asset.value, kind.value)})})
       end
 
-      [:image, :font, :video, :audio, :javascript, :stylesheet].each do |asset_class|
+      [:image, :video, :audio, :javascript, :stylesheet].each do |asset_class|
         class_eval %Q{
           def #{asset_class}_path(asset)
-            asset_path(asset, Sass::Script::String.new("#{asset_class}"))
+            Sass::Script::String.new(resolver.#{asset_class}_path(asset.value), true)
           end
           def #{asset_class}_url(asset)
-            asset_url(asset, Sass::Script::String.new("#{asset_class}"))
+            Sass::Script::String.new("url(" + resolver.#{asset_class}_path(asset.value) + ")")
           end
         }, __FILE__, __LINE__ - 6
       end
 
+      def font_path(asset)
+        asset_path(asset, Sass::Script::String.new("font"))
+      end
+
+      def font_url(asset)
+        asset_url(asset, Sass::Script::String.new("font"))
+      end
+
     protected
-      def public_path(asset, kind)
-        options[:custom][:resolver].public_path(asset, kind.pluralize)
-      end
-      
-      def context_asset_data_uri(path)
-        options[:custom][:resolver].context.asset_data_uri(path)
-      end
+
+    def resolver
+      options[:custom][:resolver]
+    end
+
+    def public_path(asset, kind)
+      resolver.public_path(asset, kind.pluralize)
+    end
+
+    def context_asset_data_uri(path)
+      resolver.context.asset_data_uri(path)
+    end
     end
   end
 end
