@@ -76,7 +76,18 @@ class SassRailsTest < Sass::Rails::TestCase
     css_output = sprockets_render("scss_project", "application.css.scss")
     assert_match css_output, %r{asset-path:\s*"/assets/rails.png"}, 'asset-path:\s*"/assets/rails.png"'
     assert_match css_output, %r{asset-url:\s*url\(/assets/rails.png\)}, 'asset-url:\s*url\(/assets/rails.png\)'
+    assert_match css_output, %r{image-path:\s*"/assets/rails.png"}, 'image-path:\s*"/assets/rails.png"'
     assert_match css_output, %r{image-url:\s*url\(/assets/rails.png\)}, 'image-url:\s*url\(/assets/rails.png\)'
+    assert_match css_output, %r{video-path:\s*"/videos/rails.mp4"}, 'video-path:\s*"/videos/rails.mp4"'
+    assert_match css_output, %r{video-url:\s*url\(/videos/rails.mp4\)}, 'video-url:\s*url\(/videos/rails.mp4\)'
+    assert_match css_output, %r{audio-path:\s*"/audios/rails.mp3"}, 'audio-path:\s*"/audios/rails.mp3"'
+    assert_match css_output, %r{audio-url:\s*url\(/audios/rails.mp3\)}, 'audio-url:\s*url\(/audios/rails.mp3\)'
+    assert_match css_output, %r{font-path:\s*"/assets/rails.ttf"}, 'font-path:\s*"/assets/rails.ttf"'
+    assert_match css_output, %r{font-url:\s*url\(/assets/rails.ttf\)}, 'font-url:\s*url\(/assets/rails.ttf\)'
+    assert_match css_output, %r{javascript-path:\s*"/assets/rails.js"}, 'javascript-path:\s*"/assets/rails.js"'
+    assert_match css_output, %r{javascript-url:\s*url\(/assets/rails.js\)}, 'javascript-url:\s*url\(/assets/rails.js\)'
+    assert_match css_output, %r{stylesheet-path:\s*"/assets/rails.css"}, 'stylesheet-path:\s*"/assets/rails.css"'
+    assert_match css_output, %r{stylesheet-url:\s*url\(/assets/rails.css\)}, 'stylesheet-url:\s*url\(/assets/rails.css\)'
 
     asset_data_url_regexp = %r{asset-data-url:\s*url\((.*?)\)}
     assert_match css_output, asset_data_url_regexp, 'asset-data-url:\s*url\((.*?)\)'
