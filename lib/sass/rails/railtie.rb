@@ -41,7 +41,7 @@ module Sass::Rails
       end
     end
 
-    initializer :setup_sass, :group => :assets do |app|
+    initializer :setup_sass, :group => :all do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
       alt_syntax = syntax == :sass ? "scss" : "sass"
@@ -64,7 +64,7 @@ module Sass::Rails
       Sass.logger = app.config.sass.logger
     end
 
-    initializer :setup_compression, :group => :assets do |app|
+    initializer :setup_compression, :group => :all do |app|
       if app.config.assets.compress
         # Use sass's css_compressor
         app.config.assets.css_compressor = CssCompressor.new
