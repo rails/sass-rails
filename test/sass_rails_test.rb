@@ -84,6 +84,7 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match css_output, %r{audio-url:\s*url\(/audios/rails.mp3\)}, 'audio-url:\s*url\(/audios/rails.mp3\)'
     assert_match css_output, %r{font-path:\s*"/assets/rails.ttf"}, 'font-path:\s*"/assets/rails.ttf"'
     assert_match css_output, %r{font-url:\s*url\(/assets/rails.ttf\)}, 'font-url:\s*url\(/assets/rails.ttf\)'
+    assert_match css_output, %r{font-url-with-query-hash:\s*url\(/assets/rails.ttf\?#iefix\)}, 'font-url:\s*url\(/assets/rails.ttf?#iefix\)'
     assert_match css_output, %r{javascript-path:\s*"/assets/rails.js"}, 'javascript-path:\s*"/assets/rails.js"'
     assert_match css_output, %r{javascript-url:\s*url\(/assets/rails.js\)}, 'javascript-url:\s*url\(/assets/rails.js\)'
     assert_match css_output, %r{stylesheet-path:\s*"/assets/rails.css"}, 'stylesheet-path:\s*"/assets/rails.css"'
