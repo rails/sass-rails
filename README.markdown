@@ -21,7 +21,7 @@ properties that will be passed to Sass.
       config.sass.syntax = :nested
     end
 
-### Important Note
+## <span style="color:#c00">Important Note</span>
 
 Sprockets provides some directives that are placed inside of comments called `require`, `require_tree`, and
 `require_self`. **DO NOT USE THEM IN YOUR SASS/SCSS FILES.** They are very primitive and
