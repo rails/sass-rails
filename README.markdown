@@ -21,13 +21,12 @@ properties that will be passed to Sass.
       config.sass.syntax = :nested
     end
 
-## <span style="color:#c00">Important Note</span>
+## Important Note
 
 Sprockets provides some directives that are placed inside of comments called `require`, `require_tree`, and
-`require_self`. **DO NOT USE THEM IN YOUR SASS/SCSS FILES.** They are very primitive and
-do not work well with Sass files. Instead, use Sass's native `@import`
-directive which `sass-rails` has customized to integrate with the
-conventions of your rails projects.
+`require_self`. **<span style="color:#c00">DO NOT USE THEM IN YOUR SASS/SCSS FILES.</span>** They are very 
+primitive and do not work well with Sass files. Instead, use Sass's native `@import` directive which
+`sass-rails` has customized to integrate with the conventions of your rails projects.
 
 ### Options
 
