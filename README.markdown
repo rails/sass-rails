@@ -21,6 +21,14 @@ properties that will be passed to Sass.
       config.sass.syntax = :nested
     end
 
+### Important Note
+
+Sprockets provides some directives that are placed inside of comments called `require`, `require_tree`, and
+`require_self`. **DO NOT USE THEM IN YOUR SASS/SCSS FILES.** They are very primitive and
+do not work well with Sass files. Instead, use Sass's native `@import`
+directive which `sass-rails` has customized to integrate with the
+conventions of your rails projects.
+
 ### Options
 
 The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options) can be found on the Sass Website with the following  caveats:
