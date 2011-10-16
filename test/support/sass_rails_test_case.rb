@@ -59,13 +59,15 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   #
   # Automatically changes back to the working directory
   # and removes the temp directory when done.
-  def within_rails_app(name, without_gems = [], gem_locations = $gem_locations)
+  def within_rails_app(name, without_gems = [], gem_options = $gem_options)
     sourcedir = File.expand_path("../../fixtures/#{name}", __FILE__)
     Dir.mktmpdir do |tmpdir|
       FileUtils.cp_r "#{sourcedir}/.", tmpdir
       Dir.chdir(tmpdir) do
-        gem_locations.each {|name, path| modify_gem_location name, path}
+        gem_options.each {|name, options| modify_gem_entry name, options}
         without_gems.each {|name| remove_gem name}
+        puts File.read("Gemfile")
+        FileUtils.rm("Gemfile.lock")
         runcmd "bundle install --verbose"
         yield
       end
@@ -81,21 +83,27 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     end
   end
 
-  def modify_gem_location(gemname, path, gemfile = "Gemfile")
+  def modify_gem_entry(gemname, options, gemfile = "Gemfile")
     found = false
     process_gemfile(gemfile) do |line|
       if line =~ /gem *(["'])#{Regexp.escape(gemname)}\1/
         found = true
-        %Q{gem "#{gemname}", :path => #{path.inspect}\n}
+        gem_entry(gemname, options) + "\n"
       else
         line
       end
     end
     unless found
       File.open(gemfile, "a") do |f|
-        f.print(%Q{\ngem "#{gemname}", :path => #{path.inspect}\n})
+        f.print("\n#{gem_entry(gemname, options)}\n")
       end
     end
+  end
+
+  def gem_entry(gemname, options)
+    entry = %Q{gem "#{gemname}", "~> #{options[:version]}"}
+    entry += ", :path => #{options[:path].inspect}" if options[:path]
+    entry
   end
 
   def remove_gem(gemname)
