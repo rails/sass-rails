@@ -66,7 +66,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
       Dir.chdir(tmpdir) do
         gem_options.each {|name, options| modify_gem_entry name, options}
         without_gems.each {|name| remove_gem name}
-        FileUtils.rm("Gemfile.lock")
+        FileUtils.rm("Gemfile.lock") if File.exist?("Gemfile.lock")
         runcmd "bundle install --verbose"
         yield tmpdir
       end
