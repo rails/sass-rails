@@ -66,7 +66,7 @@ module Sass::Rails
 
     initializer :setup_compression, :group => :all do |app|
       if app.config.assets.compress
-        # Use sass's css_compressor
+        app.config.sass.style = :compressed
         app.config.assets.css_compressor = CssCompressor.new
       end
     end

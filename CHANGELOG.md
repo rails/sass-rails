@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+3.1.5.rc.1 (Oct 16, 2011)
+---------------------
+* Several bug fixes
+* Performance and bug fixes when compressing stylesheets
+* Update dependency to latest sass stable release to fix caching issues.
+
 3.1.2 (Sept 15, 2011)
 ---------------------
 

@@ -8,11 +8,9 @@ class SassRailsLoggerTest < Sass::Rails::TestCase
     end
   end
 
-  [:debug, :warn, :info, :error, :trace].each do |level|
-    test "sending a #{level} message to the sass logger writes to the environment log file" do
-      within_rails_app "scss_project" do
-        app_root = runcmd 'rails runner "print Rails.root"'
-
+  test "sending a log messages to the sass logger writes to the environment log file" do
+    within_rails_app "scss_project" do |app_root|
+      [:debug, :warn, :info, :error, :trace].each do |level|
         message = "[#{level}]: sass message"
         runcmd %{rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, %Q|#{message}|)"}
 
