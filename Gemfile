@@ -5,6 +5,9 @@ gemspec
 
 # Meanwhile we are depending on a non released rails version
 gem "rails", :git => 'git://github.com/rails/rails.git'
+
+gem "sqlite3"
+
 gem "sfl", "~> 2.0"
 gem "mocha"
 
