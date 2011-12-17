@@ -3,6 +3,8 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in sass-rails.gemspec
 gemspec
 
+# Meanwhile we are depending on a non released rails version
+gem "rails", :git => 'git://github.com/rails/rails.git'
 gem "sfl", "~> 2.0"
 gem "mocha"
 
