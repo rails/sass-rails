@@ -4,7 +4,7 @@ source "http://rubygems.org"
 gemspec
 
 # Meanwhile we are depending on a non released rails version
-gem "rails", :git => 'git://github.com/rails/rails.git'
+gem "rails", :git => 'git://github.com/rails/rails.git', :branch => '3-2-stable'
 
 gem "sqlite3"
 
