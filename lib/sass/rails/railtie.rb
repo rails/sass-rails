@@ -30,11 +30,11 @@ module Sass::Rails
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
-    config.before_initialize do
+    config.before_initialize do |app|
       require 'sass'
 
-      # Assume dependency on sprockets, not on app.config.assets enabled.
-      if defined?(Sprockets::Engines)
+      if app.config.assets.enabled
+        require 'sprockets'
         Sprockets::Engines #force autoloading
         Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
         Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
