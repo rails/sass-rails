@@ -3,8 +3,8 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in sass-rails.gemspec
 gemspec
 
-# Depend on the latest Rails 3.2
-gem "rails", :git => 'git://github.com/rails/rails.git', :branch => '3-2-stable'
+# Track Rails master
+gem "rails", :git => 'https://github.com/rails/rails.git'
 
 gem "sqlite3"
 
