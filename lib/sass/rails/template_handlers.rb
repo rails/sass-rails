@@ -50,6 +50,10 @@ module Sass::Rails
     def stylesheet_path(stylesheet)
       context.stylesheet_path(stylesheet)
     end
+
+    def font_path(font)
+      context.font_path(font)
+    end
   end
 
   class SassTemplate < Tilt::SassTemplate

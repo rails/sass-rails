@@ -15,7 +15,7 @@ module Sass
         Sass::Script::String.new(%Q{url(#{public_path(asset.value, kind.value)})})
       end
 
-      [:image, :video, :audio, :javascript, :stylesheet].each do |asset_class|
+      [:image, :video, :audio, :javascript, :stylesheet, :font].each do |asset_class|
         class_eval %Q{
           def #{asset_class}_path(asset)
             Sass::Script::String.new(resolver.#{asset_class}_path(asset.value), true)
@@ -24,14 +24,6 @@ module Sass
             Sass::Script::String.new("url(" + resolver.#{asset_class}_path(asset.value) + ")")
           end
         }, __FILE__, __LINE__ - 6
-      end
-
-      def font_path(asset)
-        asset_path(asset, Sass::Script::String.new("font"))
-      end
-
-      def font_url(asset)
-        asset_url(asset, Sass::Script::String.new("font"))
       end
 
     protected
