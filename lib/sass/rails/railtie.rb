@@ -35,7 +35,7 @@ module Sass::Rails
 
       if app.config.assets.enabled
         require 'sprockets'
-        Sprockets::Engines #force autoloading
+        require 'sprockets/engines'
         Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
         Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
       end
