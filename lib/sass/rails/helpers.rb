@@ -6,6 +6,11 @@ module Sass
         data = context_asset_data_uri(path.value)
         Sass::Script::String.new(%Q{url(#{data})})
       end
+      
+      def data_uri(path)
+        data = context_asset_data_uri(path.value)
+        Sass::Script::String.new(data)
+      end
 
       def asset_path(asset, kind)
         Sass::Script::String.new(public_path(asset.value, kind.value), true)
