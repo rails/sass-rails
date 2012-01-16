@@ -3,7 +3,7 @@ CHANGELOG
 
 3.1.6 (Dec 24, 2011)
 ---------------------
-* Fixing #64 (incompatibility with deactivated Asset Piepeline)
+* Fixing #64 (incompatibility with deactivated Asset Pipeline)
 
 3.1.5.rc.1 (Oct 16, 2011)
 ---------------------
