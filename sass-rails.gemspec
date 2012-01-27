@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "sass-rails"
 
   s.add_runtime_dependency 'sass',       '>= 3.1.10'
-  s.add_runtime_dependency 'railties',   '~> 3.2.0.beta'
+  s.add_runtime_dependency 'railties',   '~> 3.2.0'
   s.add_runtime_dependency 'tilt',       '~> 1.3'
 
   s.files         = `git ls-files`.split("\n")
