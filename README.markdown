@@ -18,7 +18,7 @@ properties that will be passed to Sass.
 
     MyProject::Application.configure do
       config.sass.line_comments = false
-      config.sass.syntax = :nested
+      config.sass.style = :nested
     end
 
 ## Important Note
