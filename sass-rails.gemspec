@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["wycats", "chriseppstein"]
   s.email       = ["wycats@gmail.com", "chris@eppsteins.net"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/rails/sass-rails"
   s.summary     = %q{Sass adapter for the Rails asset pipeline.}
   s.description = %q{Sass adapter for the Rails asset pipeline.}
 
