@@ -1,4 +1,4 @@
-require 'sprockets/railtie'
+require 'sprockets/rails/railtie'
 
 module Sass::Rails
   class Railtie < ::Rails::Railtie
