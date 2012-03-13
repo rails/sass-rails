@@ -5,6 +5,7 @@ gemspec
 
 # Track Rails master
 gem "rails", :git => 'https://github.com/rails/rails.git'
+gem "sprockets-rails", :git => "git://github.com/rails/sprockets-rails.git"
 
 gem "sqlite3"
 
