@@ -41,6 +41,11 @@ module Sass::Rails
       end
     end
 
+    # Remove the sass middleware if it gets inadvertently enabled by applications.
+    config.after_initialize do |app|
+      app.config.middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)
+    end
+
     initializer :setup_sass, :group => :all do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
