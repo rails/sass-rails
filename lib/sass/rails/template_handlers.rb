@@ -73,7 +73,7 @@ module Sass::Rails
       load_paths = (options[:load_paths] || []).dup
       load_paths.unshift(importer)
       resolver = Resolver.new(scope)
-      css_filename = File.join(::Rails.public_path, resolver.public_path(scope.logical_path)) + ".css"
+      css_filename = File.join(::Rails.public_path, ::Rails.application.config.assets.prefix, scope.logical_path) + ".css"
       options.merge(
         :filename => eval_file,
         :css_filename => css_filename,
