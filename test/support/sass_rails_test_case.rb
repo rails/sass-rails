@@ -54,6 +54,10 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     assert $last_ouput.to_s =~ match, "#{match} was not found in #{$last_ouput.inspect}"
   end
 
+  def assert_line_count(count)
+    last_count = $last_ouput.lines.count
+    assert last_count == count, "Wrong line count, expected: #{count} but got: #{last_count}"
+  end
   # Copies a rails app fixture to a temp directory
   # and changes to that directory during the yield.
   #
