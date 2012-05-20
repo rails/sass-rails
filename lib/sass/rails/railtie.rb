@@ -11,8 +11,6 @@ module Sass::Rails
     # Establish static configuration defaults
     # Emit scss files during stylesheet generation of scaffold
     config.sass.preferred_syntax = :scss
-    # Use expanded output instead of the sass default of :nested
-    config.sass.style            = :expanded
     # Write sass cache files for performance
     config.sass.cache            = true
     # Read sass cache files for performance
@@ -74,8 +72,12 @@ module Sass::Rails
 
     initializer :setup_compression, :group => :all do |app|
       if app.config.assets.compress
-        app.config.sass.style = :compressed
-        app.config.assets.css_compressor = CssCompressor.new
+        # Use compressed style if none specified
+        app.config.sass.style ||= :compressed
+        app.config.assets.css_compressor ||= CssCompressor.new(:style => app.config.sass.style)
+      else
+        # Use expanded output instead of the sass default of :nested unless specified
+        app.config.sass.style ||= :expanded
       end
     end
   end
