@@ -7,7 +7,7 @@ require 'bundler/setup'
 require 'rails'
 require "rails/test_help"
 require 'sass/rails'
-require 'sfl'
+require 'sfl' if RUBY_VERSION < '1.9'
 require 'mocha'
 
 Rails.backtrace_cleaner.remove_silencers!
