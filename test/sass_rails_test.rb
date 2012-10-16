@@ -71,6 +71,7 @@ END_OF_COMMAND
       assert_not_output(/conflict/)
     end
   end
+
   test "sass files are generated during scaffold generation of sass projects" do
     within_rails_app "sass_project" do
       generate_scaffold
@@ -79,6 +80,7 @@ END_OF_COMMAND
       assert_not_output(/conflict/)
     end
   end
+
   test "scss files are generated during scaffold generation of a engine project" do
     within_rails_app "engine_project" do
       generate_scaffold
@@ -87,6 +89,7 @@ END_OF_COMMAND
       assert_not_output(/conflict/)
     end
   end
+
   test "sass files are generated during scaffold generation of a engine project, if is called with --stylesheet-engine=sass" do
     within_rails_app "engine_project" do
       generate_scaffold "--stylesheet-engine=sass"
@@ -95,6 +98,7 @@ END_OF_COMMAND
       assert_not_output(/conflict/)
     end
   end
+
   # DISABLED because we've removed the feature for now.
   # test "scss template has correct dasherized css class for namespaced controllers" do
   #   within_rails_app "scss_project" do
@@ -103,6 +107,7 @@ END_OF_COMMAND
   #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.scss")
   #   end
   # end
+  #
   # test "sass template has correct dasherized css class for namespaced controllers" do
   #   within_rails_app "sass_project" do
   #     runcmd "rails generate controller foo/bar"
@@ -110,10 +115,12 @@ END_OF_COMMAND
   #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
   #   end
   # end
+  #
   test "sprockets require works correctly" do
     css_output = sprockets_render("scss_project", "css_application.css")
     assert_match /globbed/, css_output
   end
+
   test "sass imports work correctly" do
     css_output = sprockets_render("scss_project", "application.css.scss")
     assert_match /main/,                     css_output
@@ -129,6 +136,7 @@ END_OF_COMMAND
     assert_match /another-plain-old-css/,    css_output
     assert_match /without-css-ext/,          css_output
   end
+
   test "sass asset paths work" do
     css_output = sprockets_render("scss_project", "application.css.scss")
     assert_match %r{asset-path:\s*"/assets/rails.png"},                            css_output, 'asset-path:\s*"/assets/rails.png"'
@@ -153,6 +161,7 @@ END_OF_COMMAND
     asset_data_url_expected = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw%2FeHBhY2tldCBiZWdpbj0i77u%2FIiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8%2BIDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCNzY5NDE1QkQ2NkMxMUUwOUUzM0E5Q0E2RTgyQUExQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCNzY5NDE1Q0Q2NkMxMUUwOUUzM0E5Q0E2RTgyQUExQiI%2BIDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkE3MzcyNTQ2RDY2QjExRTA5RTMzQTlDQTZFODJBQTFCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkI3Njk0MTVBRDY2QzExRTA5RTMzQTlDQTZFODJBQTFCIi8%2BIDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY%2BIDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8%2B0HhJ9AAAABBJREFUeNpi%2BP%2F%2FPwNAgAEACPwC%2FtuiTRYAAAAASUVORK5CYII%3D"
     assert_equal asset_data_url_expected, asset_data_url_match
   end
+
   test "css compressor compresses" do
     assert_equal "div{color:red}\n", Sass::Rails::CssCompressor.new.compress(<<CSS)
 div {
