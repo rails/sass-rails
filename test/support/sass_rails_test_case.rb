@@ -4,7 +4,7 @@ unless defined?(Bundler)
 end
 require 'fileutils'
 require 'tmpdir'
-require 'sprockets/helpers/rails_helper'
+require 'sprockets/rails/helpers/rails_helper'
 
 class Sass::Rails::TestCase < ActiveSupport::TestCase
 

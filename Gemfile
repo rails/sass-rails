@@ -4,8 +4,10 @@ source "http://rubygems.org"
 gemspec
 
 # Track Rails master
-gem "rails", :git => 'https://github.com/rails/rails.git'
-gem "sprockets-rails", :git => "git://github.com/rails/sprockets-rails.git"
+gem "rails", github: 'rails/rails'
+gem "sprockets-rails", github: "rails/sprockets-rails"
+gem "journey", github: "rails/journey"
+gem "activerecord-deprecated_finders", github: "rails/activerecord-deprecated_finders"
 
 gem "sqlite3"
 
