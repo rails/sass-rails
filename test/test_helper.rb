@@ -8,7 +8,6 @@ require 'rails'
 require "rails/test_help"
 require 'sass/rails'
 require 'sfl'
-require 'mocha'
 
 Rails.backtrace_cleaner.remove_silencers!
 
