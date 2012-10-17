@@ -3,7 +3,7 @@ require 'test_helper'
 class SassRailsLoggerTest < Sass::Rails::TestCase
   test "setting a sass-rails logger as the sass default logger" do
     within_rails_app "scss_project" do
-      logger_class_name = runcmd 'rails runner "print Sass::logger.class.name"'
+      logger_class_name = runcmd 'ruby script/rails runner "print Sass::logger.class.name"'
       assert logger_class_name =~ /#{Regexp.escape(Sass::Rails::Logger.name)}/
     end
   end
@@ -12,7 +12,7 @@ class SassRailsLoggerTest < Sass::Rails::TestCase
     within_rails_app "scss_project" do |app_root|
       [:debug, :warn, :info, :error, :trace].each do |level|
         message = "[#{level}]: sass message"
-        runcmd %{rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, %Q|#{message}|)"}
+        runcmd %{ruby script/rails runner "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, %Q|#{message}|)"}
 
         assert File.exists?("#{app_root}/log/development.log"), "log file was not created"
 
