@@ -28,17 +28,6 @@ module Sass::Rails
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
-    config.before_initialize do |app|
-      require 'sass'
-
-      if app.config.assets.enabled
-        require 'sprockets'
-        require 'sprockets/engines'
-        Sprockets.register_engine '.sass', Sass::Rails::SassTemplate
-        Sprockets.register_engine '.scss', Sass::Rails::ScssTemplate
-      end
-    end
-
     # Remove the sass middleware if it gets inadvertently enabled by applications.
     config.after_initialize do |app|
       app.config.middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)
@@ -60,11 +49,6 @@ module Sass::Rails
       if config.sass.full_exception.nil?
         # Display a stack trace in the css output when in development-like environments.
         config.sass.full_exception = app.config.consider_all_requests_local
-      end
-
-      if app.assets
-        app.assets.context_class.extend(SassContext)
-        app.assets.context_class.sass_config = app.config.sass
       end
 
       Sass.logger = app.config.sass.logger
