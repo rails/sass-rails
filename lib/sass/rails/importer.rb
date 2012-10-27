@@ -12,21 +12,25 @@ module Sprockets
       }.merge!(super)
     end
 
-    def find_relative(name, base, options)
+    def find_relative_with_glob(name, base, options)
       if name =~ GLOB
         glob_imports(name, Pathname.new(base), options)
       else
-        super
+        find_relative_without_glob(name, base, options)
       end
     end
+    alias_method :find_relative_without_glob, :find_relative
+    alias_method :find_relative, :find_relative_with_glob
 
-    def find(name, options)
+    def find_with_glob(name, options)
       if name =~ GLOB
         nil # globs must be relative
       else
-        super
+        find_without_glob(name, options)
       end
     end
+    alias_method :find_without_glob, :find
+    alias_method :find, :find_with_glob
 
     def each_globbed_file(glob, base_pathname, options)
       Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
