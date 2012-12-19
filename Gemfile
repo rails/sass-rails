@@ -6,7 +6,6 @@ gemspec
 # Track Rails master
 gem "rails", github: 'rails/rails', branch: 'master'
 gem "sprockets-rails", github: "rails/sprockets-rails"
-gem "journey", github: "rails/journey"
 gem "activerecord-deprecated_finders", github: "rails/activerecord-deprecated_finders"
 
 gem "sqlite3"
