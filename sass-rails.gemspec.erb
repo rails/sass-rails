@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/rails/sass-rails"
   s.summary     = %q{Sass adapter for the Rails asset pipeline.}
   s.description = %q{Sass adapter for the Rails asset pipeline.}
+  s.license     = %q{MIT}
 
   s.rubyforge_project = "sass-rails"
 
