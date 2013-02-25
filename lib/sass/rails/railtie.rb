@@ -55,7 +55,7 @@ module Sass::Rails
     end
 
     initializer :setup_compression, :group => :all do |app|
-      if app.config.assets.compress
+      unless Rails.env.development?
         # Use compressed style if none specified
         app.config.sass.style ||= :compressed
         app.config.assets.css_compressor ||= CssCompressor.new(:style => app.config.sass.style)
