@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+4.0.0.beta1 (Feb 25, 2013)
+---------------------
+
+* Support to Rails 4
+* Drop support to Ruby 1.8
+
 3.1.5.rc.1 (Oct 16, 2011)
 ---------------------
 * Several bug fixes
