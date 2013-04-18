@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.0.rc1 (Apr 18, 2013)
+
+* No changes.
+
 ## 4.0.0.beta1 (Feb 25, 2013)
 
 * Add Rails 4 support.
