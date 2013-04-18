@@ -2,8 +2,8 @@
 
 ## 4.0.0.beta1 (Feb 25, 2013)
 
-* Support to Rails 4.
-* Drop support to Ruby 1.8.
+* Add Rails 4 support.
+* Drop Ruby 1.8 support.
 
 ## 3.1.5.rc.1 (Oct 16, 2011)
 
@@ -13,7 +13,7 @@
 
 ## 3.1.2 (Sept 15, 2011)
 
-* Add asset-data-url helper for base-64 encoding of assets within stylesheets.
+* Add `asset-data-url` helper for base-64 encoding of assets within stylesheets.
 * Add explicit dependency on sprockets.
 
 ## 3.1.1 (Sept 13, 2011)
