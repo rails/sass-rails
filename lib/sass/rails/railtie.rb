@@ -2,10 +2,6 @@ require 'sprockets/railtie'
 
 module Sass::Rails
   class Railtie < ::Rails::Railtie
-    module SassContext
-      attr_accessor :sass_config
-    end
-
     config.sass = ActiveSupport::OrderedOptions.new
 
     # Establish static configuration defaults
