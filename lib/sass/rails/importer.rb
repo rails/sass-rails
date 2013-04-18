@@ -33,7 +33,7 @@ module Sass::Rails
     def resolve(name, base_pathname = nil)
       name = Pathname.new(name)
       if base_pathname && base_pathname.to_s.size > 0
-        root = Pathname.new(context.root_path)
+        root = context.pathname.dirname
         name = base_pathname.relative_path_from(root).join(name)
       end
       partial_name = name.dirname.join("_#{name.basename}")
