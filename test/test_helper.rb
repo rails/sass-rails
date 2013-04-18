@@ -7,7 +7,6 @@ require 'bundler/setup'
 require 'rails'
 require "rails/test_help"
 require 'sass/rails'
-require 'sfl'
 
 Rails.backtrace_cleaner.remove_silencers!
 
