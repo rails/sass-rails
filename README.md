@@ -31,7 +31,7 @@ can be found on the Sass Website with the following caveats:
 
     MyProject::Application.configure do
       config.sass.line_comments = false
-      config.sass.cache = :false
+      config.sass.cache = false
     end
 
 ## Important Note
