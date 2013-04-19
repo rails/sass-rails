@@ -14,11 +14,24 @@ To configure Sass via Rails set use `config.sass` in your
 application and/or environment files to set configuration
 properties that will be passed to Sass.
 
+### Options
+
+The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options)
+can be found on the Sass Website with the following caveats:
+
+1. `:style` - This option is not supported. This is determined by the Rails environment. It's `:expanded` only on development, otherwise it's `:compressed`.
+2. `:never_update` - This option is not supported. Instead set `config.assets.enabled = false`
+3. `:always_update` - This option is not supported. Sprockets uses a controller to access stylesheets in development mode instead of a full scan for changed files.
+4. `:always_check` - This option is not supported. Sprockets always checks in development.
+5. `:syntax` - This is determined by the file's extensions.
+6. `:filename` - This is determined by the file's name.
+7. `:line` - This is provided by the template handler.
+
 ### Example
 
     MyProject::Application.configure do
       config.sass.line_comments = false
-      config.sass.style = :nested
+      config.sass.cache = :false
     end
 
 ## Important Note
@@ -27,18 +40,6 @@ Sprockets provides some directives that are placed inside of comments called `re
 `require_self`. **<span style="color:#c00">DO NOT USE THEM IN YOUR SASS/SCSS FILES.</span>** They are very
 primitive and do not work well with Sass files. Instead, use Sass's native `@import` directive which
 `sass-rails` has customized to integrate with the conventions of your Rails projects.
-
-### Options
-
-The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options) can be found on the Sass Website with the following  caveats:
-
-1. Output compression is now controlled via the `config.assets.compress` boolean option instead of through the `:style` option.
-2. `:never_update` - This option is not supported. Instead set `config.assets.enabled = false`
-3. `:always_update` - This option is not supported. Sprockets uses a controller to access stylesheets in development mode instead of a full scan for changed files.
-4. `:always_check` - This option is not supported. Sprockets always checks in development.
-5. `:syntax` - This is determined by the file's extensions.
-6. `:filename` - This is determined by the file's name.
-7. `:line` - This is provided by the template handler.
 
 ## Features
 
