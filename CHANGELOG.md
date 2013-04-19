@@ -6,10 +6,11 @@
 
 ## 4.0.0.beta1 (Feb 25, 2013)
 
-* Add Rails 4 support.
-* Drop Ruby 1.8 support.
 * Remove `compress` option from `config.assets`. Instead, turn on
   compression for all environments except development.
+* Deprecate `asset_path` and `asset_url` with two arguments.
+* Add Rails 4 support.
+* Drop Ruby 1.8 support.
 
 ## 3.1.5.rc.1 (Oct 16, 2011)
 
