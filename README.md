@@ -4,13 +4,13 @@ This gem provides official integration for Ruby on Rails projects with the Sass 
 
 ## Installing
 
-Since rails 3.1, new rails projects will be already configured to use Sass. If you are upgrading to rails 3.1 you will need to add the following to your Gemfile:
+Since Rails 3.1, new Rails projects will be already configured to use Sass. If you are upgrading to Rails 3.1 you will need to add the following to your Gemfile:
 
     gem 'sass-rails'
 
 ## Configuration
 
-To configure Sass via rails set use `config.sass` in your
+To configure Sass via Rails set use `config.sass` in your
 application and/or environment files to set configuration
 properties that will be passed to Sass.
 
@@ -26,7 +26,7 @@ properties that will be passed to Sass.
 Sprockets provides some directives that are placed inside of comments called `require`, `require_tree`, and
 `require_self`. **<span style="color:#c00">DO NOT USE THEM IN YOUR SASS/SCSS FILES.</span>** They are very
 primitive and do not work well with Sass files. Instead, use Sass's native `@import` directive which
-`sass-rails` has customized to integrate with the conventions of your rails projects.
+`sass-rails` has customized to integrate with the conventions of your Rails projects.
 
 ### Options
 
@@ -42,7 +42,7 @@ The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFER
 
 ## Features
 
-* **Glob Imports**. When in rails, there is a special import syntax that allows you to
+* **Glob Imports**. When in Rails, there is a special import syntax that allows you to
   glob imports relative to the folder of the stylesheet that is doing the importing.
   E.g. `@import "mixins/*"` will import all the files in the mixins folder and
   `@import "mixins/**/*"` will import all the files in the mixins tree.
