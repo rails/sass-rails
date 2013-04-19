@@ -8,6 +8,8 @@
 
 * Add Rails 4 support.
 * Drop Ruby 1.8 support.
+* Remove `compress` option from `config.assets`. Instead, turn on
+  compression for all environments except development.
 
 ## 3.1.5.rc.1 (Oct 16, 2011)
 
