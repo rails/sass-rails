@@ -42,7 +42,7 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
-  test 'sass not defines compressor by default in development mode' do
+  test 'sass not defines compressor in development mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'development'}
       assert "", $last_ouput.to_s
