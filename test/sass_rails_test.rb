@@ -196,6 +196,6 @@ CSS
   end
 
   def generate_scaffold(args = nil)
-    runcmd "ruby script/rails generate scaffold foo #{args}"
+    runcmd "bundle exec rails generate scaffold foo #{args}"
   end
 end
