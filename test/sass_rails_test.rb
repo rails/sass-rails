@@ -16,8 +16,8 @@ class SassRailsTest < Sass::Rails::TestCase
 
   test 'css_compressor config item is not honored in development mode' do
     within_rails_app 'alternate_config_project' do
-      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
-      assert '', $last_ouput
+      runcmd "ruby script/rails runner 'p Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
+      assert_output /nil/
     end
   end
 
@@ -51,8 +51,8 @@ class SassRailsTest < Sass::Rails::TestCase
 
   test 'sass not defines compressor in development mode' do
     within_rails_app 'scss_project' do
-      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'development'}
-      assert '', $last_ouput
+      runcmd "ruby script/rails runner 'p Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'development'}
+      assert_output /nil/
     end
   end
 

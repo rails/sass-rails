@@ -4,5 +4,6 @@
 ENGINE_ROOT = File.expand_path('../..', __FILE__)
 ENGINE_PATH = File.expand_path('../../lib/engine_project/engine', __FILE__)
 
+require 'rails'
 require 'rails/all'
 require 'rails/engine/commands'
