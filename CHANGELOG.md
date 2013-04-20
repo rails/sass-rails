@@ -2,6 +2,7 @@
 
 ## 4.0.0 (Unreleased)
 
+* Remove `Sass::Rails::Compressor`. Use `Sprockets::SassCompressor` (`:sass` option) instead.
 * Remove `tilt` dependency.
 * Bump `sprockets-rails` to `2.0.0.rc4`.
 
