@@ -35,8 +35,4 @@ AlternateConfigProject::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
-
-  # This fixture esist to test compression config
-  config.assets.compress = true
-
 end
