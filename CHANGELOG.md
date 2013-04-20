@@ -3,6 +3,7 @@
 ## 4.0.0 (Unreleased)
 
 * Remove `tilt` dependency.
+* Bump `sprockets-rails` to `2.0.0.rc4`.
 
 ## 4.0.0.rc1 (Apr 18, 2013)
 
