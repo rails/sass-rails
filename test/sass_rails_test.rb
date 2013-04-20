@@ -14,8 +14,15 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
-  test 'css_compressor config item is honored' do
-    within_rails_app "alternate_config_project" do
+  test 'css_compressor config item is not honored in development mode' do
+    within_rails_app 'alternate_config_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
+      assert '', $last_ouput
+    end
+  end
+
+  test 'css_compressor config item is honored if environment is not development' do
+    within_rails_app 'alternate_config_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
       assert_output(/yui/)
     end
@@ -45,7 +52,7 @@ class SassRailsTest < Sass::Rails::TestCase
   test 'sass not defines compressor in development mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'development'}
-      assert "", $last_ouput.to_s
+      assert '', $last_ouput
     end
   end
 
@@ -76,7 +83,7 @@ span {
 CSS
 END_OF_COMMAND
     within_rails_app "alternate_config_project" do
-      runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
+      runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "test"}
       assert_line_count(3)
     end
   end

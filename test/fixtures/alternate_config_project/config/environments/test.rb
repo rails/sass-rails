@@ -35,4 +35,7 @@ AlternateConfigProject::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Set to compact only for testing purposes.
+  config.sass.style = :compact
 end
