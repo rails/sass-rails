@@ -23,6 +23,5 @@ AlternateConfigProject::Application.configure do
 
   # While not common in development, we are just using this to test alternate configs
   # Specifically, does it honor the style attribute
-  config.assets.compress = true
   config.sass.style = :compact
 end
