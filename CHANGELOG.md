@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.0 (Unreleased)
+
+* Remove `tilt` dependency.
+
 ## 4.0.0.rc1 (Apr 18, 2013)
 
 * No changes.
