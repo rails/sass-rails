@@ -1,4 +1,5 @@
 # Official Ruby-on-Rails Integration with Sass
+[![Travis CI](https://secure.travis-ci.org/rails/sass-rails.png)]([http://travis-ci.org/rails/sass-rails) [![Gem Version](https://badge.fury.io/rb/sass-rails.png)](http://badge.fury.io/rb/sass-rails)
 
 This gem provides official integration for Ruby on Rails projects with the Sass stylesheet language.
 
