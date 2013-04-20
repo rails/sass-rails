@@ -7,14 +7,35 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_kind_of Class, Sass::Rails::Railtie
   end
 
-  test "style config item is honored" do
-    within_rails_app "alternate_config_project" do
+  test 'sass uses expanded style by default in development mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {'RAILS_ENV' => 'development'}
+      assert_output(/expanded/)
+    end
+  end
+
+  test 'sass uses compressed style by default in test mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'test'}
+      assert_output(/compressed/)
+    end
+  end
+
+  test 'sass uses compressed style by default in production mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'production'}
+      assert_output(/compressed/)
+    end
+  end
+
+  test 'style config item is honored' do
+    within_rails_app 'alternate_config_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
       assert_output(/compact/)
     end
   end
 
-  test "css_compressor config item is honored" do
+  test 'css_compressor config item is honored' do
     within_rails_app "alternate_config_project" do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
       assert_output(/yui/)
@@ -53,13 +74,6 @@ END_OF_COMMAND
     within_rails_app "alternate_config_project" do
       runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "test"}
       assert_line_count(1)
-    end
-  end
-
-  test "sass uses expanded style by default in development" do
-    within_rails_app "scss_project" do
-      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
-      assert_output(/expanded/)
     end
   end
 
