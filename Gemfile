@@ -7,3 +7,4 @@ gemspec
 gem "rails", github: 'rails/rails', branch: 'master'
 
 gem "sqlite3"
+gem "minitest-focus"
