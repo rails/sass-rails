@@ -10,7 +10,7 @@ class SassRailsTest < Sass::Rails::TestCase
   test 'style config item is honored' do
     within_rails_app 'alternate_config_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
-      assert_output(/compact/)
+      assert_output /compact/
     end
   end
 
@@ -24,28 +24,28 @@ class SassRailsTest < Sass::Rails::TestCase
   test 'css_compressor config item is honored if environment is not development' do
     within_rails_app 'alternate_config_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
-      assert_output(/yui/)
+      assert_output /yui/
     end
   end
 
   test 'sass uses expanded style by default in development mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {'RAILS_ENV' => 'development'}
-      assert_output(/expanded/)
+      assert_output /expanded/
     end
   end
 
   test 'sass uses compressed style by default in test mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'test'}
-      assert_output(/compressed/)
+      assert_output /compressed/
     end
   end
 
   test 'sass uses compressed style by default in production mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'production'}
-      assert_output(/compressed/)
+      assert_output /compressed/
     end
   end
 
@@ -59,14 +59,14 @@ class SassRailsTest < Sass::Rails::TestCase
   test 'sass defines compressor by default in test mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'test'}
-      assert_output(/Sass::Rails::CssCompressor/)
+      assert_output /Sass::Rails::CssCompressor/
     end
   end
 
   test 'sass defines compressor by default in production mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'production'}
-      assert_output(/Sass::Rails::CssCompressor/)
+      assert_output /Sass::Rails::CssCompressor/
     end
   end
 
@@ -84,7 +84,7 @@ CSS
 END_OF_COMMAND
     within_rails_app "alternate_config_project" do
       runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "test"}
-      assert_line_count(3)
+      assert_line_count 3
     end
   end
 
@@ -93,7 +93,7 @@ END_OF_COMMAND
       generate_scaffold
       assert_file_exists "app/assets/stylesheets/foos.css.scss"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.scss"
-      assert_not_output(/conflict/)
+      assert_not_output /conflict/
     end
   end
 
@@ -102,7 +102,7 @@ END_OF_COMMAND
       generate_scaffold
       assert_file_exists "app/assets/stylesheets/foos.css.sass"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.sass"
-      assert_not_output(/conflict/)
+      assert_not_output /conflict/
     end
   end
 
@@ -111,7 +111,7 @@ END_OF_COMMAND
       generate_scaffold
       assert_file_exists "app/assets/stylesheets/engine_project/foos.css.scss"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.scss"
-      assert_not_output(/conflict/)
+      assert_not_output /conflict/
     end
   end
 
@@ -120,7 +120,7 @@ END_OF_COMMAND
       generate_scaffold "--stylesheet-engine=sass"
       assert_file_exists "app/assets/stylesheets/engine_project/foos.css.sass"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.sass"
-      assert_not_output(/conflict/)
+      assert_not_output /conflict/
     end
   end
 
@@ -140,7 +140,7 @@ END_OF_COMMAND
   #     assert_match /\.foo-bar/, File.read("app/assets/stylesheets/foo/bar.css.sass")
   #   end
   # end
-  #
+
   test "sprockets require works correctly" do
     css_output = sprockets_render("scss_project", "css_application.css")
     assert_match /globbed/, css_output
