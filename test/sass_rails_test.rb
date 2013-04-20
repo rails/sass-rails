@@ -7,6 +7,20 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_kind_of Class, Sass::Rails::Railtie
   end
 
+  test 'style config item is honored' do
+    within_rails_app 'alternate_config_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
+      assert_output(/compact/)
+    end
+  end
+
+  test 'css_compressor config item is honored' do
+    within_rails_app "alternate_config_project" do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
+      assert_output(/yui/)
+    end
+  end
+
   test 'sass uses expanded style by default in development mode' do
     within_rails_app 'scss_project' do
       runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {'RAILS_ENV' => 'development'}
@@ -28,17 +42,24 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
-  test 'style config item is honored' do
-    within_rails_app 'alternate_config_project' do
-      runcmd "ruby script/rails runner 'puts Rails.application.config.sass.style'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
-      assert_output(/compact/)
+  test 'sass not defines compressor by default in development mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'development'}
+      assert "", $last_ouput.to_s
     end
   end
 
-  test 'css_compressor config item is honored' do
-    within_rails_app "alternate_config_project" do
-      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "production"}
-      assert_output(/yui/)
+  test 'sass defines compressor by default in test mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'test'}
+      assert_output(/Sass::Rails::CssCompressor/)
+    end
+  end
+
+  test 'sass defines compressor by default in production mode' do
+    within_rails_app 'scss_project' do
+      runcmd "ruby script/rails runner 'puts Rails.application.config.assets.css_compressor'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => 'production'}
+      assert_output(/Sass::Rails::CssCompressor/)
     end
   end
 
@@ -57,23 +78,6 @@ END_OF_COMMAND
     within_rails_app "alternate_config_project" do
       runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "development"}
       assert_line_count(3)
-    end
-  end
-
-  test "compressor outputs compressed style when no style is specified but compression is true" do
-    command =<<END_OF_COMMAND
-puts Rails.application.config.assets.css_compressor.compress(<<CSS)
-div {
-  color: red;
-}
-span {
-  color: blue;
-}
-CSS
-END_OF_COMMAND
-    within_rails_app "alternate_config_project" do
-      runcmd "ruby script/rails runner '#{command}'", Dir.pwd, true, "Gemfile", {"RAILS_ENV" => "test"}
-      assert_line_count(1)
     end
   end
 
