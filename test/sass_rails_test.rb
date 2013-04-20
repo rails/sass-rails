@@ -106,9 +106,9 @@ END_OF_COMMAND
     end
   end
 
-  test "scss files are generated during scaffold generation of a engine project" do
+  test "scss files are generated during scaffold generation of a engine project, if is called with --stylesheet-engine=scss" do
     within_rails_app "engine_project" do
-      generate_scaffold
+      generate_scaffold "--stylesheet-engine=scss"
       assert_file_exists "app/assets/stylesheets/engine_project/foos.css.scss"
       assert_file_exists "app/assets/stylesheets/scaffolds.css.scss"
       assert_not_output /conflict/
@@ -196,6 +196,6 @@ CSS
   end
 
   def generate_scaffold(args = nil)
-    runcmd "bundle exec rails generate scaffold foo #{args}"
+    runcmd "ruby script/rails generate scaffold foo #{args}"
   end
 end
