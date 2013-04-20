@@ -50,11 +50,9 @@ module Sass::Rails
       Sass.logger = app.config.sass.logger
     end
 
-    initializer :setup_compression, :group => :all do |app|
+    initializer :setup_compression, group: :all do |app|
       unless Rails.env.development?
-        # Use compressed style if none specified
-        app.config.sass.style ||= :compressed
-        app.config.assets.css_compressor ||= CssCompressor.new(:style => app.config.sass.style)
+        app.config.assets.css_compressor ||= :sass
       else
         # Use expanded output instead of the sass default of :nested unless specified
         app.config.sass.style ||= :expanded

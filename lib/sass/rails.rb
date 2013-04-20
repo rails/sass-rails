@@ -1,7 +1,6 @@
 module Sass
   module Rails
-    autoload :CssCompressor, 'sass/rails/compressor'
-    autoload :Logger,        'sass/rails/logger'
+    autoload :Logger, 'sass/rails/logger'
   end
 end
 
