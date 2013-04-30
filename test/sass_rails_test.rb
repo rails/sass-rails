@@ -81,6 +81,11 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match /plain-old-css/,            css_output
     assert_match /another-plain-old-css/,    css_output
     assert_match /without-css-ext/,          css_output
+    assert_match /css-erb-handler/,          css_output
+    assert_match /scss-erb-handler/,         css_output
+    assert_match /sass-erb-handler/,         css_output
+    assert_match /css-sass-erb-handler/,     css_output
+    assert_match /css-scss-erb-handler/,     css_output
   end
 
   test 'sass asset paths work' do
