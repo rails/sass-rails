@@ -62,11 +62,13 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
+  focus
   test 'sprockets require works correctly' do
     css_output = sprockets_render('scss_project', 'css_application.css')
     assert_match /globbed/, css_output
   end
 
+  focus
   test 'sass imports work correctly' do
     css_output = sprockets_render('scss_project', 'application.css.scss')
     assert_match /main/,                     css_output

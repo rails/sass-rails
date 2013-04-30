@@ -4,6 +4,8 @@ module Sprockets
   class SassImporter < Sass::Importers::Filesystem
     GLOB = /\*|\[.+\]/
 
+    attr_reader :context
+
     def extensions
       {
         "css" => :scss,
@@ -35,7 +37,7 @@ module Sprockets
     def each_globbed_file(glob, base_pathname, options)
       Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
         next if filename == options[:filename]
-        yield filename if File.directory?(filename) || @context.asset_requirable?(filename)
+        yield filename if File.directory?(filename) || context.asset_requirable?(filename)
       end
     end
 
@@ -43,9 +45,9 @@ module Sprockets
       contents = ""
       each_globbed_file(glob, base_pathname.dirname, options) do |filename|
         if File.directory?(filename)
-          @context.depend_on(filename)
-        elsif @context.asset_requirable?(filename)
-          @context.depend_on(filename)
+          context.depend_on(filename)
+        elsif context.asset_requirable?(filename)
+          context.depend_on(filename)
           contents << "@import #{Pathname.new(filename).relative_path_from(base_pathname.dirname).to_s.inspect};\n"
         end
       end
