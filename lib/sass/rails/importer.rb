@@ -5,6 +5,7 @@ module Sprockets
     GLOB = /\*|\[.+\]/
 
     attr_reader :context
+    private :context
 
     def extensions
       {
