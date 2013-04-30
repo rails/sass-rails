@@ -4,6 +4,7 @@
 @import "subfolder/plain";
 @import "subfolder/second_level";
 @import "partials/without_css_ext";
+@import "erb_handler";
 
 .main {
   color: yellow;
