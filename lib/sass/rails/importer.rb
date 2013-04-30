@@ -8,31 +8,32 @@ module Sprockets
 
     def extensions
       {
-        "css" => :scss,
-        "css.sass" => :sass,
-        "css.scss" => :scss
+        'css'          => :scss,
+        'css.scss'     => :scss,
+        'css.sass'     => :sass,
+        'css.erb'      => :scss,
+        'scss.erb'     => :scss,
+        'sass.erb'     => :sass,
+        'css.scss.erb' => :scss,
+        'css.sass.erb' => :sass
       }.merge!(super)
     end
 
-    def find_relative_with_glob(name, base, options)
+    def find_relative(name, base, options)
       if name =~ GLOB
         glob_imports(name, Pathname.new(base), options)
       else
-        find_relative_without_glob(name, base, options)
+        engine_from_path(name, File.dirname(base), options)
       end
     end
-    alias_method :find_relative_without_glob, :find_relative
-    alias_method :find_relative, :find_relative_with_glob
 
-    def find_with_glob(name, options)
+    def find(name, options)
       if name =~ GLOB
         nil # globs must be relative
       else
-        find_without_glob(name, options)
+        engine_from_path(name, root, options)
       end
     end
-    alias_method :find_without_glob, :find
-    alias_method :find, :find_with_glob
 
     def each_globbed_file(glob, base_pathname, options)
       Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
@@ -58,5 +59,31 @@ module Sprockets
         :syntax => :scss
       ))
     end
+
+    private
+
+      def engine_from_path(name, dir, options)
+        full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
+        return unless full_filename && File.readable?(full_filename)
+
+        engine = Sass::Engine.new(evaluate(full_filename), options.merge(
+          syntax: syntax,
+          filename: full_filename,
+          importer: self
+        ))
+
+        if engine && (filename = engine.options[:filename])
+          @context.depend_on(filename)
+        end
+
+        engine
+      end
+
+      def evaluate(filename)
+        processors = context.environment.attributes_for(filename).processors.reject { |processor|
+          processor.in? [Sprockets::ScssTemplate, Sprockets::SassTemplate]
+        }
+        context.evaluate(filename, processors: processors)
+      end
   end
 end
