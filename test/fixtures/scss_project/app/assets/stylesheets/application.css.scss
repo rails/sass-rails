@@ -4,7 +4,11 @@
 @import "subfolder/plain";
 @import "subfolder/second_level";
 @import "partials/without_css_ext";
-@import "erb_handler";
+@import "css_erb_handler";
+@import "scss_erb_handler";
+@import "sass_erb_handler";
+@import "css_scss_erb_handler";
+@import "css_sass_erb_handler";
 
 .main {
   color: yellow;

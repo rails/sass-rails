@@ -8,9 +8,14 @@ module Sprockets
 
     def extensions
       {
-        "css" => :scss,
-        "css.sass" => :sass,
-        "css.scss" => :scss
+        'css'          => :scss,
+        'css.scss'     => :scss,
+        'css.sass'     => :sass,
+        'css.erb'      => :scss,
+        'scss.erb'     => :scss,
+        'sass.erb'     => :sass,
+        'css.scss.erb' => :scss,
+        'css.sass.erb' => :sass
       }.merge!(super)
     end
 
@@ -58,5 +63,25 @@ module Sprockets
         :syntax => :scss
       ))
     end
+
+    private
+
+      def _find(dir, name, options)
+        full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
+        return unless full_filename && File.readable?(full_filename)
+
+        Sass::Engine.new(evaluate(full_filename), options.merge(
+          syntax: syntax,
+          filename: full_filename,
+          importer: self
+        ))
+      end
+
+      def evaluate(filename)
+        processors = context.environment.attributes_for(filename).processors.reject { |processor|
+          processor.in? [Sprockets::ScssTemplate, Sprockets::SassTemplate]
+        }
+        context.evaluate(filename, processors: processors)
+      end
   end
 end
