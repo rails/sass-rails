@@ -5,7 +5,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'rails'
-require "rails/test_help"
+require 'rails/test_help'
 require 'sass/rails'
 
 Rails.backtrace_cleaner.remove_silencers!
@@ -17,7 +17,7 @@ possible_dev_dependencies = %w(sass-rails sass rails actionpack railties sprocke
 Bundler.load.specs.each do |s|
   if possible_dev_dependencies.include?(s.name)
      gem_path = s.full_gem_path
-     gem_options = {:version => s.version}
+     gem_options = { version: s.version}
      gem_options[:path] = gem_path if File.exists?("#{gem_path}/#{s.name}.gemspec")
      $gem_options[s.name] = gem_options
   end

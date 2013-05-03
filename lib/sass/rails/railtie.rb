@@ -29,7 +29,7 @@ module Sass::Rails
       app.config.middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)
     end
 
-    initializer :setup_sass, :group => :all do |app|
+    initializer :setup_sass, group: :all do |app|
       # Only emit one kind of syntax because though we have registered two kinds of generators
       syntax     = app.config.sass.preferred_syntax.to_sym
       alt_syntax = syntax == :sass ? "scss" : "sass"

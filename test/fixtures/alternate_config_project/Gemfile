@@ -4,4 +4,4 @@ gem 'rails', "~> 3.2.0.rc1"
 gem 'sqlite3'
 
 # Asset template engines
-gem 'sass-rails', :path => File.expand_path('../../../..', __FILE__)
+gem 'sass-rails', path: File.expand_path('../../../..', __FILE__)

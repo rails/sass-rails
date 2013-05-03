@@ -11,7 +11,7 @@ Rake::TestTask.new(:test) do |t|
 end
 
 desc 'Default: run unit tests.'
-task :default => :test
+task default: :test
 
 specname = "sass-rails.gemspec"
 deps = `git ls-files`.split("\n") - [specname]
