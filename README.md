@@ -1,5 +1,4 @@
 # Official Ruby-on-Rails Integration with Sass
-[![Travis CI](https://secure.travis-ci.org/rails/sass-rails.png?branch=master)](http://travis-ci.org/rails/sass-rails) [![Gem Version](https://badge.fury.io/rb/sass-rails.png)](http://badge.fury.io/rb/sass-rails)
 
 This gem provides official integration for Ruby on Rails projects with the Sass stylesheet language.
 
@@ -75,3 +74,9 @@ primitive and do not work well with Sass files. Instead, use Sass's native `@imp
     $ bundle exec rake test
 
 If you need to test against local gems, use Bundler's gem :path option in the Gemfile and also edit `test/support/test_helper.rb` and tell the tests where the gem is checked out.
+
+## Code Status
+
+* [![Travis CI](https://secure.travis-ci.org/rails/sass-rails.png)](http://travis-ci.org/rails/sass-rails)
+* [![Gem Version](https://badge.fury.io/rb/sass-rails.png)](http://badge.fury.io/rb/sass-rails)
+* [![Dependencies](https://gemnasium.com/rails/sass-rails.png)](https://gemnasium.com/rails/sass-rails)
