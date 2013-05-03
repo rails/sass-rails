@@ -4,7 +4,6 @@ unless defined?(Bundler)
 end
 require 'fileutils'
 require 'tmpdir'
-require 'minitest/focus'
 
 class Sass::Rails::TestCase < ActiveSupport::TestCase
 
