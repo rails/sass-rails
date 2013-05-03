@@ -1,9 +1,7 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
-require 'rubygems'
 require 'bundler/setup'
-
 require 'rails'
 require 'rails/test_help'
 require 'sass/rails'
