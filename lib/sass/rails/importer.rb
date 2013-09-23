@@ -81,9 +81,10 @@ module Sprockets
       end
 
       def evaluate(filename)
-        processors = context.environment.attributes_for(filename).processors.reject { |processor|
-          processor.in? [Sprockets::ScssTemplate, Sprockets::SassTemplate]
-        }
+        attributes = context.environment.attributes_for(filename)
+        processors = context.environment.preprocessors(attributes.content_type) +
+          attributes.engines.reverse - [Sprockets::ScssTemplate, Sprockets::SassTemplate]
+
         context.evaluate(filename, processors: processors)
       end
   end
