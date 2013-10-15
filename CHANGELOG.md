@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 4.0.0 (Unreleased)
+## 4.0.1 (Oct 15, 2013)
+
+* Remove Post Processors from asset evaluation.
+
+## 4.0.0 (Jun 25, 2013)
 
 * Add support for importing ERB files.
 * Remove `Sass::Rails::Compressor`. Use `Sprockets::SassCompressor` (`:sass` option) instead.

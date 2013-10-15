@@ -4,6 +4,6 @@ source "https://rubygems.org"
 gemspec
 
 # Track Rails master
-gem "rails", github: 'rails/rails', branch: 'master'
+gem "rails"
 
 gem "sqlite3"
