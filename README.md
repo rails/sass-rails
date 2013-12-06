@@ -43,30 +43,46 @@ primitive and do not work well with Sass files. Instead, use Sass's native `@imp
 
 ## Features
 
-* **Glob Imports**. When in Rails, there is a special import syntax that allows you to
-  glob imports relative to the folder of the stylesheet that is doing the importing.
-  E.g. `@import "mixins/*"` will import all the files in the mixins folder and
-  `@import "mixins/**/*"` will import all the files in the mixins tree.
-  Any valid ruby glob may be used. The imports are sorted alphabetically.
-  **NOTE:** It is recommended that you only use this when importing pure library
-  files (containing mixins and variables) because it is difficult to control the
-  cascade ordering for imports that contain styles using this approach.
+### Glob Imports
 
-* **Asset Helpers**. When using the asset pipeline, paths to assets must be rewritten.
-  When referencing assets use the following asset helpers (underscored in Ruby, hyphenated
-  in Sass):
+When in Rails, there is a special import syntax that allows you to
+glob imports relative to the folder of the stylesheet that is doing the importing.
 
-  * `asset-path($relative-asset-path, $asset-class)` - Returns a string to the asset.
-    For example: `asset-path("rails.png", image)` becomes `"/assets/rails.png"`
-  * `asset-url($relative-asset-path, $asset-class)` - Returns url reference to the asset.
-    For example: `asset-url("rails.png", image)` becomes `url(/assets/rails.png)`
-  * As a convenience, for each of the following asset classes there are
-    corresponding `-path` and `-url` helpers:
-    image, font, video, audio, javascript, stylesheet.
-    For example: `image-url("rails.png")` becomes `url(/assets/rails.png)` and
-    `image-path("rails.png")` becomes `"/assets/rails.png"`.
-  * `asset-data-url($relative-asset-path)` - Returns url reference to the Base64-encoded asset at the specified path.
-    For example: `asset-data-url("rails.png")` becomes `url(data:image/png;base64,iVBORw0K...)`
+* `@import "mixins/*"` will import all the files in the mixins folder
+* `@import "mixins/**/*"` will import all the files in the mixins tree
+
+Any valid ruby glob may be used. The imports are sorted alphabetically.
+
+**NOTE:** It is recommended that you only use this when importing pure library
+files (containing mixins and variables) because it is difficult to control the
+cascade ordering for imports that contain styles using this approach.
+
+### Asset Helpers
+When using the asset pipeline, paths to assets must be rewritten.
+When referencing assets use the following asset helpers (underscored in Ruby, hyphenated
+in Sass):
+
+#### `asset-path($relative-asset-path)`
+Returns a string to the asset.
+
+* `asset-path("rails.png")` becomes `"/assets/rails.png"`
+
+#### `asset-url($relative-asset-path)`
+Returns a url reference to the asset.
+
+* `asset-url("rails.png")` becomes `url(/assets/rails.png)`
+
+As a convenience, for each of the following asset classes there are
+corresponding `-path` and `-url` helpers:
+image, font, video, audio, javascript, stylesheet.
+
+* `image-path("rails.png")` becomes `"/assets/rails.png"`
+* `image-url("rails.png")` becomes `url(/assets/rails.png)`
+
+#### `asset-data-url($relative-asset-path)`
+Returns a url reference to the Base64-encoded asset at the specified path.
+
+* `asset-data-url("rails.png")` becomes `url(data:image/png;base64,iVBORw0K...)`
 
 ## Running Tests
 
