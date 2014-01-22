@@ -2,6 +2,10 @@ require 'sprockets/railtie'
 
 module Sass::Rails
   class Railtie < ::Rails::Railtie
+    module SassContext
+      attr_accessor :sass_config
+    end
+
     config.sass = ActiveSupport::OrderedOptions.new
 
     # Establish static configuration defaults
@@ -45,6 +49,11 @@ module Sass::Rails
       if config.sass.full_exception.nil?
         # Display a stack trace in the css output when in development-like environments.
         config.sass.full_exception = app.config.consider_all_requests_local
+      end
+
+      if app.assets
+        app.assets.context_class.extend(SassContext)
+        app.assets.context_class.sass_config = app.config.sass
       end
 
       Sass.logger = app.config.sass.logger
