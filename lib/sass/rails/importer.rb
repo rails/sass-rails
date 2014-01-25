@@ -47,9 +47,9 @@ module Sprockets
       contents = ""
       each_globbed_file(glob, base_pathname.dirname, options) do |filename|
         if File.directory?(filename)
-          context.depend_on(filename)
+          depend_on(filename)
         elsif context.asset_requirable?(filename)
-          context.depend_on(filename)
+          depend_on(filename)
           contents << "@import #{Pathname.new(filename).relative_path_from(base_pathname.dirname).to_s.inspect};\n"
         end
       end
@@ -62,6 +62,19 @@ module Sprockets
     end
 
     private
+
+      def depend_on(filename)
+        context.depend_on(filename)
+        context.depend_on(globbed_file_parent(filename))
+      end
+
+      def globbed_file_parent(filename)
+        if File.directory?(filename)
+          File.expand_path('..', filename)
+        else
+          File.dirname(filename)
+        end
+      end
 
       def engine_from_path(name, dir, options)
         full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
