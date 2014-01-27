@@ -38,7 +38,7 @@ module Sprockets
 
     def each_globbed_file(glob, base_pathname, options)
       Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
-        next if filename == options[:filename]
+        next if filename == options[:filename] || filename.match(/~$/)
         yield filename if File.directory?(filename) || context.asset_requirable?(filename)
       end
     end
