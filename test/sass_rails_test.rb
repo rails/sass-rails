@@ -89,6 +89,23 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match /default-old-css/,          css_output
   end
 
+  test 'globbed imports work when new file is added' do
+    project = 'scss_project'
+    filename = 'application.css.scss'
+
+    within_rails_app(project) do |tmpdir|
+      asset_output(filename)
+
+      new_file = File.join(tmpdir, 'app', 'assets', 'stylesheets', 'globbed', 'new.scss')
+      File.open(new_file, 'w') do |file|
+        file.puts '.new-file-test { color: #000; }'
+      end
+
+      css_output = asset_output(filename)
+      assert_match /new-file-test/, css_output
+    end
+  end
+
   test 'sass asset paths work' do
     css_output = sprockets_render('scss_project', 'application.css.scss')
     assert_match %r{asset-path:\s*"/assets/rails.png"},                           css_output, 'asset-path:\s*"/assets/rails.png"'

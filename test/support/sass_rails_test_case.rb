@@ -37,8 +37,12 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   def sprockets_render(project, filename)
     within_rails_app(project) do
-      runcmd "ruby script/rails runner 'puts Rails.application.assets[#{filename.inspect}]'"
+      asset_output(filename)
     end
+  end
+
+  def asset_output(filename)
+    runcmd "ruby script/rails runner 'puts Rails.application.assets[#{filename.inspect}]'"
   end
 
   def assert_file_exists(filename)
