@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.2 (Mar 13, 2014)
+
+* Lock sprockets version to <= 2.11.0. Fixes #191.
+
 ## 4.0.1 (Oct 15, 2013)
 
 * Remove Post Processors from asset evaluation.
