@@ -12,8 +12,8 @@ module Sass
           :line => line,
           :syntax => syntax,
           :cache_store => cache_store,
-          :importer => Sprockets::SassImporter.new(context.pathname.to_s),
-          :load_paths => context.environment.paths.map { |path| Sprockets::SassImporter.new(path.to_s) },
+          :importer => SassImporter.new(context.pathname.to_s),
+          :load_paths => context.environment.paths.map { |path| SassImporter.new(path.to_s) },
           :sprockets => {
             :context => context,
             :environment => context.environment
