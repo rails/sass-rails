@@ -52,6 +52,9 @@ module Sass::Rails
       end
 
       if app.assets
+        app.assets.register_engine '.sass', Sass::Rails::SassTemplate
+        app.assets.register_engine '.scss', Sass::Rails::ScssTemplate
+
         app.assets.context_class.extend(SassContext)
         app.assets.context_class.sass_config = app.config.sass
       end
