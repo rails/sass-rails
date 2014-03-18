@@ -28,6 +28,10 @@ module Sass::Rails
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
 
+    if config.respond_to?(:annotations)
+      config.annotations.register_extensions("scss", "sass") { |annotation| /\/\/\s*(#{annotation}):?\s*(.*)$/ }
+    end
+
     # Remove the sass middleware if it gets inadvertently enabled by applications.
     config.after_initialize do |app|
       app.config.middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)

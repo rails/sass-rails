@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## unreleased
+
+* Register scss and sass extensions for rake notes
+
 ## 4.0.1 (Oct 15, 2013)
 
 * Remove Post Processors from asset evaluation.
