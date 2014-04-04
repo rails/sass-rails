@@ -4,6 +4,14 @@
 
 * Register scss and sass extensions for rake notes
 
+## 4.0.3 (Apr 4, 2014)
+
+* Make possible to use sprockets-rails 2.1.
+
+## 4.0.2 (Mar 13, 2014)
+
+* Lock sprockets version to <= 2.11.0. Fixes #191.
+
 ## 4.0.1 (Oct 15, 2013)
 
 * Remove Post Processors from asset evaluation.
