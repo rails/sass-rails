@@ -86,6 +86,29 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
+  test 'precision on decimal numbers is settable' do
+    within_rails_app 'sass_project' do
+      runner 'development' do
+        "puts Rails.application.config.sass.precision"
+      end
+
+      assert_equal '4', $last_output.chomp
+    end
+
+    within_rails_app 'scss_project' do
+      runner 'development' do
+        "puts Rails.application.config.sass.precision"
+      end
+
+      assert_equal '3', $last_output.chomp
+    end
+  end
+
+  test 'decimal numbers are honouring the configuration' do
+    css_output = sprockets_render('scss_project', 'decimals.css.scss')
+    assert_match %r{0.333px}, css_output
+  end
+
   test 'sprockets require works correctly' do
     within_rails_app('scss_project') do |app_root|
       css_output = asset_output('css_application.css')

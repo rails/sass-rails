@@ -28,6 +28,7 @@ can be found on the Sass Website with the following caveats:
 - `:syntax` - This is determined by the file's extensions.
 - `:filename` - This is determined by the file's name.
 - `:line` - This is provided by the template handler.
+- `:precision` - This option allows you to define the number of digits of precision.
 
 ### Example
 

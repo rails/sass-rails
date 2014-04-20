@@ -48,5 +48,8 @@ module ScssProject
 
     # Prefer sass for generated assets.
     config.sass.preferred_syntax = :sass
+
+    # Define a custom precision for decimal numbers
+    config.sass.precision = 4
   end
 end

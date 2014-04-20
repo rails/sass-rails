@@ -18,6 +18,8 @@ module Sass::Rails
     config.sass.load_paths       = []
     # Send Sass logs to Rails.logger
     config.sass.logger           = Sass::Rails::Logger.new
+    # Define the digits of precision for decimal numbers
+    config.sass.precision        = Sass::Script::Number.precision
 
     # Set the default stylesheet engine
     # It can be overridden by passing:
@@ -63,6 +65,9 @@ module Sass::Rails
       end
 
       Sass.logger = app.config.sass.logger
+
+      # Set Sass' digits of precision for decimal numbers
+      Sass::Script::Number.precision = app.config.sass.precision
     end
 
     initializer :setup_compression, group: :all do |app|

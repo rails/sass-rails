@@ -45,5 +45,8 @@ module ScssProject
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Define a custom precision for decimal numbers
+    config.sass.precision = 3
   end
 end
