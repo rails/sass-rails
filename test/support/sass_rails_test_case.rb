@@ -79,11 +79,6 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
         gem_options.each { |gem_name, options| modify_gem_entry gem_name, options }
         without_gems.each { |gem_name| remove_gem name }
 
-        FileUtils.rm("Gemfile.lock") if File.exist?("Gemfile.lock")
-
-        runcmd "bundle install --verbose"
-        runcmd "bundle exec rake db:create --trace"
-
         yield tmpdir
       end
     end
