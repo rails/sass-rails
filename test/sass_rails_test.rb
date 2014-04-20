@@ -22,7 +22,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "p Rails.application.config.sass.style"
       end
 
-      assert_equal 'nil', $last_ouput.chomp
+      assert_equal 'nil', $last_output.chomp
     end
   end
 
@@ -32,7 +32,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "p Rails.application.config.assets.css_compressor"
       end
 
-      assert_equal 'nil', $last_ouput.chomp
+      assert_equal 'nil', $last_output.chomp
     end
   end
 
@@ -62,7 +62,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "p Rails.application.config.assets.css_compressor"
       end
 
-      assert_equal 'nil', $last_ouput.chomp
+      assert_equal 'nil', $last_output.chomp
     end
   end
 
@@ -72,7 +72,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "puts Rails.application.config.assets.css_compressor"
       end
 
-      assert_equal 'sass', $last_ouput.chomp
+      assert_equal 'sass', $last_output.chomp
     end
   end
 
@@ -82,7 +82,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "puts Rails.application.config.assets.css_compressor"
       end
 
-      assert_equal 'sass', $last_ouput.chomp
+      assert_equal 'sass', $last_output.chomp
     end
   end
 

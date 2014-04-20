@@ -53,15 +53,15 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   end
 
   def assert_not_output(match)
-    assert_no_match match, $last_ouput
+    assert_no_match match, $last_output
   end
 
   def assert_output(match)
-    assert $last_ouput.to_s =~ match, "#{match} was not found in #{$last_ouput.inspect}"
+    assert $last_output.to_s =~ match, "#{match} was not found in #{$last_output.inspect}"
   end
 
   def assert_line_count(count)
-    last_count = $last_ouput.lines.count
+    last_count = $last_output.lines.count
     assert last_count == count, "Wrong line count, expected: #{count} but got: #{last_count}"
   end
   # Copies a rails app fixture to a temp directory
@@ -169,7 +169,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
         raise ExecutionError, "Command failed with exit status #{$?.exitstatus}: #{cmd}", output
       end
 
-      $last_ouput = output
+      $last_output = output
     end
 
     if clean_env
