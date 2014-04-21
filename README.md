@@ -16,17 +16,18 @@ properties that will be passed to Sass.
 
 ### Options
 
-The [list of supported options](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options)
+- `preferred_syntax` - This option determines the default Sass syntax and file extensions that will be used by Rails generators. Can be `:scss` (default CSS-compatible SCSS syntax) or `:sass` (indented Sass syntax).
+
+The [list of supported Sass options](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options)
 can be found on the Sass Website with the following caveats:
 
-1. `preferred_syntax` - This option determines the default Sass syntax and file extensions that will be used by Rails generators. Can be `:scss` (default CSS-compatible SCSS syntax) or `:sass` (indented Sass syntax).
-2. `:style` - This option is not supported. This is determined by the Rails environment. It's `:expanded` only on development, otherwise it's `:compressed`.
-3. `:never_update` - This option is not supported. Instead set `config.assets.enabled = false`
-4. `:always_update` - This option is not supported. Sprockets uses a controller to access stylesheets in development mode instead of a full scan for changed files.
-5. `:always_check` - This option is not supported. Sprockets always checks in development.
-6. `:syntax` - This is determined by the file's extensions.
-7. `:filename` - This is determined by the file's name.
-8. `:line` - This is provided by the template handler.
+- `:style` - This option is not supported. This is determined by the Rails environment. It's `:expanded` only on development, otherwise it's `:compressed`.
+- `:never_update` - This option is not supported. Instead set `config.assets.enabled = false`
+- `:always_update` - This option is not supported. Sprockets uses a controller to access stylesheets in development mode instead of a full scan for changed files.
+- `:always_check` - This option is not supported. Sprockets always checks in development.
+- `:syntax` - This is determined by the file's extensions.
+- `:filename` - This is determined by the file's name.
+- `:line` - This is provided by the template handler.
 
 ### Example
 
