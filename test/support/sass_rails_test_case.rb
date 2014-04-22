@@ -9,10 +9,12 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   class ExecutionError < StandardError
     attr_accessor :output
+
     def initialize(message, output = nil)
       super(message)
       self.output = output
     end
+
     def message
       "#{super}\nOutput was:\n#{output}"
     end
@@ -20,6 +22,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   module SilentError
     attr_accessor :output
+
     def message
       "#{super}\nOutput was:\n#{output}"
     end
@@ -50,15 +53,15 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   end
 
   def assert_not_output(match)
-    assert_no_match match, $last_ouput
+    assert_no_match match, $last_output
   end
 
   def assert_output(match)
-    assert $last_ouput.to_s =~ match, "#{match} was not found in #{$last_ouput.inspect}"
+    assert $last_output.to_s =~ match, "#{match} was not found in #{$last_output.inspect}"
   end
 
   def assert_line_count(count)
-    last_count = $last_ouput.lines.count
+    last_count = $last_output.lines.count
     assert last_count == count, "Wrong line count, expected: #{count} but got: #{last_count}"
   end
   # Copies a rails app fixture to a temp directory
@@ -68,14 +71,14 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   # and removes the temp directory when done.
   def within_rails_app(name, without_gems = [], gem_options = $gem_options)
     sourcedir = File.expand_path("../../fixtures/#{name}", __FILE__)
+
     Dir.mktmpdir do |tmpdir|
       FileUtils.cp_r "#{sourcedir}/.", tmpdir
+
       Dir.chdir(tmpdir) do
         gem_options.each { |gem_name, options| modify_gem_entry gem_name, options }
         without_gems.each { |gem_name| remove_gem name }
-        FileUtils.rm("Gemfile.lock") if File.exist?("Gemfile.lock")
-        runcmd "bundle install --verbose"
-        runcmd "bundle exec rake db:create --trace"
+
         yield tmpdir
       end
     end
@@ -85,6 +88,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     gem_contents = File.readlines(gemfile)
     gem_contents.map!(&blk)
     gem_contents.compact!
+
     File.open(gemfile, "w") do |f|
       f.print(gem_contents.join(""))
     end
@@ -92,6 +96,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
 
   def modify_gem_entry(gemname, options, gemfile = "Gemfile")
     found = false
+
     process_gemfile(gemfile) do |line|
       if line =~ /gem *(["'])#{Regexp.escape(gemname)}\1/
         found = true
@@ -100,6 +105,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
         line
       end
     end
+
     unless found
       File.open(gemfile, "a") do |f|
         f.print("\n#{gem_entry(gemname, options)}\n")
@@ -123,6 +129,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     output = StringIO.new
     $stderr, old_stderr = output, $stderr
     $stdout, old_stdout = output, $stdout
+
     begin
       yield
     rescue ExecutionError => e
@@ -144,6 +151,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     # There's a bug in bundler where with_clean_env doesn't clear out the BUNDLE_GEMFILE environment setting
     # https://github.com/carlhuda/bundler/issues/1133
     env["BUNDLE_GEMFILE"] = "#{working_directory}/#{gemfile}" if clean_env
+
     todo = Proc.new do
       r, w = IO.pipe
       Kernel.spawn(env, cmd, :out => w , :err => w, :chdir => working_directory)
@@ -151,11 +159,14 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
       Process.wait
       output = r.read
       r.close
+
       unless $?.exitstatus == 0
         raise ExecutionError, "Command failed with exit status #{$?.exitstatus}: #{cmd}", output
       end
-      $last_ouput = output
+
+      $last_output = output
     end
+
     if clean_env
       Bundler.with_clean_env(&todo)
     else
@@ -163,4 +174,8 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
     end
   end
 
+  # A thin wrapper around runcmd to be DRY in tests
+  def runner(environment)
+    runcmd "ruby script/rails runner '#{yield}'", Dir.pwd, true, 'Gemfile', {'RAILS_ENV' => environment}
+  end
 end
