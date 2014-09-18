@@ -3,6 +3,9 @@ require "sprockets/sass_template"
 module Sass
   module Rails
     class SassTemplate < Sprockets::SassTemplate
+      def self.default_mime_type
+        'text/css'
+      end
 
       def evaluate(context, locals, &block)
         cache_store = Sprockets::SassCacheStore.new(context.environment)
@@ -30,10 +33,6 @@ module Sass
     end
 
     class ScssTemplate < SassTemplate
-      def self.default_mime_type
-        'text/css'
-      end
-
       def syntax
         :scss
       end
