@@ -4,7 +4,8 @@ rvm:
  - 2.0.0
  - 2.1.0
 gemfile:
-  - test/gemfiles/Gemfile-master
+  - test/gemfiles/Gemfile-4-0-stable
+  - test/gemfiles/Gemfile-4-1-stable
   - Gemfile
 before_install: gem install bundler
 script: bundle exec rake test
