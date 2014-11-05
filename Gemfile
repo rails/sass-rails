@@ -4,5 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "rails", github: 'rails/rails'
+gem 'sprockets-rails', github: 'rails/sprockets-rails'
+gem 'sprockets', '>= 3.0.0.beta.2'
 
 gem "sqlite3"
