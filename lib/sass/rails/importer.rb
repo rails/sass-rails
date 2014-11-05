@@ -1,4 +1,4 @@
-require 'sprockets/sass_importer'
+require 'sass/importers'
 
 module Sass
   module Rails

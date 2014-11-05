@@ -3,38 +3,39 @@ require "sprockets/sass_template"
 module Sass
   module Rails
     class SassTemplate < Sprockets::SassTemplate
-
-      def evaluate(context, locals, &block)
-        cache_store = Sprockets::SassCacheStore.new(context.environment)
+      def call(input)
+        context = input[:environment].context_class.new(input)
 
         options = {
-          :filename => eval_file,
-          :line => line,
-          :syntax => syntax,
-          :cache_store => cache_store,
-          :importer => SassImporter.new(context, context.pathname.to_s),
-          :load_paths => context.environment.paths.map { |path| SassImporter.new(context, path.to_s) },
-          :sprockets => {
-            :context => context,
-            :environment => context.environment
+          filename: input[:filename],
+          syntax: self.class.syntax,
+          cache_store: CacheStore.new(input[:cache], @cache_version),
+          importer: SassImporter.new(context, context.pathname.to_s),
+          load_paths: input[:environment].paths.map { |path| SassImporter.new(context, path.to_s) },
+          sprockets: {
+            context: context,
+            environment: input[:environment],
+            dependencies: context.metadata[:dependency_paths]
           }
         }
 
-        sass_config = context.environment.context_class.sass_config.merge(options)
+        engine = ::Sass::Engine.new(input[:data], options)
 
-        ::Sass::Engine.new(data, sass_config).render
-      rescue ::Sass::SyntaxError => e
-        context.__LINE__ = e.sass_backtrace.first[:line]
-        raise e
+        css = Sprockets::Utils.module_include(::Sass::Script::Functions, @functions) do
+          engine.render
+        end
+
+        # Track all imported files
+        engine.dependencies.map do |dependency|
+          context.metadata[:dependency_paths] << dependency.options[:filename]
+        end
+
+        context.metadata.merge(data: css)
       end
     end
 
     class ScssTemplate < SassTemplate
-      def self.default_mime_type
-        'text/css'
-      end
-
-      def syntax
+      def self.syntax
         :scss
       end
     end
