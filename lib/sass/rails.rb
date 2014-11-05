@@ -5,7 +5,6 @@ module Sass
 end
 
 require 'sass/rails/version'
-require 'sass/rails/helpers'
 require 'sass/rails/importer'
 require 'sass/rails/template'
 require 'sass/rails/railtie'
