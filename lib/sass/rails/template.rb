@@ -15,8 +15,8 @@ module Sass
           :line => line,
           :syntax => syntax,
           :cache_store => cache_store,
-          :importer => SassImporter.new(context, context.pathname.to_s),
-          :load_paths => context.environment.paths.map { |path| SassImporter.new(context, path.to_s) },
+          :importer => importer_class.new(context, context.pathname.to_s),
+          :load_paths => context.environment.paths.map { |path| importer_class.new(context, path.to_s) },
           :sprockets => {
             :context => context,
             :environment => context.environment
@@ -29,6 +29,12 @@ module Sass
       rescue ::Sass::SyntaxError => e
         context.__LINE__ = e.sass_backtrace.first[:line]
         raise e
+      end
+
+      private
+
+      def importer_class
+        SassImporter
       end
     end
 
