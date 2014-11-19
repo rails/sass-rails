@@ -6,7 +6,7 @@ module Scss
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_scss
-        template "stylesheet.css.scss", File.join('app/assets/stylesheets', class_path, "#{file_name}.css.scss")
+        template "stylesheet.scss", File.join('app/assets/stylesheets', class_path, "#{file_name}.scss")
       end
     end
   end
