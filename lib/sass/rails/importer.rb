@@ -16,13 +16,7 @@ module Sass
           'css'          => :scss,
           'css.erb'      => :scss,
           'scss.erb'     => :scss,
-          'sass.erb'     => :sass,
-
-          # css.scss and css.sass extensions are deprecated.
-          'css.scss'     => :scss,
-          'css.sass'     => :sass,
-          'css.scss.erb' => :scss,
-          'css.sass.erb' => :sass
+          'sass.erb'     => :sass
         }.merge!(super)
       end
 
