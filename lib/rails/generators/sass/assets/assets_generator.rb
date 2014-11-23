@@ -6,7 +6,7 @@ module Sass
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_sass
-        template "stylesheet.css.sass", File.join('app/assets/stylesheets', class_path, "#{file_name}.css.sass")
+        template "stylesheet.sass", File.join('app/assets/stylesheets', class_path, "#{file_name}.sass")
       end
     end
   end
