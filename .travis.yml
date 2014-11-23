@@ -6,6 +6,7 @@ rvm:
 gemfile:
   - test/gemfiles/Gemfile-rails-4-0
   - test/gemfiles/Gemfile-rails-4-1
+  - test/gemfiles/Gemfile-sprockets-2-11
   - test/gemfiles/Gemfile-sprockets-2-8
   - Gemfile
 before_install: gem install bundler
