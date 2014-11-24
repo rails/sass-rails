@@ -4,6 +4,11 @@
 
 * Register scss and sass extensions for rake notes
 
+## 4.0.4 (Oct 29, 2014)
+
+* Make possible to use any sprockets version in the 2.11 series.
+* Require at least sass 3.2.2.
+
 ## 4.0.3 (Apr 4, 2014)
 
 * Make possible to use sprockets-rails 2.1.
