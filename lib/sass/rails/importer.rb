@@ -1,3 +1,4 @@
+require 'sass'
 require 'sprockets/sass_importer'
 
 module Sprockets
@@ -6,6 +7,11 @@ module Sprockets
 
     attr_reader :context
     private :context
+
+    def initialize(context, root)
+      @context = context
+      super root.to_s
+    end
 
     def extensions
       {
