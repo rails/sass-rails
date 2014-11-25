@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.5 (Nov 25, 2014)
+
+* Make possible to use sprockets 2.12.
+
 ## 4.0.4 (Oct 29, 2014)
 
 * Make possible to use any sprockets version in the 2.11 series.
