@@ -13,8 +13,6 @@ Gem::Specification.new do |s|
   s.description = %q{Sass adapter for the Rails asset pipeline.}
   s.license     = %q{MIT}
 
-  s.rubyforge_project = "sass-rails"
-
   s.add_dependency 'railties',        '>= 4.0.0', '< 5.0'
   s.add_dependency 'sass',            '~> 3.2', '>= 3.2.2'
   s.add_dependency 'sprockets-rails', '>= 2.0', '< 4.0'
