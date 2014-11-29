@@ -1,8 +1,10 @@
 language: ruby
+
 rvm:
  - 1.9.3
  - 2.0.0
  - 2.1.1
+
 gemfile:
   - test/gemfiles/Gemfile-rails-4-0
   - test/gemfiles/Gemfile-rails-4-1
@@ -12,6 +14,11 @@ gemfile:
   - test/gemfiles/Gemfile-sprockets-2-12
   - test/gemfiles/Gemfile-sprockets-2-8
   - Gemfile
+
+sudo: false
+
+script: bundle exec rake test
+
 matrix:
   exclude:
     - gemfile: Gemfile
@@ -22,8 +29,7 @@ matrix:
       rvm: 1.9.3
     - gemfile: test/gemfiles/Gemfile-rails-master
       rvm: 2.0.0
-before_install: gem install bundler
-script: bundle exec rake test
+
 notifications:
   email: false
   irc:
