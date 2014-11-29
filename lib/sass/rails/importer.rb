@@ -58,16 +58,23 @@ module Sass
       module ERB
         def extensions
           {
-            'css.erb'  => :scss,
-            'scss.erb' => :scss,
-            'sass.erb' => :sass
+            'css.erb'  => :scss_erb,
+            'scss.erb' => :scss_erb,
+            'sass.erb' => :sass_erb
           }.merge(super)
+        end
+
+        def erb_extensions
+          {
+            :scss_erb => :scss,
+            :sass_erb => :sass
+          }
         end
 
         def find_relative(name, base, options)
           filename, syntax = find_filename(File.dirname(base), name, options)
 
-          if filename && File.extname(filename) == '.erb'
+          if syntax = erb_extensions[syntax]
             erb_engine(filename, syntax, options)
           else
             super
@@ -77,7 +84,7 @@ module Sass
         def find(name, options)
           filename, syntax = find_filename(root, name, options)
 
-          if filename && File.extname(filename) == '.erb'
+          if syntax = erb_extensions[syntax]
             erb_engine(filename, syntax, options)
           else
             super
@@ -93,7 +100,7 @@ module Sass
           end
 
           def erb_engine(filename, syntax, options)
-            options[:syntax] = syntax
+            options[:syntax]   = syntax
             options[:filename] = filename
             options[:importer] = self
 
