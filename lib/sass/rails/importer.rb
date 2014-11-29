@@ -1,5 +1,6 @@
 require 'sass'
 require 'sprockets/sass_importer'
+require 'tilt'
 
 module Sass
   module Rails
@@ -81,9 +82,7 @@ module Sass
         end
 
         def evaluate(filename)
-          attributes = context.environment.attributes_for(filename)
-          processors = attributes.engines.reverse - [Sass::Rails::ScssTemplate, Sass::Rails::SassTemplate]
-
+          processors = File.extname(filename) == '.erb' ? [Tilt::ERBTemplate] : []
           context.evaluate(filename, processors: processors)
         end
 
