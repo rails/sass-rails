@@ -94,8 +94,10 @@ module Sass
           options[:filename] = filename
           options[:importer] = self
 
-          context.depend_on filename
-          contents = context.evaluate(filename, processors: [Tilt::ERBTemplate])
+          context.depend_on(filename)
+
+          template = Tilt::ERBTemplate.new(filename) { File.read(filename) }
+          contents = template.render(context, {})
 
           Sass::Engine.new(contents, options)
         end
