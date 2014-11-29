@@ -28,7 +28,6 @@ module Sass
         end
 
         filename, syntax = find_filename(File.dirname(base), name, options)
-
         if filename && File.extname(filename) == '.erb'
           return erb_engine(filename, syntax, options)
         end
@@ -52,14 +51,14 @@ module Sass
       private
 
         def each_globbed_file(glob, base_pathname, options)
-          Dir["#{base_pathname}/#{glob}"].sort.each do |filename|
-            next if filename == options[:filename]
-            if File.directory?(filename)
-              context.depend_on(filename)
-              context.depend_on(File.expand_path('..', filename))
-            elsif importable?(filename)
-              context.depend_on(File.dirname(filename))
-              yield filename
+          Dir["#{base_pathname}/#{glob}"].sort.each do |path|
+            if path == options[:filename]
+              # skip importing self
+            elsif File.directory?(path)
+              context.depend_on(path)
+              context.depend_on(File.expand_path("..", path))
+            elsif importable?(path)
+              yield path
             end
           end
         end
@@ -93,8 +92,6 @@ module Sass
           options[:syntax] = syntax
           options[:filename] = filename
           options[:importer] = self
-
-          context.depend_on(filename)
 
           template = Tilt::ERBTemplate.new(filename) { File.read(filename) }
           contents = template.render(context, {})
