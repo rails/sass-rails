@@ -82,8 +82,7 @@ module Sass
 
         def evaluate(filename)
           attributes = context.environment.attributes_for(filename)
-          processors = context.environment.preprocessors(attributes.content_type) +
-            attributes.engines.reverse - [Sass::Rails::ScssTemplate, Sass::Rails::SassTemplate]
+          processors = attributes.engines.reverse - [Sass::Rails::ScssTemplate, Sass::Rails::SassTemplate]
 
           context.evaluate(filename, processors: processors)
         end
