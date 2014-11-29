@@ -113,6 +113,12 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match /default-old-css/,          css_output
   end
 
+  test 'sprockets directives are ignored within an import' do
+    css_output = sprockets_render('scss_project', 'import_css_application.css')
+    assert_match /\.css-application/,        css_output
+    assert_match /\.import-css-application/, css_output
+  end
+
   test 'globbed imports work when new file is added' do
     project = 'scss_project'
     filename = 'application.scss'
