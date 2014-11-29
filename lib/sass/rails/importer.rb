@@ -24,18 +24,29 @@ module Sass
 
       def find_relative(name, base, options)
         if name =~ GLOB
-          glob_imports(name, Pathname.new(base), options)
-        else
-          engine_from_path(name, File.dirname(base), options)
+          return glob_imports(name, Pathname.new(base), options)
         end
+
+        filename, syntax = find_filename(File.dirname(base), name, options)
+
+        if filename && File.extname(filename) == '.erb'
+          return erb_engine(filename, syntax, options)
+        end
+
+        super
       end
 
       def find(name, options)
-        if name =~ GLOB
-          nil # globs must be relative
-        else
-          engine_from_path(name, root, options)
+        # globs must be relative
+        return if name =~ GLOB
+
+        filename, syntax = find_filename(root, name, options)
+
+        if filename && File.extname(filename) == '.erb'
+          return erb_engine(filename, syntax, options)
         end
+
+        super
       end
 
       private
@@ -71,26 +82,23 @@ module Sass
           ))
         end
 
-
-        def engine_from_path(name, dir, options)
+        def find_filename(dir, name, options)
           full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
-          return unless full_filename && File.readable?(full_filename)
-
-          context.depend_on full_filename
-          engine = Sass::Engine.new(evaluate(full_filename), options.merge(
-            syntax: syntax,
-            filename: full_filename,
-            importer: self
-          ))
-
-          engine
+          if full_filename && File.readable?(full_filename)
+            return full_filename, syntax
+          end
         end
 
-        def evaluate(filename)
-          processors = File.extname(filename) == '.erb' ? [Tilt::ERBTemplate] : []
-          context.evaluate(filename, processors: processors)
-        end
+        def erb_engine(filename, syntax, options)
+          options[:syntax] = syntax
+          options[:filename] = filename
+          options[:importer] = self
 
+          context.depend_on filename
+          contents = context.evaluate(filename, processors: [Tilt::ERBTemplate])
+
+          Sass::Engine.new(contents, options)
+        end
     end
   end
 end
