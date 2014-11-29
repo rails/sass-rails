@@ -46,11 +46,16 @@ module Sass
             if File.directory?(filename)
               context.depend_on(filename)
               context.depend_on(File.expand_path('..', filename))
-            elsif context.asset_requirable?(filename)
+            elsif importable?(filename)
               context.depend_on(File.dirname(filename))
               yield filename
             end
           end
+        end
+
+        def importable?(filename)
+          exts = extensions.keys.map { |ext| Regexp.escape(".#{ext}") }.join("|")
+          Regexp.compile("(#{exts})$") =~ filename
         end
 
         def glob_imports(glob, base_pathname, options)
