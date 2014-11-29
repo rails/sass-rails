@@ -1,3 +1,4 @@
+require 'sass'
 require 'sprockets/sass_importer'
 
 module Sass

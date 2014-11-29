@@ -23,10 +23,14 @@ module Sass::Rails
     config.sass.logger           = Sass::Rails::Logger.new
 
     # Set the default stylesheet engine
-    # It can be overridedden by passing:
+    # It can be overridden by passing:
     #     --stylesheet_engine=sass
     # to the rails generate command
     config.app_generators.stylesheet_engine config.sass.preferred_syntax
+
+    if config.respond_to?(:annotations)
+      config.annotations.register_extensions("scss", "sass") { |annotation| /\/\/\s*(#{annotation}):?\s*(.*)$/ }
+    end
 
     # Remove the sass middleware if it gets inadvertently enabled by applications.
     config.after_initialize do |app|

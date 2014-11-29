@@ -2,9 +2,14 @@ language: ruby
 rvm:
  - 1.9.3
  - 2.0.0
- - 2.1.0
+ - 2.1.1
 gemfile:
-  - test/gemfiles/Gemfile-master
+  - test/gemfiles/Gemfile-rails-4-0
+  - test/gemfiles/Gemfile-rails-4-1
+  - test/gemfiles/Gemfile-rails-master
+  - test/gemfiles/Gemfile-sprockets-2-11
+  - test/gemfiles/Gemfile-sprockets-2-12
+  - test/gemfiles/Gemfile-sprockets-2-8
   - Gemfile
 before_install: gem install bundler
 script: bundle exec rake test
