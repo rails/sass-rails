@@ -1,11 +1,8 @@
+require 'active_support/core_ext/class/attribute'
 require 'sprockets/railtie'
 
 module Sass::Rails
   class Railtie < ::Rails::Railtie
-    module SassContext
-      attr_accessor :sass_config
-    end
-
     config.sass = ActiveSupport::OrderedOptions.new
 
     # Establish static configuration defaults
@@ -59,8 +56,10 @@ module Sass::Rails
         app.assets.register_engine '.sass', Sass::Rails::SassTemplate
         app.assets.register_engine '.scss', Sass::Rails::ScssTemplate
 
-        app.assets.context_class.extend(SassContext)
-        app.assets.context_class.sass_config = app.config.sass
+        app.assets.context_class.class_eval do
+          class_attribute :sass_config
+          self.sass_config = app.config.sass
+        end
       end
 
       Sass.logger = app.config.sass.logger
