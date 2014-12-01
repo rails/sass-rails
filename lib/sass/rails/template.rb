@@ -1,10 +1,28 @@
-require "sprockets/sass_template"
+require 'sass'
+require 'sass/rails/helpers'
+require 'sprockets/sass_cache_store'
+require 'sprockets/sass_functions'
+require 'tilt'
 
 module Sass
   module Rails
-    class SassTemplate < Sprockets::SassTemplate
+    class SassTemplate < Tilt::Template
       def self.default_mime_type
         'text/css'
+      end
+
+      def self.engine_initialized?
+        true
+      end
+
+      def initialize_engine
+      end
+
+      def prepare
+      end
+
+      def syntax
+        :sass
       end
 
       def evaluate(context, locals, &block)
