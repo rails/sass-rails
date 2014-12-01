@@ -1,6 +1,6 @@
 require 'sass'
+require 'sass/rails/cache_store'
 require 'sass/rails/helpers'
-require 'sprockets/sass_cache_store'
 require 'sprockets/sass_functions'
 require 'tilt'
 
@@ -26,7 +26,7 @@ module Sass
       end
 
       def evaluate(context, locals, &block)
-        cache_store = Sprockets::SassCacheStore.new(context.environment)
+        cache_store = CacheStore.new(context.environment)
 
         options = {
           :filename => eval_file,
