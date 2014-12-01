@@ -41,7 +41,7 @@ module Sass
           }
         }
 
-        sass_config = context.environment.context_class.sass_config.merge(options)
+        sass_config = context.class.sass_config.merge(options)
 
         engine = ::Sass::Engine.new(data, sass_config)
         css = engine.render
