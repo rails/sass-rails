@@ -6,11 +6,13 @@ module Sass
   module Rails
     class SassImporter < Sass::Importers::Filesystem
       module Globbing
-        GLOB = /\*|\[.+\]/
+        GLOB = /(\A|\/)(\*|\*\*\/\*)\z/
 
         def find_relative(name, base, options)
-          if name =~ GLOB
-            glob_imports(name, Pathname.new(base), options)
+          if m = name.match(GLOB)
+            path = name.sub(m[0], "")
+            base = File.expand_path(path, File.dirname(base))
+            glob_imports(base, m[2], options)
           else
             super
           end
@@ -23,35 +25,34 @@ module Sass
         end
 
         private
-          def glob_imports(glob, base_pathname, options)
+          def glob_imports(base, glob, options)
             contents = ""
-            each_globbed_file(glob, base_pathname.dirname, options) do |filename|
-              contents << "@import #{Pathname.new(filename).relative_path_from(base_pathname.dirname).to_s.inspect};\n"
+            each_globbed_file(base, glob) do |filename|
+              next if filename == options[:filename]
+              contents << "@import #{filename.inspect};\n"
             end
-            return nil if contents.empty?
+            return nil if contents == ""
             Sass::Engine.new(contents, options.merge(
-              :filename => base_pathname.to_s,
               :importer => self,
               :syntax => :scss
             ))
           end
 
-          def each_globbed_file(glob, base_pathname, options)
-            Dir["#{base_pathname}/#{glob}"].sort.each do |path|
-              if path == options[:filename]
-                # skip importing self
-              elsif File.directory?(path)
+          def each_globbed_file(base, glob)
+            raise ArgumentError unless glob == "*" || glob == "**/*"
+
+            exts = extensions.keys.map { |ext| Regexp.escape(".#{ext}") }.join("|")
+            sass_re = Regexp.compile("(#{exts})$")
+
+            context.depend_on(base)
+
+            Dir["#{base}/#{glob}"].sort.each do |path|
+              if File.directory?(path)
                 context.depend_on(path)
-                context.depend_on(File.expand_path("..", path))
-              elsif importable?(path)
+              elsif sass_re =~ path
                 yield path
               end
             end
-          end
-
-          def importable?(filename)
-            exts = extensions.keys.map { |ext| Regexp.escape(".#{ext}") }.join("|")
-            Regexp.compile("(#{exts})$") =~ filename
           end
       end
 
