@@ -7,3 +7,5 @@ module Sprockets
     end
   end
 end
+
+::Sass::Script::Functions.send :include, Sprockets::SassFunctions

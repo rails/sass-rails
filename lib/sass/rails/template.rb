@@ -1,14 +1,32 @@
-require "sprockets/sass_template"
+require 'sass'
+require 'sass/rails/cache_store'
+require 'sass/rails/helpers'
+require 'sprockets/sass_functions'
+require 'tilt'
 
 module Sass
   module Rails
-    class SassTemplate < Sprockets::SassTemplate
+    class SassTemplate < Tilt::Template
       def self.default_mime_type
         'text/css'
       end
 
+      def self.engine_initialized?
+        true
+      end
+
+      def initialize_engine
+      end
+
+      def prepare
+      end
+
+      def syntax
+        :sass
+      end
+
       def evaluate(context, locals, &block)
-        cache_store = Sprockets::SassCacheStore.new(context.environment)
+        cache_store = CacheStore.new(context.environment)
 
         options = {
           :filename => eval_file,
@@ -23,7 +41,7 @@ module Sass
           }
         }
 
-        sass_config = context.environment.context_class.sass_config.merge(options)
+        sass_config = context.sass_config.merge(options)
 
         engine = ::Sass::Engine.new(data, sass_config)
         css = engine.render
