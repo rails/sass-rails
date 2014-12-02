@@ -13,6 +13,7 @@ gemfile:
   - test/gemfiles/Gemfile-sprockets-2-11
   - test/gemfiles/Gemfile-sprockets-2-12
   - test/gemfiles/Gemfile-sprockets-2-8
+  - test/gemfiles/Gemfile-sprockets-3-0
   - Gemfile
 
 sudo: false
