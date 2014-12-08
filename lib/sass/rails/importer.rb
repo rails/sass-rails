@@ -94,9 +94,13 @@ module Sass
 
         private
           def find_filename(dir, name, options)
-            full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
-            if full_filename && File.readable?(full_filename)
-              return full_filename, syntax
+            # Feature check additional options parameter that was added in 3.2.
+            result = method(:find_real_file).arity == 2 ?
+              find_real_file(dir, name) :
+              find_real_file(dir, name, options)
+
+            if result && File.readable?(result[0])
+              return result
             end
           end
 
