@@ -28,7 +28,8 @@ module Sass
         private
           def glob_imports(base, glob, options)
             contents = ""
-            each_globbed_file(base, glob) do |filename|
+            context = options[:sprockets][:context]
+            each_globbed_file(base, glob, context) do |filename|
               next if filename == options[:filename]
               contents << "@import #{filename.inspect};\n"
             end
@@ -39,7 +40,7 @@ module Sass
             ))
           end
 
-          def each_globbed_file(base, glob)
+          def each_globbed_file(base, glob, context)
             raise ArgumentError unless glob == "*" || glob == "**/*"
 
             exts = extensions.keys.map { |ext| Regexp.escape(".#{ext}") }.join("|")
@@ -85,7 +86,7 @@ module Sass
           def process_erb_engine(engine)
             if engine && syntax = erb_extensions[engine.options[:syntax]]
               template = Tilt::ERBTemplate.new(engine.options[:filename])
-              contents = template.render(context, {})
+              contents = template.render(engine.options[:sprockets][:context], {})
 
               Sass::Engine.new(contents, engine.options.merge(:syntax => syntax))
             else
@@ -135,13 +136,6 @@ module Sass
       include Deprecated
       include ERB
       include Globbing
-
-      attr_reader :context
-
-      def initialize(context, *args)
-        @context = context
-        super(*args)
-      end
 
       # Allow .css files to be @import'd
       def extensions
