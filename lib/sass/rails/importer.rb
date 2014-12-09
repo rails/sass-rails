@@ -1,3 +1,4 @@
+require 'active_support/deprecation/reporting'
 require 'sass'
 require 'sprockets/sass_importer'
 require 'tilt'
@@ -93,6 +94,45 @@ module Sass
           end
       end
 
+      module Deprecated
+        def extensions
+          {
+            'css.scss'     => :scss,
+            'css.sass'     => :sass,
+            'css.scss.erb' => :scss_erb,
+            'css.sass.erb' => :sass_erb
+          }.merge(super)
+        end
+
+        def find_relative(*args)
+          deprecate_extra_css_extension(super)
+        end
+
+        def find(*args)
+          deprecate_extra_css_extension(super)
+        end
+
+        private
+          def deprecate_extra_css_extension(engine)
+            if engine && filename = engine.options[:filename]
+              if filename.end_with?('.css.scss')
+                msg = "Extra .css in SCSS file is unnecessary. Rename #{filename} to #{filename.sub('.css.scss', '.scss')}."
+              elsif filename.end_with?('.css.sass')
+                msg = "Extra .css in SCSS file is unnecessary. Rename #{filename} to #{filename.sub('.css.sass', '.sass')}."
+              elsif filename.end_with?('.css.scss.erb')
+                msg = "Extra .css in SCSS/ERB file is unnecessary. Rename #{filename} to #{filename.sub('.css.scss.erb', '.scss.erb')}."
+              elsif filename.end_with?('.css.sass.erb')
+                msg = "Extra .css in SASS/ERB file is unnecessary. Rename #{filename} to #{filename.sub('.css.sass.erb', '.sass.erb')}."
+              end
+
+              ActiveSupport::Deprecation.warn(msg) if msg
+            end
+
+            engine
+          end
+      end
+
+      include Deprecated
       include ERB
       include Globbing
 
