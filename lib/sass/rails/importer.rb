@@ -72,43 +72,24 @@ module Sass
           }
         end
 
-        def find_relative(name, base, options)
-          filename, syntax = find_filename(File.dirname(base), name, options)
-
-          if syntax = erb_extensions[syntax]
-            erb_engine(filename, syntax, options)
-          else
-            super
-          end
+        def find_relative(*args)
+          process_erb_engine(super)
         end
 
-        def find(name, options)
-          filename, syntax = find_filename(root, name, options)
-
-          if syntax = erb_extensions[syntax]
-            erb_engine(filename, syntax, options)
-          else
-            super
-          end
+        def find(*args)
+          process_erb_engine(super)
         end
 
         private
-          def find_filename(dir, name, options)
-            full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
-            if full_filename && File.readable?(full_filename)
-              return full_filename, syntax
+          def process_erb_engine(engine)
+            if engine && syntax = erb_extensions[engine.options[:syntax]]
+              template = Tilt::ERBTemplate.new(engine.options[:filename])
+              contents = template.render(context, {})
+
+              Sass::Engine.new(contents, engine.options.merge(:syntax => syntax))
+            else
+              engine
             end
-          end
-
-          def erb_engine(filename, syntax, options)
-            options[:syntax]   = syntax
-            options[:filename] = filename
-            options[:importer] = self
-
-            template = Tilt::ERBTemplate.new(filename) { File.read(filename) }
-            contents = template.render(context, {})
-
-            Sass::Engine.new(contents, options)
           end
       end
 
