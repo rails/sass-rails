@@ -1,3 +1,4 @@
+require 'active_support/deprecation/reporting'
 require 'sass'
 require 'sprockets/sass_importer'
 require 'tilt'
@@ -93,6 +94,18 @@ module Sass
           end
       end
 
+      module Deprecated
+        def extensions
+          {
+            'css.scss'     => :scss,
+            'css.sass'     => :sass,
+            'css.scss.erb' => :scss_erb,
+            'css.sass.erb' => :sass_erb
+          }.merge(super)
+        end
+      end
+
+      include Deprecated
       include ERB
       include Globbing
 
