@@ -118,7 +118,7 @@ module Sass
               if filename.end_with?('.css.scss')
                 msg = "Extra .css in SCSS file is unnecessary. Rename #{filename} to #{filename.sub('.css.scss', '.scss')}."
               elsif filename.end_with?('.css.sass')
-                msg = "Extra .css in SCSS file is unnecessary. Rename #{filename} to #{filename.sub('.css.sass', '.sass')}."
+                msg = "Extra .css in SASS file is unnecessary. Rename #{filename} to #{filename.sub('.css.sass', '.sass')}."
               elsif filename.end_with?('.css.scss.erb')
                 msg = "Extra .css in SCSS/ERB file is unnecessary. Rename #{filename} to #{filename.sub('.css.scss.erb', '.scss.erb')}."
               elsif filename.end_with?('.css.sass.erb')
