@@ -87,8 +87,14 @@ class SassRailsTest < Sass::Rails::TestCase
   end
 
   test 'sprockets require works correctly' do
-    css_output = sprockets_render('scss_project', 'css_application.css')
-    assert_match /globbed/, css_output
+    within_rails_app('scss_project') do |app_root|
+      css_output = asset_output('css_application.css')
+      assert_match /globbed/, css_output
+
+      assert File.exists?("#{app_root}/log/development.log"), "log file was not created"
+      log_output = File.open("#{app_root}/log/development.log").read
+      refute_match /Warning/, log_output
+    end
   end
 
   test 'sass imports work correctly' do
