@@ -10,7 +10,7 @@ module Sass
         GLOB = /(\A|\/)(\*|\*\*\/\*)\z/
 
         def find_relative(name, base, options)
-          if m = name.match(GLOB)
+          if options[:sprockets] && m = name.match(GLOB)
             path = name.sub(m[0], "")
             base = File.expand_path(path, File.dirname(base))
             glob_imports(base, m[2], options)
@@ -84,7 +84,7 @@ module Sass
 
         private
           def process_erb_engine(engine)
-            if engine && syntax = erb_extensions[engine.options[:syntax]]
+            if engine && engine.options[:sprockets] && syntax = erb_extensions[engine.options[:syntax]]
               template = Tilt::ERBTemplate.new(engine.options[:filename])
               contents = template.render(engine.options[:sprockets][:context], {})
 
