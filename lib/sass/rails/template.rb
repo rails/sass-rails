@@ -33,8 +33,8 @@ module Sass
           :line => line,
           :syntax => syntax,
           :cache_store => cache_store,
-          :importer => importer_class.new(context, context.pathname.to_s),
-          :load_paths => context.environment.paths.map { |path| importer_class.new(context, path.to_s) },
+          :importer => importer_class.new(context.pathname.to_s),
+          :load_paths => context.environment.paths.map { |path| importer_class.new(path.to_s) },
           :sprockets => {
             :context => context,
             :environment => context.environment
