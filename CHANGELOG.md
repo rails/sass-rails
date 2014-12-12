@@ -1,8 +1,11 @@
 # CHANGELOG
 
-## unreleased
+## 5.0.0 (Dec 12, 2014)
 
 * Register scss and sass extensions for rake notes
+* Make possible to use sprockes > 2.8 and < 4
+* Make possible to use sass ~> 3.1
+* Deprecate .css.scss and .css.sass extentions
 
 ## 4.0.5 (Nov 25, 2014)
 
