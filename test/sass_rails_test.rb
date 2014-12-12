@@ -91,8 +91,15 @@ class SassRailsTest < Sass::Rails::TestCase
       css_output = asset_output('css_application.css')
       assert_match /globbed/, css_output
 
-      assert File.exists?("#{app_root}/log/development.log"), "log file was not created"
-      log_output = File.open("#{app_root}/log/development.log").read
+      if File.exists?("#{app_root}/log/development.log")
+        log_file = "#{app_root}/log/development.log"
+      elsif File.exists?("#{app_root}/log/test.log")
+        log_file = "#{app_root}/log/test.log"
+      else
+        flunk "log file was not created"
+      end
+
+      log_output = File.open(log_file).read
       refute_match /Warning/, log_output
     end
   end
