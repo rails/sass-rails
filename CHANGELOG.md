@@ -6,6 +6,7 @@
 * Make possible to use sprockes > 2.8 and < 4
 * Make possible to use sass ~> 3.1
 * Deprecate .css.scss and .css.sass extentions
+* Limit `=require` to .css only files and `@import` to .scss files. Avoid mixing the two.
 
 ## 4.0.5 (Nov 25, 2014)
 
