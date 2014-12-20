@@ -8,7 +8,11 @@ AlternateConfigProject::Application.configure do
   config.cache_classes = true
 
   # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_assets = true
+  if config.respond_to?(:serve_static_files)
+    config.serve_static_files = true
+  else
+    config.serve_static_assets = true
+  end
   config.static_cache_control = "public, max-age=3600"
 
   config.eager_load = false
