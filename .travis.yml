@@ -22,6 +22,8 @@ gemfile:
 
 sudo: false
 
+cache: bundler
+
 script: bundle exec rake test
 
 matrix:
