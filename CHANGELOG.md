@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 5.0.1
+
+* Fixed @import glob related caching bug
+
 ## 5.0.0 (Dec 12, 2014)
 
 * Register scss and sass extensions for rake notes
