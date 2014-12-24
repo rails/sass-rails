@@ -35,6 +35,7 @@ module Sass
             end
             return nil if contents == ""
             Sass::Engine.new(contents, options.merge(
+              :filename => base,
               :importer => self,
               :syntax => :scss
             ))
