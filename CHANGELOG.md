@@ -1,5 +1,7 @@
 # CHANGELOG
 
+* Add a `precision` configuration option.
+
 ## 5.0.1
 
 * Fixed @import glob related caching bug
