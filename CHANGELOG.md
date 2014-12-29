@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 5.0.1
+## 5.0.1 (Dec 29, 2014)
 
 * Fixed @import glob related caching bug
 
