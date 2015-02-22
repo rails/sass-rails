@@ -6,10 +6,6 @@ rvm:
  - 2.1.1
  - rbx-2
 
-matrix:
-  allow_failures:
-    - rvm: rbx-2
-
 gemfile:
   - test/gemfiles/Gemfile-rails-4-0
   - test/gemfiles/Gemfile-rails-4-1
@@ -30,6 +26,8 @@ sudo: false
 script: bundle exec rake test
 
 matrix:
+  allow_failures:
+    - rvm: rbx-2
   exclude:
     - gemfile: Gemfile
       rvm: 1.9.3
