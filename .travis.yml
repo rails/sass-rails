@@ -4,6 +4,11 @@ rvm:
  - 1.9.3
  - 2.0.0
  - 2.1.1
+ - rbx-2
+
+matrix:
+  allow_failures:
+    - rvm: rbx-2
 
 gemfile:
   - test/gemfiles/Gemfile-rails-4-0
