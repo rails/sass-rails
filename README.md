@@ -96,6 +96,6 @@ If you need to test against local gems, use Bundler's gem :path option in the Ge
 
 ## Code Status
 
-* [![Travis CI](https://api.travis-ci.org/rails/sass-rails.png)](http://travis-ci.org/rails/sass-rails)
-* [![Gem Version](https://badge.fury.io/rb/sass-rails.png)](http://badge.fury.io/rb/sass-rails)
-* [![Dependencies](https://gemnasium.com/rails/sass-rails.png)](https://gemnasium.com/rails/sass-rails)
+* [![Travis CI](https://api.travis-ci.org/rails/sass-rails.svg)](http://travis-ci.org/rails/sass-rails)
+* [![Gem Version](https://badge.fury.io/rb/sass-rails.svg)](http://badge.fury.io/rb/sass-rails)
+* [![Dependencies](https://gemnasium.com/rails/sass-rails.svg)](https://gemnasium.com/rails/sass-rails)
