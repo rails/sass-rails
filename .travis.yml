@@ -11,7 +11,6 @@ gemfile:
   - test/gemfiles/Gemfile-rails-4-0
   - test/gemfiles/Gemfile-rails-4-1
   - test/gemfiles/Gemfile-rails-4-2
-  - test/gemfiles/Gemfile-rails-master
   - test/gemfiles/Gemfile-sprockets-2-11
   - test/gemfiles/Gemfile-sprockets-2-12
   - test/gemfiles/Gemfile-sprockets-2-8
@@ -20,7 +19,6 @@ gemfile:
   - test/gemfiles/Gemfile-sass-3-2
   - test/gemfiles/Gemfile-sass-3-3
   - test/gemfiles/Gemfile-sass-3-4
-  - Gemfile
 
 sudo: false
 
@@ -29,15 +27,9 @@ script: bundle exec rake test
 matrix:
   allow_failures:
     - rvm: rbx-2
-  exclude:
+  include:
     - gemfile: Gemfile
-      rvm: 1.9.3
-    - gemfile: Gemfile
-      rvm: 2.0.0
-    - gemfile: test/gemfiles/Gemfile-rails-master
-      rvm: 1.9.3
-    - gemfile: test/gemfiles/Gemfile-rails-master
-      rvm: 2.0.0
+      rvm: 2.2.1
 
 notifications:
   email: false
