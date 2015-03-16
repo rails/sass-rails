@@ -4,3 +4,4 @@
 pkg/*
 .sass-cache
 .ruby-version
+gemfiles/vendor/*
