@@ -8,17 +8,17 @@ rvm:
  - rbx-2
 
 gemfile:
-  - test/gemfiles/Gemfile-rails-4-0
-  - test/gemfiles/Gemfile-rails-4-1
-  - test/gemfiles/Gemfile-rails-4-2
-  - test/gemfiles/Gemfile-sprockets-2-11
-  - test/gemfiles/Gemfile-sprockets-2-12
-  - test/gemfiles/Gemfile-sprockets-2-8
-  - test/gemfiles/Gemfile-sprockets-3-0
-  - test/gemfiles/Gemfile-sass-3-1
-  - test/gemfiles/Gemfile-sass-3-2
-  - test/gemfiles/Gemfile-sass-3-3
-  - test/gemfiles/Gemfile-sass-3-4
+  - gemfiles/Gemfile-rails-4-0
+  - gemfiles/Gemfile-rails-4-1
+  - gemfiles/Gemfile-rails-4-2
+  - gemfiles/Gemfile-sprockets-2-11
+  - gemfiles/Gemfile-sprockets-2-12
+  - gemfiles/Gemfile-sprockets-2-8
+  - gemfiles/Gemfile-sprockets-3-0
+  - gemfiles/Gemfile-sass-3-1
+  - gemfiles/Gemfile-sass-3-2
+  - gemfiles/Gemfile-sass-3-3
+  - gemfiles/Gemfile-sass-3-4
 
 sudo: false
 
