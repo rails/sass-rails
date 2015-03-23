@@ -1,3 +1,4 @@
+require 'sass'
 require 'sass/logger'
 
 module Sass

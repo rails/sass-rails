@@ -1,3 +1,4 @@
+require 'sass'
 require 'active_support/core_ext/class/attribute'
 require 'sprockets/railtie'
 
@@ -52,11 +53,11 @@ module Sass::Rails
         config.sass.full_exception = app.config.consider_all_requests_local
       end
 
-      if app.assets
-        app.assets.register_engine '.sass', Sass::Rails::SassTemplate
-        app.assets.register_engine '.scss', Sass::Rails::ScssTemplate
+      config.assets.configure do |env|
+        env.register_engine '.sass', Sass::Rails::SassTemplate
+        env.register_engine '.scss', Sass::Rails::ScssTemplate
 
-        app.assets.context_class.class_eval do
+        env.context_class.class_eval do
           class_attribute :sass_config
           self.sass_config = app.config.sass
         end
