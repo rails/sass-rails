@@ -1,3 +1,4 @@
+require 'sass'
 require 'active_support/core_ext/class/attribute'
 require 'sprockets/railtie'
 
