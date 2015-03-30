@@ -22,6 +22,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails'
   s.add_development_dependency 'sqlite3'
 
-  s.files         = Dir["CHANGELOG.md", "MIT-LICENSE", "README.md", "lib/**/*"]
+  s.files         = Dir["MIT-LICENSE", "README.md", "lib/**/*"]
   s.require_paths = ["lib"]
 end
