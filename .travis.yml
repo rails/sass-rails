@@ -33,7 +33,7 @@ matrix:
     - rvm: rbx-2
   include:
     - gemfile: Gemfile
-      rvm: 2.2.1
+      rvm: 2.2.2
 
 notifications:
   email: false
