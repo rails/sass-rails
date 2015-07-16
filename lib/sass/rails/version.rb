@@ -1,5 +1,5 @@
 module Sass
   module Rails
-    VERSION = "5.0.3"
+    VERSION = "6.0.0"
   end
 end

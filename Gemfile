@@ -5,3 +5,5 @@ gemspec
 
 gem "rails", github: "rails/rails"
 gem "arel", github: "rails/arel"
+gem "sprockets", github: "rails/sprockets", branch: "master"
+gem "sprockets-rails", github: "rails/sprockets-rails", branch: "master"
