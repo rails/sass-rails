@@ -1,24 +1,13 @@
 language: ruby
 
 rvm:
- - 1.9.3
  - 2.0.0
  - 2.1
  - 2.2
  - rbx-2
 
 gemfile:
-  - gemfiles/Gemfile-rails-4-0
-  - gemfiles/Gemfile-rails-4-1
   - gemfiles/Gemfile-rails-4-2
-  - gemfiles/Gemfile-sprockets-2-11
-  - gemfiles/Gemfile-sprockets-2-12
-  - gemfiles/Gemfile-sprockets-2-8
-  - gemfiles/Gemfile-sprockets-3-0
-  - gemfiles/Gemfile-sprockets-rails-2-2
-  - gemfiles/Gemfile-sprockets-rails-master
-  - gemfiles/Gemfile-sass-3-1
-  - gemfiles/Gemfile-sass-3-2
   - gemfiles/Gemfile-sass-3-3
   - gemfiles/Gemfile-sass-3-4
 

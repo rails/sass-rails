@@ -5,3 +5,5 @@ gemspec path: ".."
 
 gem "rails"
 gem "sass", "~> 3.3.0"
+gem "sprockets", github: "rails/sprockets", branch: "master"
+gem "sprockets-rails", github: "rails/sprockets-rails", branch: "master"
