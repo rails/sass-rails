@@ -1,6 +1,8 @@
 require 'active_support/deprecation/reporting'
 require 'sprockets/sass_importer'
-require 'tilt'
+require 'sprockets/file_reader'
+require 'sprockets/erb_processor'
+require 'sprockets/processor_utils'
 
 module Sass
   module Rails
@@ -85,10 +87,20 @@ module Sass
         private
           def process_erb_engine(engine)
             if engine && engine.options[:sprockets] && syntax = erb_extensions[engine.options[:syntax]]
-              template = Tilt::ERBTemplate.new(engine.options[:filename])
-              contents = template.render(engine.options[:sprockets][:context], {})
+              context = engine.options[:sprockets][:context]
 
-              Sass::Engine.new(contents, engine.options.merge(:syntax => syntax))
+              input = {
+                filename: engine.options[:filename],
+                environment: context.environment,
+                content_type: "text/#{syntax}",
+                metadata: {}
+              }
+
+              processors = [Sprockets::ERBProcessor, Sprockets::FileReader]
+
+              result = Sprockets::ProcessorUtils.call_processors(processors, input)
+
+              Sass::Engine.new(result[:data], engine.options.merge(:syntax => syntax))
             else
               engine
             end
