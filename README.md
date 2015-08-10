@@ -68,24 +68,24 @@ in Sass):
 #### `asset-path($relative-asset-path)`
 Returns a string to the asset.
 
-* `"/assets/rails.png"` becomes `asset-path("rails.png")`
+* `asset-path("rails.png")` returns `"/assets/rails.png"`
 
 #### `asset-url($relative-asset-path)`
 Returns a url reference to the asset.
 
-* `url(/assets/rails.png)` becomes `asset-url("rails.png")`
+* `asset-url("rails.png")` returns `url(/assets/rails.png)`
 
 As a convenience, for each of the following asset classes there are
 corresponding `-path` and `-url` helpers:
 image, font, video, audio, javascript, stylesheet.
 
-* `"/assets/rails.png"` becomes `image-path("rails.png")`
-* `url(/assets/rails.png)` becomes `image-url("rails.png")`
+* `image-path("rails.png")` returns `"/assets/rails.png"`
+* `image-url("rails.png")` returns `url(/assets/rails.png)`
 
 #### `asset-data-url($relative-asset-path)`
 Returns a url reference to the Base64-encoded asset at the specified path.
 
-* `url(data:image/png;base64,iVBORw0K...)` becomes `asset-data-url("rails.png")`
+* `asset-data-url("rails.png")` returns `url(data:image/png;base64,iVBORw0K...)`
 
 ## Running Tests
 
