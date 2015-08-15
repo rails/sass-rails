@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'railties',        '>= 4.0.0', '< 5.0'
   s.add_dependency 'sass',            '~> 3.3'
-  s.add_dependency 'sprockets-rails', '>= 3.0', '< 4.0'
+  s.add_dependency 'sprockets-rails', '< 4.0'
   s.add_dependency 'sprockets',       '>= 4.0'
 
   s.add_development_dependency 'sqlite3'
