@@ -1,12 +1,18 @@
-# Official Ruby-on-Rails Integration with Sass
+# Official Ruby on Rails Integration with Sass
+
+[![Travis CI](https://api.travis-ci.org/rails/sass-rails.svg)](http://travis-ci.org/rails/sass-rails)
+[![Gem Version](https://badge.fury.io/rb/sass-rails.svg)](http://badge.fury.io/rb/sass-rails)
+[![Dependencies](https://gemnasium.com/rails/sass-rails.svg)](https://gemnasium.com/rails/sass-rails)
 
 This gem provides official integration for Ruby on Rails projects with the Sass stylesheet language.
 
-## Installing
+## Installation
 
 Since Rails 3.1, new Rails projects will be already configured to use Sass. If you are upgrading to Rails 3.1 you will need to add the following to your Gemfile:
 
-    gem 'sass-rails'
+```ruby
+gem 'sass-rails'
+```
 
 ## Configuration
 
@@ -31,11 +37,13 @@ can be found on the Sass Website with the following caveats:
 
 ### Example
 
-    MyProject::Application.configure do
-      config.sass.preferred_syntax = :sass
-      config.sass.line_comments = false
-      config.sass.cache = false
-    end
+```ruby
+MyProject::Application.configure do
+  config.sass.preferred_syntax = :sass
+  config.sass.line_comments = false
+  config.sass.cache = false
+end
+```
 
 ## Important Note
 
@@ -89,13 +97,9 @@ Returns a url reference to the Base64-encoded asset at the specified path.
 
 ## Running Tests
 
-    $ bundle install
-    $ bundle exec rake test
+```
+$ bundle install
+$ bundle exec rake test
+```
 
 If you need to test against local gems, use Bundler's gem :path option in the Gemfile and also edit `test/support/test_helper.rb` and tell the tests where the gem is checked out.
-
-## Code Status
-
-* [![Travis CI](https://api.travis-ci.org/rails/sass-rails.svg)](http://travis-ci.org/rails/sass-rails)
-* [![Gem Version](https://badge.fury.io/rb/sass-rails.svg)](http://badge.fury.io/rb/sass-rails)
-* [![Dependencies](https://gemnasium.com/rails/sass-rails.svg)](https://gemnasium.com/rails/sass-rails)
