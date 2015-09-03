@@ -39,4 +39,7 @@ AlternateConfigProject::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Decide not to use sass compression
+  config.assets.css_compressor = nil
 end

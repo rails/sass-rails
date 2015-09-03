@@ -76,6 +76,16 @@ class SassRailsTest < Sass::Rails::TestCase
     end
   end
 
+  test 'sass allows compressor override in test mode' do
+    within_rails_app 'alternate_config_project' do
+      runner 'test' do
+        "puts Rails.application.config.assets.css_compressor.nil?"
+      end
+
+      assert_equal 'true', $last_output.chomp
+    end
+  end
+
   test 'sass defines compressor by default in production mode' do
     within_rails_app 'scss_project' do
       runner 'production' do
