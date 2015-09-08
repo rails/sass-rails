@@ -1,12 +1,12 @@
 require 'active_support/deprecation/reporting'
-require 'sprockets/sass_importer'
+require 'sass/importers'
 require 'sprockets/file_reader'
 require 'sprockets/erb_processor'
 require 'sprockets/processor_utils'
 
 module Sass
   module Rails
-    class SassImporter < Sprockets::SassImporter
+    class SassImporter < Sass::Importers::Filesystem
       module Globbing
         GLOB = /(\A|\/)(\*|\*\*\/\*)\z/
 

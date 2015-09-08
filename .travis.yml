@@ -8,8 +8,6 @@ rvm:
 
 gemfile:
   - gemfiles/Gemfile-rails-4-2
-  - gemfiles/Gemfile-sass-3-3
-  - gemfiles/Gemfile-sass-3-4
 
 sudo: false
 
