@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in sass-rails.gemspec
 gemspec path: ".."
 
-gem "sassc", "~> 1.7"
+gem "sassc", "~> 1.7.1"
 gem "rails", "~> 4.2.0"
 gem "sprockets", github: "rails/sprockets", branch: "master"
 gem "sprockets-rails", github: "rails/sprockets-rails", branch: "master"

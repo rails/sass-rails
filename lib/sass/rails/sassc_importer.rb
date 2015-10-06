@@ -1,21 +1,5 @@
 require "sassc"
 
-module SassC
-  class Engine
-    def options
-      @options
-    end
-
-    def template
-      @template
-    end
-
-    def filename
-      @options[:filename]
-    end
-  end
-end
-
 module Sass
   module Rails
     class SasscImporter < SassC::Importer
