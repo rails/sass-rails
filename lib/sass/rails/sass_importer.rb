@@ -35,7 +35,7 @@ module Sass
               contents << "@import #{filename.inspect};\n"
             end
             return nil if contents == ""
-            Sass::Engine.new(contents, options.merge(
+            sass_engine(contents, options.merge(
               :filename => base,
               :importer => self,
               :syntax => :scss
@@ -57,6 +57,10 @@ module Sass
                 yield path
               end
             end
+          end
+
+          def sass_engine(contents, options)
+            Sass::Engine.new(contents, options)
           end
       end
 
@@ -100,7 +104,7 @@ module Sass
 
               result = Sprockets::ProcessorUtils.call_processors(processors, input)
 
-              Sass::Engine.new(result[:data], engine.options.merge(:syntax => syntax))
+              sass_engine(result[:data], engine.options.merge(:syntax => syntax))
             else
               engine
             end

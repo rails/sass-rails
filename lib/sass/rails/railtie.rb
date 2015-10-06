@@ -3,6 +3,12 @@ require 'active_support/core_ext/class/attribute'
 require 'sprockets/railtie'
 require 'sprockets/sass_processor'
 
+begin
+  require "sassc"
+  require "sprockets/sassc_processor"
+rescue LoadError
+end
+
 module Sass::Rails
   class Railtie < ::Rails::Railtie
     config.sass = ActiveSupport::OrderedOptions.new
@@ -55,11 +61,17 @@ module Sass::Rails
       end
 
       config.assets.configure do |env|
-
-        env.register_transformer 'text/sass', 'text/css',
-          Sprockets::SassProcessor.new(importer: SassImporter)
-        env.register_transformer 'text/scss', 'text/css',
-          Sprockets::ScssProcessor.new(importer: SassImporter)
+        if defined?(SassC)
+          env.register_transformer 'text/sass', 'text/css',
+            Sprockets::SasscProcessor.new(importer: SasscImporter)
+          env.register_transformer 'text/scss', 'text/css',
+            Sprockets::ScsscProcessor.new(importer: SasscImporter)
+        else
+          env.register_transformer 'text/sass', 'text/css',
+            Sprockets::SassProcessor.new(importer: SassImporter)
+          env.register_transformer 'text/scss', 'text/css',
+            Sprockets::ScssProcessor.new(importer: SassImporter)
+        end
 
         env.context_class.class_eval do
           class_attribute :sass_config

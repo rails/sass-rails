@@ -45,7 +45,9 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   end
 
   def asset_output(filename)
-    runcmd "ruby script/rails runner 'puts Rails.application.assets[#{filename.inspect}]'"
+    runner "development" do
+      "puts Rails.application.assets[#{filename.inspect}]"
+    end
   end
 
   def assert_file_exists(filename)
