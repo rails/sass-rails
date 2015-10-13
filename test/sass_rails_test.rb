@@ -126,6 +126,7 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match /globbed/,                  css_output
     assert_match /nested-glob/,              css_output
     assert_match /nested-glob-erb/,          css_output
+    assert_match /nested-glob-erb-css-scss/, css_output
     assert_match /plain-old-css/,            css_output
     assert_match /another-plain-old-css/,    css_output
     assert_match /without-css-ext/,          css_output
