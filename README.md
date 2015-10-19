@@ -6,7 +6,9 @@ This gem provides official integration for Ruby on Rails projects with the Sass 
 
 Since Rails 3.1, new Rails projects will be already configured to use Sass. If you are upgrading to Rails 3.1 you will need to add the following to your Gemfile:
 
-    gem 'sass-rails'
+```ruby
+gem 'sass-rails'
+```
 
 ## Configuration
 
@@ -30,12 +32,13 @@ can be found on the Sass Website with the following caveats:
 - `:line` - This is provided by the template handler.
 
 ### Example
-
-    MyProject::Application.configure do
-      config.sass.preferred_syntax = :sass
-      config.sass.line_comments = false
-      config.sass.cache = false
-    end
+```ruby
+MyProject::Application.configure do
+  config.sass.preferred_syntax = :sass
+  config.sass.line_comments = false
+  config.sass.cache = false
+end
+```
 
 ## Important Note
 
