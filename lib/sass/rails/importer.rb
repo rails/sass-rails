@@ -145,8 +145,8 @@ module Sass
           end
       end
 
-      include Deprecated
       include ERB
+      include Deprecated
       include Globbing
 
       # Allow .css files to be @import'd
