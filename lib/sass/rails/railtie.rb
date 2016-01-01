@@ -55,16 +55,10 @@ module Sass::Rails
       end
 
       config.assets.configure do |env|
-
         env.register_transformer 'text/sass', 'text/css',
-          Sprockets::SassProcessor.new(importer: SassImporter)
+          Sprockets::SassProcessor.new(importer: SassImporter, sass_config: app.config.sass)
         env.register_transformer 'text/scss', 'text/css',
-          Sprockets::ScssProcessor.new(importer: SassImporter)
-
-        env.context_class.class_eval do
-          class_attribute :sass_config
-          self.sass_config = app.config.sass
-        end
+          Sprockets::ScssProcessor.new(importer: SassImporter, sass_config: app.config.sass)
       end
 
       Sass.logger = app.config.sass.logger
