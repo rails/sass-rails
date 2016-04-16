@@ -99,6 +99,7 @@ module Sass
               processors = [Sprockets::ERBProcessor, Sprockets::FileReader]
 
               result = Sprockets::ProcessorUtils.call_processors(processors, input)
+              result[:links].each { |link| context.link_asset(link) }
 
               Sass::Engine.new(result[:data], engine.options.merge(:syntax => syntax))
             else
