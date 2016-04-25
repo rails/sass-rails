@@ -12,7 +12,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "puts Rails.application.config.sass.style"
       end
 
-      assert_output /compact/
+      assert_output %r{compact}
     end
   end
 
@@ -42,7 +42,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "puts Rails.application.config.assets.css_compressor"
       end
 
-      assert_output /yui/
+      assert_output %r{yui}
     end
   end
 
@@ -52,7 +52,7 @@ class SassRailsTest < Sass::Rails::TestCase
         "puts Rails.application.config.sass.style"
       end
 
-      assert_output /expanded/
+      assert_output %r{expanded}
     end
   end
 
@@ -99,49 +99,49 @@ class SassRailsTest < Sass::Rails::TestCase
   test 'sprockets require works correctly' do
     within_rails_app('scss_project') do |app_root|
       css_output = asset_output('css_application.css')
-      assert_match /globbed/, css_output
+      assert_match %r{globbed}, css_output
 
-      if File.exists?("#{app_root}/log/development.log")
+      if File.exist?("#{app_root}/log/development.log")
         log_file = "#{app_root}/log/development.log"
-      elsif File.exists?("#{app_root}/log/test.log")
+      elsif File.exist?("#{app_root}/log/test.log")
         log_file = "#{app_root}/log/test.log"
       else
         flunk "log file was not created"
       end
 
       log_output = File.open(log_file).read
-      refute_match /Warning/, log_output
+      refute_match %r{Warning}, log_output
     end
   end
 
   test 'sass imports work correctly' do
     css_output = sprockets_render('scss_project', 'application.css')
-    assert_match /main/,                     css_output
-    assert_match /top-level/,                css_output
-    assert_match /partial-sass/,             css_output
-    assert_match /partial-scss/,             css_output
-    assert_match /sub-folder-relative-sass/, css_output
-    assert_match /sub-folder-relative-scss/, css_output
-    assert_match /not-a-partial/,            css_output
-    assert_match /globbed/,                  css_output
-    assert_match /nested-glob/,              css_output
-    assert_match /nested-glob-erb/,          css_output
-    assert_match /nested-glob-erb-css-scss/, css_output
-    assert_match /plain-old-css/,            css_output
-    assert_match /another-plain-old-css/,    css_output
-    assert_match /without-css-ext/,          css_output
-    assert_match /css-erb-handler/,          css_output
-    assert_match /scss-erb-handler/,         css_output
-    assert_match /sass-erb-handler/,         css_output
-    assert_match /css-sass-erb-handler/,     css_output
-    assert_match /css-scss-erb-handler/,     css_output
-    assert_match /default-old-css/,          css_output
+    assert_match %r{main},                     css_output
+    assert_match %r{top-level},                css_output
+    assert_match %r{partial-sass},             css_output
+    assert_match %r{partial-scss},             css_output
+    assert_match %r{sub-folder-relative-sass}, css_output
+    assert_match %r{sub-folder-relative-scss}, css_output
+    assert_match %r{not-a-partial},            css_output
+    assert_match %r{globbed},                  css_output
+    assert_match %r{nested-glob},              css_output
+    assert_match %r{nested-glob-erb},          css_output
+    assert_match %r{nested-glob-erb-css-scss}, css_output
+    assert_match %r{plain-old-css},            css_output
+    assert_match %r{another-plain-old-css},    css_output
+    assert_match %r{without-css-ext},          css_output
+    assert_match %r{css-erb-handler},          css_output
+    assert_match %r{scss-erb-handler},         css_output
+    assert_match %r{sass-erb-handler},         css_output
+    assert_match %r{css-sass-erb-handler},     css_output
+    assert_match %r{css-scss-erb-handler},     css_output
+    assert_match %r{default-old-css},          css_output
   end
 
   test 'sprockets directives are ignored within an import' do
     css_output = sprockets_render('scss_project', 'import_css_application.css')
-    assert_match /\.css-application/,        css_output
-    assert_match /\.import-css-application/, css_output
+    assert_match %r{\.css-application},        css_output
+    assert_match %r{\.import-css-application}, css_output
   end
 
   test 'globbed imports work when new file is added' do
@@ -157,7 +157,7 @@ class SassRailsTest < Sass::Rails::TestCase
       end
 
       css_output = asset_output(filename)
-      assert_match /new-file-test/, css_output
+      assert_match %r{new-file-test}, css_output
     end
   end
 
@@ -174,7 +174,7 @@ class SassRailsTest < Sass::Rails::TestCase
       end
 
       css_output = asset_output(filename)
-      assert_match /changed-file-test/, css_output
+      assert_match %r{changed-file-test}, css_output
     end
   end
 

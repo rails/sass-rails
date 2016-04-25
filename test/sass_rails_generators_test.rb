@@ -6,7 +6,7 @@ class ScaffoldGeneratorTest < Sass::Rails::TestCase
       generate_scaffold
       assert_file_exists "app/assets/stylesheets/foos.scss"
       assert_file_exists "app/assets/stylesheets/scaffolds.scss"
-      assert_not_output /conflict/
+      assert_not_output %r{conflict}
     end
   end
 
@@ -15,7 +15,7 @@ class ScaffoldGeneratorTest < Sass::Rails::TestCase
       generate_scaffold
       assert_file_exists "app/assets/stylesheets/foos.sass"
       assert_file_exists "app/assets/stylesheets/scaffolds.sass"
-      assert_not_output /conflict/
+      assert_not_output %r{conflict}
     end
   end
 
@@ -24,7 +24,7 @@ class ScaffoldGeneratorTest < Sass::Rails::TestCase
       generate_scaffold "--stylesheet-engine=scss"
       assert_file_exists "app/assets/stylesheets/engine_project/foos.scss"
       assert_file_exists "app/assets/stylesheets/scaffolds.scss"
-      assert_not_output /conflict/
+      assert_not_output %r{conflict}
     end
   end
 
@@ -33,7 +33,7 @@ class ScaffoldGeneratorTest < Sass::Rails::TestCase
       generate_scaffold "--stylesheet-engine=sass"
       assert_file_exists "app/assets/stylesheets/engine_project/foos.sass"
       assert_file_exists "app/assets/stylesheets/scaffolds.sass"
-      assert_not_output /conflict/
+      assert_not_output %r{conflict}
     end
   end
 
