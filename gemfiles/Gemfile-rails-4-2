@@ -4,5 +4,5 @@ source "https://rubygems.org"
 gemspec path: ".."
 
 gem "rails", "~> 4.2.0"
-gem "sprockets", github: "rails/sprockets", branch: "master"
-gem "sprockets-rails", github: "rails/sprockets-rails", branch: "master"
+gem "sprockets", "~> 4.0.0.beta2"
+gem "sprockets-rails", "~> 3.0.4"
