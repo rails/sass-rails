@@ -19,6 +19,8 @@ matrix:
   allow_failures:
     - rvm: rbx-2
   include:
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.2
     - gemfile: Gemfile
       rvm: 2.2.2
 
