@@ -21,9 +21,9 @@ matrix:
     - rvm: rbx-2
   include:
     - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.2
+      rvm: 2.3
     - gemfile: Gemfile
-      rvm: 2.2.2
+      rvm: 2.3
 
 notifications:
   email: false
