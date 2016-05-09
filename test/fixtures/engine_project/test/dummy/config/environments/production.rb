@@ -20,7 +20,9 @@ Dummy::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  if config.respond_to?(:serve_static_files)
+  if config.respond_to?(:public_file_server)
+    config.public_file_server.enabled = false
+  elsif config.respond_to?(:serve_static_files)
     config.serve_static_files = false
   else
     config.serve_static_assets = false
