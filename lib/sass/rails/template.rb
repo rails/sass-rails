@@ -15,6 +15,10 @@ module Sass
         true
       end
 
+      def self.cache_key
+        ::Sass::VERSION
+      end
+
       def initialize_engine
       end
 
