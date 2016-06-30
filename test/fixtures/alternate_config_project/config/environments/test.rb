@@ -10,10 +10,16 @@ AlternateConfigProject::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   if config.respond_to?(:public_file_server)
     config.public_file_server.enabled = true
+  elsif config.respond_to?(:serve_static_files)
+    config.serve_static_files = true
   else
     config.serve_static_assets = true
   end
-  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
+  if config.respond_to?(:public_file_server)
+    config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
+  else
+    config.static_cache_control = "public, max-age=3600"
+  end
 
   config.eager_load = false
 
