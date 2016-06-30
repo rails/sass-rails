@@ -5,3 +5,4 @@ gemspec path: ".."
 
 gem "rails"
 gem "sass", "~> 3.1.0"
+gem "mime-types", "< 2"

@@ -5,3 +5,4 @@ gemspec path: ".."
 
 gem "rails"
 gem "sprockets-rails", "~> 2.2.0"
+gem "mime-types", "< 2"
