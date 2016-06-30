@@ -12,7 +12,7 @@ gemfile:
   - gemfiles/Gemfile-rails-4-0
   - gemfiles/Gemfile-rails-4-1
   - gemfiles/Gemfile-rails-4-2
-  - gemfiles/Gemfile-rails-5.0
+  - gemfiles/Gemfile-rails-5-0
   - gemfiles/Gemfile-sprockets-2-11
   - gemfiles/Gemfile-sprockets-2-12
   - gemfiles/Gemfile-sprockets-2-8
@@ -33,6 +33,13 @@ script: bundle exec rake test
 matrix:
   allow_failures:
     - rvm: rbx-2
+  exclude:
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 1.9.3
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.0.0
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.1
   include:
     - gemfile: Gemfile
       rvm: 2.2.5
