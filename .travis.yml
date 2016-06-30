@@ -23,7 +23,6 @@ gemfile:
   - gemfiles/Gemfile-sass-3-2
   - gemfiles/Gemfile-sass-3-3
   - gemfiles/Gemfile-sass-3-4
-  - gemfiles/Gemfile-sass-3-5
 
 sudo: false
 
@@ -35,7 +34,7 @@ matrix:
   allow_failures:
     - rvm: rbx-2
   exclude:
-    - gemfile: gemfiles/Gemfile-sass-3-5
+    - gemfile: gemfiles/Gemfile-sass-3-4
       rvm: 1.9.3
     - gemfile: gemfiles/Gemfile-rails-5-0
       rvm: 1.9.3

@@ -5,5 +5,5 @@ gemspec path: ".."
 
 gem "rails"
 gem "sprockets-rails", github: "rails/sprockets-rails"
-gem "sass", "~> 3.4.0"
+gem "sass", "~> 3.3.0"
 gem "mime-types", "< 2"
