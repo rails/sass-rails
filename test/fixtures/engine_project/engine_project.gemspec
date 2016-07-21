@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EngineProject::VERSION
   s.authors     = ["Your name"]
   s.email       = ["Your email"]
-  s.homepage    = "http://example.com"
+  s.homepage    = ""
   s.summary     = "Summary of EngineProject."
   s.description = "Description of EngineProject."
 
