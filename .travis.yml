@@ -37,6 +37,8 @@ matrix:
   exclude:
     - gemfile: gemfiles/Gemfile-sass-3-4
       rvm: 1.9.3
+    - gemfile: gemfiles/Gemfile-sprockets-4-0
+      rvm: 1.9.3
     - gemfile: gemfiles/Gemfile-rails-5-0
       rvm: 1.9.3
     - gemfile: gemfiles/Gemfile-rails-5-0
