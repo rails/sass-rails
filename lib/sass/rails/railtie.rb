@@ -57,11 +57,11 @@ module Sass::Rails
         if env.respond_to?(:register_engine)
           args = ['.sass', Sass::Rails::SassTemplate]
           args << { silence_deprecation: true } if env.method(:register_engine).arity.abs > 2
-          env.register_engine *args
+          env.register_engine(*args)
 
           args = ['.scss', Sass::Rails::ScssTemplate]
           args << { silence_deprecation: true } if env.method(:register_engine).arity.abs > 2
-          env.register_engine *args
+          env.register_engine(*args)
         end
 
         if env.respond_to?(:register_transformer)
