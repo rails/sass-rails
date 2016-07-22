@@ -5,7 +5,7 @@ class SassRailsTestPostProcessor
     @source   = block.call
   end
 
-  def render(context)
+  def render(context, _)
     self.class.run(@source)
   end
 
