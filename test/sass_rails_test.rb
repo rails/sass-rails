@@ -144,7 +144,7 @@ class SassRailsTest < Sass::Rails::TestCase
 
   test 'globbed imports work when new file is added' do
     project = 'scss_project'
-    filename = 'application.scss'
+    filename = 'application.css'
 
     within_rails_app(project) do |tmpdir|
       asset_output(filename)
@@ -161,7 +161,7 @@ class SassRailsTest < Sass::Rails::TestCase
 
   test 'globbed imports work when globbed file is changed' do
     project = 'scss_project'
-    filename = 'application.scss'
+    filename = 'application.css'
 
     within_rails_app(project) do |tmpdir|
       asset_output(filename)

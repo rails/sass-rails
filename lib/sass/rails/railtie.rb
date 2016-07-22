@@ -54,8 +54,22 @@ module Sass::Rails
       end
 
       config.assets.configure do |env|
-        env.register_engine '.sass', Sass::Rails::SassTemplate
-        env.register_engine '.scss', Sass::Rails::ScssTemplate
+        if env.respond_to?(:register_engine)
+          args = ['.sass', Sass::Rails::SassTemplate]
+          args << { silence_deprecation: true } if env.method(:register_engine).arity.abs > 2
+          env.register_engine(*args)
+
+          args = ['.scss', Sass::Rails::ScssTemplate]
+          args << { silence_deprecation: true } if env.method(:register_engine).arity.abs > 2
+          env.register_engine(*args)
+        end
+
+        if env.respond_to?(:register_transformer)
+          env.register_transformer 'text/sass', 'text/css',
+            Sprockets::SassProcessor.new(importer: SassImporter, sass_config: app.config.sass)
+          env.register_transformer 'text/scss', 'text/css',
+            Sprockets::ScssProcessor.new(importer: SassImporter, sass_config: app.config.sass)
+        end
 
         env.context_class.class_eval do
           class_attribute :sass_config

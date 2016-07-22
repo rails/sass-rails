@@ -17,6 +17,7 @@ gemfile:
   - gemfiles/Gemfile-sprockets-2-12
   - gemfiles/Gemfile-sprockets-2-8
   - gemfiles/Gemfile-sprockets-3-0
+  - gemfiles/Gemfile-sprockets-4-0
   - gemfiles/Gemfile-sprockets-rails-2-2
   - gemfiles/Gemfile-sprockets-rails-master
   - gemfiles/Gemfile-sass-3-1
@@ -35,6 +36,8 @@ matrix:
     - rvm: rbx-2
   exclude:
     - gemfile: gemfiles/Gemfile-sass-3-4
+      rvm: 1.9.3
+    - gemfile: gemfiles/Gemfile-sprockets-4-0
       rvm: 1.9.3
     - gemfile: gemfiles/Gemfile-rails-5-0
       rvm: 1.9.3
