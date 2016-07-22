@@ -6,3 +6,4 @@ gemspec path: ".."
 gem "rails"
 gem "sass", "~> 3.1.0"
 gem "mime-types", "< 2"
+gem "rack", "< 2" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.2")
