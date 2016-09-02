@@ -32,7 +32,7 @@ module Sass::Rails
 
     # Remove the sass middleware if it gets inadvertently enabled by applications.
     config.after_initialize do |app|
-      app.config.middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)
+      app.config.app_middleware.delete(Sass::Plugin::Rack) if defined?(Sass::Plugin::Rack)
     end
 
     initializer :setup_sass, group: :all do |app|
