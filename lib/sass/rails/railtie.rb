@@ -45,9 +45,6 @@ module Sass::Rails
       # Override stylesheet engine to the preferred syntax
       config.app_generators.stylesheet_engine syntax
 
-      # Set the sass cache location
-      config.sass.cache_location   = File.join(Rails.root, "tmp/cache/sass")
-
       # Establish configuration defaults that are evironmental in nature
       if config.sass.full_exception.nil?
         # Display a stack trace in the css output when in development-like environments.
