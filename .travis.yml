@@ -3,8 +3,10 @@ language: ruby
 rvm:
  - 2.0.0
  - 2.1
- - 2.2.5
- - 2.3.1
+ - 2.2.7
+ - 2.3.4
+ - 2.4.1
+ - ruby-head
  - rbx-2
 
 gemfile:
@@ -19,11 +21,21 @@ script: bundle exec rake test
 matrix:
   allow_failures:
     - rvm: rbx-2
+    - rvm: ruby-head
+  fast_finish: true
   include:
     - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.3.1
+      rvm: 2.3.4
     - gemfile: Gemfile
-      rvm: 2.3.1
+      rvm: 2.3.4
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.4.1
+    - gemfile: Gemfile
+      rvm: 2.4.1
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: ruby-head
+    - gemfile: Gemfile
+      rvm: ruby-head
 
 notifications:
   email: false
