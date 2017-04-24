@@ -101,9 +101,9 @@ class SassRailsTest < Sass::Rails::TestCase
       css_output = asset_output('css_application.css')
       assert_match /globbed/, css_output
 
-      if File.exists?("#{app_root}/log/development.log")
+      if File.exist?("#{app_root}/log/development.log")
         log_file = "#{app_root}/log/development.log"
-      elsif File.exists?("#{app_root}/log/test.log")
+      elsif File.exist?("#{app_root}/log/test.log")
         log_file = "#{app_root}/log/test.log"
       else
         flunk "log file was not created"
@@ -132,7 +132,9 @@ class SassRailsTest < Sass::Rails::TestCase
     assert_match /scss-erb-handler/,         css_output
     assert_match /sass-erb-handler/,         css_output
     assert_match /css-sass-erb-handler/,     css_output
-    assert_match /css-scss-erb-handler/,     css_output
+    assert_match /vendor-package/,           css_output
+    assert_match /forms/,                    css_output
+    assert_match /alerts/,                   css_output
     assert_match /default-old-css/,          css_output
   end
 

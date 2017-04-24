@@ -1,0 +1,10 @@
+.alert {
+  border: 1px solid transparent;
+  padding: 1rem;
+
+  &.warning {
+    background-color: #fdb;
+    border-color: #a74;
+    color: #a74;
+  }
+}

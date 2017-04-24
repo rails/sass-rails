@@ -10,6 +10,8 @@
 @import "sass_erb_handler";
 @import "css_scss_erb_handler";
 @import "css_sass_erb_handler";
+@import "vendor-package/vendor-package";
+@import "vendor-package/components/*";
 
 .main {
   color: yellow;

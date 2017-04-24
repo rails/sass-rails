@@ -12,7 +12,7 @@ module Sass
         def find_relative(name, base, options)
           if options[:sprockets] && m = name.match(GLOB)
             path = name.sub(m[0], "")
-            base = File.expand_path(path, File.dirname(base))
+            base = seek_valid_glob_dir(path, base, options[:load_paths])
             glob_imports(base, m[2], options)
           else
             super
@@ -26,6 +26,18 @@ module Sass
         end
 
         private
+          def seek_valid_glob_dir(path, base, load_paths)
+            dir = File.expand_path(path, File.dirname(base))
+            return dir if File.exist?(dir)
+
+            load_paths.each do |importer|
+              valid_dir = File.join(importer.to_s, path)
+              return valid_dir if File.exist?(valid_dir)
+            end
+
+            dir
+          end
+
           def glob_imports(base, glob, options)
             contents = ""
             context = options[:sprockets][:context]
