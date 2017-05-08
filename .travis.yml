@@ -25,14 +25,24 @@ matrix:
   fast_finish: true
   include:
     - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.2.7
+    - gemfile: gemfiles/Gemfile-rails-5-1
+      rvm: 2.2.7
+    - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: 2.3.4
+    - gemfile: gemfiles/Gemfile-rails-5-1
       rvm: 2.3.4
     - gemfile: Gemfile
       rvm: 2.3.4
     - gemfile: gemfiles/Gemfile-rails-5-0
       rvm: 2.4.1
+    - gemfile: gemfiles/Gemfile-rails-5-1
+      rvm: 2.4.1
     - gemfile: Gemfile
       rvm: 2.4.1
     - gemfile: gemfiles/Gemfile-rails-5-0
+      rvm: ruby-head
+    - gemfile: gemfiles/Gemfile-rails-5-1
       rvm: ruby-head
     - gemfile: Gemfile
       rvm: ruby-head
