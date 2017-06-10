@@ -8,3 +8,4 @@ gem "sprockets-rails", github: "rails/sprockets-rails"
 gem "sass", "~> 3.3.0"
 gem "mime-types", "< 2"
 gem "rack", "< 2" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.2")
+gem "nokogiri", "~> 1.6.8" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
