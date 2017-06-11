@@ -3,7 +3,12 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in sass-rails.gemspec
 gemspec path: ".."
 
-gem "rails"
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.2")
+  gem "rails", "~> 4.2.0"
+else
+  gem "rails"
+end
 gem "sprockets", "~> 4.x"
 gem 'mime-types', '< 3', require: false if RUBY_VERSION.start_with?('1.9')
 gem "rack", "< 2" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.2")
+gem "nokogiri", "~> 1.6.8" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
