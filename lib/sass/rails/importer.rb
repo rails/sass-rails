@@ -28,7 +28,7 @@ module Sass
 
         private
           def glob_imports(base, glob, options)
-            contents = ""
+            contents = "".dup
             context = options[:sprockets][:context]
             each_globbed_file(base, glob, context) do |filename|
               next if filename == options[:filename]
