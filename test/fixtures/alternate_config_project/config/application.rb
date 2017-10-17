@@ -46,6 +46,8 @@ module AlternateConfigProject
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.active_record.sqlite3.represent_boolean_as_integer = true
+    if Rails.version >= '5.1.0'
+      config.active_record.sqlite3.represent_boolean_as_integer = true
+    end
   end
 end
