@@ -54,7 +54,7 @@ glob imports relative to the folder of the stylesheet that is doing the importin
 * `@import "mixins/*"` will import all the files in the mixins folder
 * `@import "mixins/**/*"` will import all the files in the mixins tree
 
-Any valid ruby glob may be used. The imports are sorted alphabetically.
+Glob patterns must end in `/*` or `/**/*`. The imports are sorted alphabetically.
 
 **NOTE:** It is recommended that you only use this when importing pure library
 files (containing mixins and variables) because it is difficult to control the
