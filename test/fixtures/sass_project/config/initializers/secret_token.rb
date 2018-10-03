@@ -4,4 +4,9 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-ScssProject::Application.config.secret_token = 'aad80c771c1b2b13b67b0b2d03ee3fa8a1d5a8e8dce2e8bc8b382f197927b789afdc9355f8bc7256faf650015d75d8eb541e9ab96a88f0bd63c4bd7552174849'
+secret = 'aad80c771c1b2b13b67b0b2d03ee3fa8a1d5a8e8dce2e8bc8b382f197927b789afdc9355f8bc7256faf650015d75d8eb541e9ab96a88f0bd63c4bd7552174849'
+if ScssProject::Application.config.respond_to? :secret_key_base
+  ScssProject::Application.config.secret_key_base = secret
+else
+  ScssProject::Application.config.secret_token = secret
+end

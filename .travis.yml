@@ -1,51 +1,30 @@
 language: ruby
+sudo: false
+before_install:
+  - gem install bundler
 
 rvm:
- - 2.0.0
- - 2.1
- - 2.2.7
- - 2.3.4
- - 2.4.1
+ - 2.3.7
+ - 2.4.4
+ - 2.5.1
  - ruby-head
  - rbx-2
 
 gemfile:
   - gemfiles/Gemfile-rails-4-2
-
-sudo: false
-
-cache: bundler
-
-script: bundle exec rake test
+  - gemfiles/Gemfile-rails-5-0
+  - gemfiles/Gemfile-rails-5-1
+  - gemfiles/Gemfile-rails-5-2
+  - Gemfile
 
 matrix:
   allow_failures:
     - rvm: rbx-2
     - rvm: ruby-head
   fast_finish: true
-  include:
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.2.7
-    - gemfile: gemfiles/Gemfile-rails-5-1
-      rvm: 2.2.7
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.3.4
-    - gemfile: gemfiles/Gemfile-rails-5-1
-      rvm: 2.3.4
+  exclude:
     - gemfile: Gemfile
-      rvm: 2.3.4
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.4.1
-    - gemfile: gemfiles/Gemfile-rails-5-1
-      rvm: 2.4.1
-    - gemfile: Gemfile
-      rvm: 2.4.1
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: ruby-head
-    - gemfile: gemfiles/Gemfile-rails-5-1
-      rvm: ruby-head
-    - gemfile: Gemfile
-      rvm: ruby-head
+      rvm: 2.3.7
 
 notifications:
   email: false

@@ -11,7 +11,7 @@ Rails.backtrace_cleaner.remove_silencers!
 # If developing against local dependencies, this code will ensure they get picked up
 # in the project fixtures that have their own bundle environment
 $gem_options = {}
-possible_dev_dependencies = %w(sass-rails sass rails arel actionpack rack railties sprockets journey sprockets-rails activerecord-deprecated_finders)
+possible_dev_dependencies = %w(sass-rails sass rails arel actionpack rack railties sprockets sprockets-rails)
 Bundler.load.specs.each do |s|
   if possible_dev_dependencies.include?(s.name)
      gem_path = s.full_gem_path
@@ -24,4 +24,4 @@ end
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-ActiveSupport::TestCase.test_order = :random if ActiveSupport::TestCase.respond_to?(:test_order=)
+ActiveSupport::TestCase.test_order = :random

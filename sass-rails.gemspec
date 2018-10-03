@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sprockets-rails', '< 4.0'
   s.add_dependency 'sprockets',       '~> 4.x'
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'sqlite3'
 
   s.files         = Dir["MIT-LICENSE", "README.md", "lib/**/*"]
