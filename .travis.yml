@@ -38,12 +38,16 @@ matrix:
       rvm: 2.4.1
     - gemfile: gemfiles/Gemfile-rails-5-1
       rvm: 2.4.1
+    - gemfile: gemfiles/Gemfile-rails-edge
+      rvm: 2.4.1
     - gemfile: Gemfile
       rvm: 2.4.1
     - gemfile: gemfiles/Gemfile-rails-5-0
       rvm: ruby-head
     - gemfile: gemfiles/Gemfile-rails-5-1
       rvm: ruby-head
+    - gemfile: gemfiles/Gemfile-rails-edge
+      rvm: 2.5.3
     - gemfile: Gemfile
       rvm: ruby-head
 
