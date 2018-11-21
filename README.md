@@ -101,4 +101,3 @@ If you need to test against local gems, use Bundler's gem :path option in the Ge
 
 * [![Travis CI](https://api.travis-ci.org/rails/sass-rails.svg)](http://travis-ci.org/rails/sass-rails)
 * [![Gem Version](https://badge.fury.io/rb/sass-rails.svg)](http://badge.fury.io/rb/sass-rails)
-* [![Dependencies](https://gemnasium.com/rails/sass-rails.svg)](https://gemnasium.com/rails/sass-rails)
