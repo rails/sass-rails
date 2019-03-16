@@ -1,1 +1,1 @@
-require 'sass/rails'
+require 'sassc/rails'
