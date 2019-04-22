@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Sass adapter for the Rails asset pipeline.}
   s.license     = %q{MIT}
 
-  s.add_dependency 'sassc-rails', '~> 2.1', '>= 2.1.0'
+  s.add_dependency 'sassc-rails', '~> 2.1', '>= 2.1.1'
 
   s.files         = Dir["MIT-LICENSE", "README.md", "lib/**/*"]
   s.require_paths = ["lib"]
