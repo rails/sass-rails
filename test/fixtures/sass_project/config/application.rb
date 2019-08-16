@@ -48,5 +48,9 @@ module ScssProject
 
     # Prefer sass for generated assets.
     config.sass.preferred_syntax = :sass
+
+    if Rails.gem_version < Gem::Version.new('6.0.0')
+      config.active_record.sqlite3.represent_boolean_as_integer = true
+    end
   end
 end

@@ -17,7 +17,7 @@ class SassRailsLoggerTest < Sass::Rails::TestCase
           "Sass::logger.log_level = :#{level}; Sass::logger.log(:#{level}, %Q|#{message}|)"
         end
 
-        assert File.exists?("#{app_root}/log/development.log"), "log file was not created"
+        assert File.exist?("#{app_root}/log/development.log"), "log file was not created"
 
         log_output = File.open("#{app_root}/log/development.log").read
         assert log_output.include?(message), "the #{level} log message was not found in the log file"
