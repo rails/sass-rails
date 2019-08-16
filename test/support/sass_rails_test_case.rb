@@ -49,7 +49,7 @@ class Sass::Rails::TestCase < ActiveSupport::TestCase
   end
 
   def assert_file_exists(filename)
-    assert File.exists?(filename), "could not find #{filename}. PWD=#{Dir.pwd}\nDid find: #{Dir.glob(File.dirname(filename)+"/*").join(", ")}"
+    assert File.exist?(filename), "could not find #{filename}. PWD=#{Dir.pwd}\nDid find: #{Dir.glob(File.dirname(filename)+"/*").join(", ")}"
   end
 
   def assert_not_output(match)

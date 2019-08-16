@@ -3,5 +3,4 @@ source "https://rubygems.org"
 # Specify your gem"s dependencies in sass-rails.gemspec
 gemspec path: ".."
 
-gem "rails"
-gem "sass", "~> 3.4.0"
+gem "rails", github: 'rails/rails', branch: '6-0-stable'
