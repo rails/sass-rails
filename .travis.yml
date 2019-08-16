@@ -1,18 +1,18 @@
 language: ruby
 
 rvm:
- - 1.9.3
- - 2.0.0
- - 2.1
  - 2.2.5
  - 2.3.1
- - rbx-2
+ - 2.4.6
+ - 2.5.5
+ - 2.6.3
 
 gemfile:
-  - gemfiles/Gemfile-rails-4-0
-  - gemfiles/Gemfile-rails-4-1
+  - Gemfile
   - gemfiles/Gemfile-rails-4-2
   - gemfiles/Gemfile-rails-5-0
+  - gemfiles/Gemfile-rails-5-1
+  - gemfiles/Gemfile-rails-5-2
   - gemfiles/Gemfile-sprockets-2-11
   - gemfiles/Gemfile-sprockets-2-12
   - gemfiles/Gemfile-sprockets-2-8
@@ -32,24 +32,13 @@ cache: bundler
 script: bundle exec rake test
 
 matrix:
-  allow_failures:
-    - rvm: rbx-2
   exclude:
-    - gemfile: gemfiles/Gemfile-sass-3-4
-      rvm: 1.9.3
-    - gemfile: gemfiles/Gemfile-sprockets-4-0
-      rvm: 1.9.3
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 1.9.3
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.0.0
-    - gemfile: gemfiles/Gemfile-rails-5-0
-      rvm: 2.1
-  include:
     - gemfile: Gemfile
       rvm: 2.2.5
     - gemfile: Gemfile
       rvm: 2.3.1
+    - gemfile: Gemfile
+      rvm: 2.4.6
 
 notifications:
   email: false
