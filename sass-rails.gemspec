@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Sass adapter for the Rails asset pipeline.}
   s.license     = %q{MIT}
 
-  s.add_dependency 'railties',        '>= 4.0.0', '< 6'
+  s.add_dependency 'railties',        '>= 4.0.0'
   s.add_dependency 'sass',            '~> 3.1'
   s.add_dependency 'sprockets-rails', '>= 2.0', '< 4.0'
   s.add_dependency 'sprockets',       '>= 2.8', '< 4.0'
